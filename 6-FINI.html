@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>On the role of dopamine in motivated behavior : a neuro-computational approach - 6&nbsp; ANNarchy: a code generation approach to neural simulations on parallel hardware</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./References.html" rel="next">
+<link href="./5-FINR.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./6-FINI.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ANNarchy: a code generation approach to neural simulations on parallel hardware</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./img/tuc.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">On the role of dopamine in motivated behavior : a neuro-computational approach</a> 
+        <div class="sidebar-tools-main">
+    <a href="./thesis.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Abstract</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-JOCN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sustained activities and retrieval in a computational model of perirhinal cortex</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-FICN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A computational model of basal ganglia and its role in memory retrieval in rewarded visual memory tasks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-NN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working memory and response selection: A computational account of interactions among cortico-basal ganglio-thalamic loops</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5-FINR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Timing and expectation of reward: a neuro-computational model of the afferents to the ventral tegmental area</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6-FINI.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ANNarchy: a code generation approach to neural simulations on parallel hardware</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">6.1</span> Introduction</a></li>
+  <li><a href="#interface-of-the-simulator" id="toc-interface-of-the-simulator" class="nav-link" data-scroll-target="#interface-of-the-simulator"><span class="header-section-number">6.2</span> Interface of the simulator</a>
+  <ul class="collapse">
+  <li><a href="#structure-of-a-network" id="toc-structure-of-a-network" class="nav-link" data-scroll-target="#structure-of-a-network"><span class="header-section-number">6.2.1</span> Structure of a network</a></li>
+  <li><a href="#equation-oriented-description" id="toc-equation-oriented-description" class="nav-link" data-scroll-target="#equation-oriented-description"><span class="header-section-number">6.2.2</span> Equation-oriented description</a></li>
+  <li><a href="#sec-rate-coded-neurons-and-synapses" id="toc-sec-rate-coded-neurons-and-synapses" class="nav-link" data-scroll-target="#sec-rate-coded-neurons-and-synapses"><span class="header-section-number">6.2.3</span> Rate-coded neurons and synapses</a></li>
+  <li><a href="#sec-spiking-neurons-and-synapses" id="toc-sec-spiking-neurons-and-synapses" class="nav-link" data-scroll-target="#sec-spiking-neurons-and-synapses"><span class="header-section-number">6.2.4</span> Spiking neurons and synapses</a></li>
+  <li><a href="#additional-features" id="toc-additional-features" class="nav-link" data-scroll-target="#additional-features"><span class="header-section-number">6.2.5</span> Additional features</a></li>
+  </ul></li>
+  <li><a href="#code-generation" id="toc-code-generation" class="nav-link" data-scroll-target="#code-generation"><span class="header-section-number">6.3</span> Code generation</a>
+  <ul class="collapse">
+  <li><a href="#sec-internal-representation-of-data" id="toc-sec-internal-representation-of-data" class="nav-link" data-scroll-target="#sec-internal-representation-of-data"><span class="header-section-number">6.3.1</span> Internal representation of data</a></li>
+  <li><a href="#sec-simulation-steps" id="toc-sec-simulation-steps" class="nav-link" data-scroll-target="#sec-simulation-steps"><span class="header-section-number">6.3.2</span> Simulation steps</a></li>
+  <li><a href="#mathematical-parser" id="toc-mathematical-parser" class="nav-link" data-scroll-target="#mathematical-parser"><span class="header-section-number">6.3.3</span> Mathematical parser</a></li>
+  <li><a href="#sec-numerical-methods" id="toc-sec-numerical-methods" class="nav-link" data-scroll-target="#sec-numerical-methods"><span class="header-section-number">6.3.4</span> Numerical methods</a></li>
+  <li><a href="#openmp-and-cuda-code-generation" id="toc-openmp-and-cuda-code-generation" class="nav-link" data-scroll-target="#openmp-and-cuda-code-generation"><span class="header-section-number">6.3.5</span> OpenMP and CUDA code generation</a></li>
+  </ul></li>
+  <li><a href="#benchmarks" id="toc-benchmarks" class="nav-link" data-scroll-target="#benchmarks"><span class="header-section-number">6.4</span> Benchmarks</a></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion"><span class="header-section-number">6.5</span> Discussion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-chapter:ANNarchy" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ANNarchy: a code generation approach to neural simulations on parallel hardware</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="abstract" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="abstract">Abstract</h4>
+<p>Many modern neural simulators focus on the simulation of networks of spiking neurons on parallel hardware. Another important framework in computational neuroscience, rate-coded neural networks, is mostly difficult or impossible to implement using these simulators. We present here the ANNarchy (Artificial Neural Networks architect) neural simulator, which allows to easily define and simulate rate-coded and spiking networks, as well as combinations of both. The interface in Python has been designed to be close to the PyNN interface, while the definition of neuron and synapse models can be specified using an equation-oriented mathematical description similar to the Brian neural simulator. This information is used to generate C++ code that will efficiently perform the simulation on the chosen parallel hardware (multi-core system or graphical processing unit). Several numerical methods are available to transform ordinary differential equations into an efficient C++ code. We compare the parallel performance of the simulator to existing solutions.</p>
+</section>
+<section id="introduction" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">6.1</span> Introduction</h2>
+<p>The efficiency and flexibility of neural simulators becomes increasingly important as the size and complexity of the models studied in computational neuroscience grows. Most recent efforts focus on spiking neurons, either of the integrate-and-fire or Hodgkin-Huxley type <span class="citation" data-cites="Brette2007">(see <a href="References.html#ref-Brette2007" role="doc-biblioref">Brette et al., 2007</a> for a review)</span>. The most well-known examples include Brian <span class="citation" data-cites="Goodman2008 Stimberg2014">(<a href="References.html#ref-Goodman2008" role="doc-biblioref">Goodman and Brette, 2008</a>; <a href="References.html#ref-Stimberg2014" role="doc-biblioref">Stimberg et al., 2014</a>)</span>, NEST <span class="citation" data-cites="Gewaltig2007">(<a href="References.html#ref-Gewaltig2007" role="doc-biblioref">Gewaltig and Diesmann, 2007</a>)</span>, NEURON <span class="citation" data-cites="Hines1997">(<a href="References.html#ref-Hines1997" role="doc-biblioref">Hines and Carnevale, 1997</a>)</span>, GENESIS <span class="citation" data-cites="Bower2007">(<a href="References.html#ref-Bower2007" role="doc-biblioref">Bower and Beeman, 2007</a>)</span>, Nengo <span class="citation" data-cites="Bekolay2014">(<a href="References.html#ref-Bekolay2014" role="doc-biblioref">Bekolay et al., 2014</a>)</span> or Auryn <span class="citation" data-cites="Zenke2014">(<a href="References.html#ref-Zenke2014" role="doc-biblioref">Zenke and Gerstner, 2014</a>)</span>. These neural simulators focus on the parallel simulation of neural networks on shared memory systems (multi-core or multi-processor) or distributed systems (clusters) using either OpenMP (open multi-processing) or MPI (message parsing interface). Recent work address the use of general-purpose graphical processing cards (GPU) through the CUDA or OpenCL frameworks <span class="citation" data-cites="Brette2012">(see <a href="References.html#ref-Brette2012" role="doc-biblioref">Brette and Goodman, 2012</a> for a review)</span>. The neural simulators GeNN <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, NCS <span class="citation" data-cites="Thibeault2011">(<a href="References.html#ref-Thibeault2011" role="doc-biblioref">Thibeault et al., 2011</a>)</span>, NeMo <span class="citation" data-cites="Fidjeland2009">(<a href="References.html#ref-Fidjeland2009" role="doc-biblioref">Fidjeland et al., 2009</a>)</span> and CARLsim <span class="citation" data-cites="Carlson2014">(<a href="References.html#ref-Carlson2014" role="doc-biblioref">Carlson et al., 2014</a>)</span> provide in particular support for the simulation of spiking and compartmental models on single or multiple GPU architectures.</p>
+<p>A common approach to most of these neural simulators is to provide an extensive library of neuron and synapse models which are optimized in a low-level language for a particular computer architecture. These models are combined to form the required network by using a high-level interface, such as a specific scripting language (as in NEST or NEURON) or an interpreted programming language (e.g.&nbsp;Python). As these interfaces are simulator-specific, the PyNN interface has been designed to provide a common Python interface to multiple neural simulators, allowing a better exchange of models between researchers <span class="citation" data-cites="Davison2008">(<a href="References.html#ref-Davison2008" role="doc-biblioref">Davison et al., 2008</a>)</span>. The main drawback of this approach is that a user is limited to the neuron and synapse models provided by the simulator: if one wants to even marginally modify the equations of a model, one has to write a plugin in a low-level language without breaking the performance of the simulator. This can be particularly tedious, especially for CUDA code on GPUs.</p>
+<p>A notable exception is the Brian simulator, which allows the user to completely define the neuron and synapse models using a simple mathematical description of the corresponding equations. Brian uses a code generation approach to transform these descriptions into executable code <span class="citation" data-cites="Goodman2010">(<a href="References.html#ref-Goodman2010" role="doc-biblioref">Goodman, 2010</a>)</span>, allowing the user to implement any kind of neuron or synapse model. The first version of Brian executes the code in Python directly (although some code portions can be generated in a lower-level language) using vectorized computations <span class="citation" data-cites="Brette2011">(<a href="References.html#ref-Brette2011" role="doc-biblioref">Brette and Goodman, 2011</a>)</span>, making the simulation relatively slow and impossible to run in parallel on shared memory systems. The second version in development <span class="citation" data-cites="Stimberg2014">(Brian 2, <a href="References.html#ref-Stimberg2014" role="doc-biblioref">Stimberg et al., 2014</a>)</span> proposes a complete code generation approach where the simulation can be implemented in different languages or parallel frameworks. This approach is promising as it combines flexibility in model design with efficient and parallel simulation performance.</p>
+<p>Rate-coded networks, however, do not benefit much from the advances of spiking simulators. Rate-coded neurons do not communicate through discrete spike events but through instantaneous firing rates (real values computed at each step of the simulation). Rate-coded simulators are either restricted to classical neural networks (static neurons learning with the backpropagation algorithm) or optimized for particular structures such as convolutional networks. To our knowledge, no rate-coded simulator provides a flexibility similar to what Brian proposes. The Emergent simulator <span class="citation" data-cites="Aisa2008">(<a href="References.html#ref-Aisa2008" role="doc-biblioref">Aisa et al., 2008</a>)</span> provides some features - including parallel computing - and is used in a number of models in computational neuroscience <span class="citation" data-cites="OReilly2006">(e.g. <a href="References.html#ref-OReilly2006" role="doc-biblioref">O’Reilly and Frank, 2006</a>)</span> but is restricted to a set of neuron and synapse models provided by the Leabra library. Topographica <span class="citation" data-cites="Bednar2009">(<a href="References.html#ref-Bednar2009" role="doc-biblioref">Bednar, 2009</a>)</span> and CNS <span class="citation" data-cites="Mutch2010">(Cortical Network Simulator, <a href="References.html#ref-Mutch2010" role="doc-biblioref">Mutch et al., 2010</a>)</span> primarily focus on convolutional networks. DANA <span class="citation" data-cites="Rougier2012">(Distributed, Asynchronous, Numerical and Adaptive computing framework, <a href="References.html#ref-Rougier2012" role="doc-biblioref">Rougier and Fix, 2012</a>)</span> is a generic solver for distributed equations which can flexibly simulate dynamical rate-coded networks, but it does not address parallel computing yet.</p>
+<p>Rate-coded networks are nevertheless an important paradigm in computational neuroscience, as they allow to model complex structures and dynamics with a smaller computational footprint than spiking networks. Each unit of a rate-coded network can model the dynamics of several biological neurons, so a rate-coded network typically requires less units to perform a function than a functionally equivalent spiking network. The rate-coded domain also benefits from a wide range of biologically realistic learning rules - such as the Bienenstock-Cooper-Munro (BCM) rule <span class="citation" data-cites="Bienenstock1982">(<a href="References.html#ref-Bienenstock1982" role="doc-biblioref">Bienenstock et al., 1982</a>)</span> or the Oja learning rule <span class="citation" data-cites="Oja1982">(<a href="References.html#ref-Oja1982" role="doc-biblioref">Oja, 1982</a>)</span>. Synaptic plasticity in spiking networks, including spike-timing dependency plasticity (STDP), is an active research field and the current implementations can be hard to parameterize. Except in cases where synchronization mechanisms take place or where precise predictions at the single-cell level are required, rate-coded networks can provide a valid approximation of the brain’s dynamics at the functional level, see for example models of reinforcement learning in the basal ganglia <span class="citation" data-cites="OReilly2006 Dranias2008 Schroll2014">(<a href="References.html#ref-Dranias2008" role="doc-biblioref">Dranias et al., 2008</a>; <a href="References.html#ref-OReilly2006" role="doc-biblioref">O’Reilly and Frank, 2006</a>; <a href="References.html#ref-Schroll2014" role="doc-biblioref">Schroll et al., 2014</a>)</span>, models of visual attention <span class="citation" data-cites="Zirnsak2011 Beuth2015">(<a href="References.html#ref-Beuth2015" role="doc-biblioref">Beuth and Hamker, 2015</a>; <a href="References.html#ref-Zirnsak2011" role="doc-biblioref">Zirnsak et al., 2011</a>)</span> or models of gain normalization <span class="citation" data-cites="Carandini2012">(<a href="References.html#ref-Carandini2012" role="doc-biblioref">Carandini and Heeger, 2012</a>)</span>.</p>
+<p>Another reason why rate-coded networks should not be neglected by neural simulators is that advances in computational neuroscience allow to aim at complete functional models of the brain which could be implemented in simulated agents or robots <span class="citation" data-cites="Eliasmith2012">(e.g. <a href="References.html#ref-Eliasmith2012" role="doc-biblioref">Eliasmith et al., 2012</a>)</span>. However, spiking networks may not yet be able to perform all the required functions, especially when in a learning context. Hybrid architectures, combining rate-coded and spiking parts, may prove very useful to achieve this goal. We consider there is a need for a parallel neural simulator which should: 1) be flexible for the definition of neuron and synapse models, 2) allow the definition of rate-coded, spiking and hybrid networks, 3) be computationally efficient on CPU- and GPU-based hardware and 4) be easy to interface with external programs or devices (such as robots).</p>
+<p>This article presents the neural simulator ANNarchy (Artificial Neural Networks architect) which allows to simulate rate-coded, spiking as well as hybrid neural networks. It proposes a high-level interface in Python directly inspired from PyNN for the global structure and Brian for the definition of neuron and synapse models. It uses a C++ code generation approach to perform the simulation in order to avoid the costs of an interpreted language such as Python. Furthermore, rate-coded and spiking networks raise different problems for parallelization <span class="citation" data-cites="Dinkelbach2012">(<a href="References.html#ref-Dinkelbach2012" role="doc-biblioref">Dinkelbach et al., 2012</a>)</span>, so code generation ensures the required computations are adapted to the parallel framework. ANNarchy is released under the version 2 of the GNU Public License. Its source code and documentation<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> are freely available.</p>
+</section>
+<section id="interface-of-the-simulator" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="interface-of-the-simulator"><span class="header-section-number">6.2</span> Interface of the simulator</h2>
+<section id="structure-of-a-network" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="structure-of-a-network"><span class="header-section-number">6.2.1</span> Structure of a network</h3>
+<p>The interface of ANNarchy focuses on the definition of populations of neurons and their interconnection through projections. Populations are defined as homogeneous sets of identical neurons, while projections gather all synapses formed between the neurons of the pre-synaptic population and the ones of the post-synaptic population. Each projection is associated to a target name (e.g.&nbsp;‘exc’ for excitatory synapses and ‘inh’ for inhibitory ones). This allows the post-synaptic neurons receiving these synapses to integrate them differently, for example to implement modulatory effects. The target can represent the excitatory/inhibitory nature, the corresponding neurotransmitter (‘ampa’, ‘nmda’, ‘gaba’) or even the functional role of a synapse (‘feedforward’, ‘feedback’).</p>
+<div id="fig-fini:izhikevich" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fini:izhikevich-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/fini/code-izhikevich.jpg" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fini:izhikevich-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: ANNarchy script reproducing the pulse-coupled spiking network described in <span class="citation" data-cites="Izhikevich2003">Izhikevich (<a href="References.html#ref-Izhikevich2003" role="doc-biblioref">2003</a>)</span>. A population of 1000 Izhikevich neurons is created and split into subsets of 800 excitatory and 200 inhibitory neurons. The different parameters of the Izhikevich neuron are then initialized through attributes of the two populations. <code>a</code>, <code>b</code>, <code>c</code> and <code>d</code> are dimensionless parameters, <code>noise</code> is a multiplicative factor on the random variable <code>Normal(0., 1.)</code> drawn each step from the standard normal distribution <span class="math inline">\mathcal{N}(0,1)</span>, <code>v_thresh</code> is the spiking theshold of the neurons and <code>tau</code> is the time constant in milliseconds of the membrane conductances. The network is fully connected, with weight values initialized randomly using uniform distributions whose range depend on the pre-synaptic population. The source code for the network is then generated, compiled and simulated for 1000 milliseconds.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-fini:izhikevich" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> shows a simple example implementing the pulse-coupled spiking network proposed by <span class="citation" data-cites="Izhikevich2003">Izhikevich (<a href="References.html#ref-Izhikevich2003" role="doc-biblioref">2003</a>)</span>. It creates a population of 1000 Izhikevich neurons and splits it into two subsets of 800 excitatory and 200 inhibitory neurons each. These neurons are reciprocally connected with each other (all-to-all connection pattern) through excitatory and inhibitory synapses. Such a pulse-coupled network exhibits oscillating pattern at various frequencies, depending on the strength of the connections. The example uses Izhikevich neurons, which are defined by <a href="#eq-fini:izhikevich" class="quarto-xref">Equation&nbsp;<span>6.1</span></a>:</p>
+<p><span id="eq-fini:izhikevich"><span class="math display">
+\begin{aligned}
+I(t)               &amp; =  g_\text{exc}(t) - g_\text{inh}(t) + n \cdot \chi\\
+\frac{dv(t)}{dt}   &amp; =  0.04 \cdot v(t)^2 + 5 \cdot v(t) + 140 - u(t) + I(t) \\
+\frac{du(t)}{dt}   &amp; =  a \cdot (b \cdot v(t) - u(t)) \\
+\text{if} \quad v(t) &gt; v_\text{thresh} :  &amp; \quad v(t) = c \quad \text{and} \quad u(t) \text{ += } d
+\end{aligned}
+\tag{6.1}</span></span></p>
+<p>with <span class="math inline">I(t)</span> being the total input current to a neuron at time <span class="math inline">t</span>, <span class="math inline">g_\text{exc}(t)</span> (resp. <span class="math inline">g_\text{inh}(t)</span>) the total current current injected by excitatory (resp. inhibitory) synapses, <span class="math inline">v(t)</span> the membrane potential and <span class="math inline">u(t)</span> a recovery variable. <span class="math inline">\chi</span> is an additive random variable following a standard normal distribution and <span class="math inline">n</span> a multiplicative factor. When the membrane potential <span class="math inline">v(t)</span> exceeds a threshold <span class="math inline">v_\text{thresh}</span>, a spike is emitted, the membrane potential is reset and the recovery variable is incremented. <span class="math inline">a</span>, <span class="math inline">b</span>, <span class="math inline">c</span> and <span class="math inline">d</span> are dimensionless parameters specifying the dynamics of the neuron type.</p>
+<p>Populations are defined by three fields: 1) the geometry, which can represent either the total number of neurons (a single integer) or a multi-dimensional structure (tuple) similar to the shape of a Numpy array <span class="citation" data-cites="VanderWalt2011">(<a href="References.html#ref-VanderWalt2011" role="doc-biblioref">Walt et al., 2011</a>)</span>; 2) the type of neuron used in the population (either a pre-defined neuron model or one defined by the user, see <a href="#sec-rate-coded-neurons-and-synapses" class="quarto-xref"><span>Section 6.2.3</span></a> and <a href="#sec-spiking-neurons-and-synapses" class="quarto-xref"><span>Section 6.2.4</span></a>) and 3) an optional unique name allowing to access the population globally. Defining a multi-dimensional geometry is primarily useful for visualization purposes and when defining distance-dependent connection patterns between two populations, but the internal data is arranged in one-dimensional arrays (see <a href="#sec-internal-representation-of-data" class="quarto-xref"><span>Section 6.3.1</span></a>).</p>
+<p>Once the populations are created, the value of each parameter and variable can be directly set using population attributes, by providing either a single value (which will be the same for all neurons) or lists/Numpy arrays of the same size/shape as the population. Like many other simulators, but unlike Brian, parameters and variables use implicit physical units: except for time which is expressed in milliseconds, the user must decide if the value of a variable represents volts or millivolts, for example. Brian uses explicit physical units, which allows to ensure consistency between the parameters. The neurons of a population can be accessed either individually or in subsets (similar to the PopulationViews of PyNN), allowing a finer control over the parameter values. Subsets use the slice notation of NumPy.</p>
+<p>Projections are defined by four values: 1) the pre-synaptic population, 2) the post-synaptic population, 3) the associated target (e.g.&nbsp;“exc” or “inh”) and 4) optionally the synapse type. Subsets of a population can also be used to create the projection. A connecting method has to be applied on the projection in order to create the synapses using a pre-defined scheme and initialize the corresponding weights and delays. The network is here fully connected, using the <code>connect_all_to_all()</code> method. Several methods are provided by the simulator (all-to-all, one-to-one, distance-dependent, probabilistic…) but the user can also define its own connection patterns in Python, or load connection matrices from a file. Compatibility with the <em>Connection Set Algebra</em> proposed by <span class="citation" data-cites="Djurfeldt2012">Djurfeldt (<a href="References.html#ref-Djurfeldt2012" role="doc-biblioref">2012</a>)</span> is currently under development.</p>
+<p>Once the populations and projections are defined and initialized, the corresponding C++ code has to be generated and compiled by calling the <code>compile()</code> method. If the network structure has not changed since the last execution of the script, compilation is skipped. The C++ structures storing the parameters and variables of the populations and projections are then initialized with the values previously defined. The network can be then simulated for a certain duration in milliseconds. The values of all population/projection attributes can be read and modified at any point between two calls to <code>simulate()</code>, allowing an easy definition of complex experimental protocols.</p>
+<p>This simple script outlines the high-level interface necessary to create a network: in its most simple form, all implementation details (including the neuron/synapse models) are hidden to the user. At this level, there is also no distinction between rate-coded and spiking networks. This distinction only appears when defining or using neuron and synapse models.</p>
+</section>
+<section id="equation-oriented-description" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="equation-oriented-description"><span class="header-section-number">6.2.2</span> Equation-oriented description</h3>
+<p>Neuron and synapse models are described using an equation-oriented approach, where each equation is expressed by a simple textual description. The goal of the syntax is to provide a high flexibility to the user while being close to natural mathematical descriptions <span class="citation" data-cites="Stimberg2014">(<a href="References.html#ref-Stimberg2014" role="doc-biblioref">Stimberg et al., 2014</a>)</span>. Our equation-oriented syntax has been designed to be close to the Brian syntax <span class="citation" data-cites="Goodman2008">(<a href="References.html#ref-Goodman2008" role="doc-biblioref">Goodman and Brette, 2008</a>)</span>, although some differences had to be introduced to take into account the semantic difference between rate-coded and spiking neurons.</p>
+<p>The syntax chosen for the equations ruling each variable allows to describe most common mathematical operations. Each variable has to be described by an equation, either regular or differential. For the moment, ANNarchy only supports first-order ordinary differential equations (ODE). For regular equations, the left side must hold only the name of the variable which will be updated (e.g.&nbsp;<code>a = b + c</code>). The available operators are assignment (<code>=</code>) and the different augmented assignments (<code>+=, -=, *=, /=</code>). For ODEs, the left term can be more complex (<code>tau*dv/dt + v = E</code> is the same as <code>dv/dt = (E - v)/tau</code>), but only the assignment operator is allowed. The right term can use single operations (<code>+, -, *, /</code>) or power functions (<code>y^d</code>) of other parameters or variables. Different mathematical functions are available (given they exist in the C math library), for example <code>cos, sin, exp, log</code>…</p>
+<p>Conditional statements (if/then/else) can be useful for some rate-coded neurons, although they are classically avoided in spiking neurons. They follow a Python-like syntax using the <code>if</code> and <code>else</code> keywords and <code>:</code> as a separator. The rectifier transfer function can for example be implemented like this:</p>
+<pre><code>r = if v &gt; 0.0: v else: 0.0</code></pre>
+<p>with <code>r</code> being the output of a neuron and <code>v</code> its net activation. The condition can use any parameters or variable of the neuron or synapse. All relational operators are available (<code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>==</code>, <code>!=</code>…), and they can be combined using the <code>and</code> and <code>or</code> logical operators. Conditioal statements can be nested.</p>
+</section>
+<section id="sec-rate-coded-neurons-and-synapses" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="sec-rate-coded-neurons-and-synapses"><span class="header-section-number">6.2.3</span> Rate-coded neurons and synapses</h3>
+<div id="fig-fini:ratecoded" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fini:ratecoded-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/fini/ratecoded.jpg" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fini:ratecoded-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.2: Examples of rate-coded neuron and synapse definitions. a) Noisy leaky-integrator rate-coded neuron. It defines a global parameter <code>tau</code> for the time constant and a local one <code>B</code> for the baseline firing rate. The evolution of the firing rate <code>r</code> over time is rules by an ODE integrating the weighted sum of excitatory inputs <code>sum(exc)</code> and the baseline. The random variable is defined by the <code>Uniform(-1.0, 1.0)</code> term, so that a value is taken from the uniform range <span class="math inline">[-1, 1]</span> at each time step and for each neuron. The initial value at <span class="math inline">t=0</span> of <code>r</code> is set to 1.0 through the <code>init</code> flag and the minimal value of <code>r</code> is set to zero. b) Rate-coded synapse implementing the IBCM learning rule. It defines a global parameter <code>tau</code>, which is used to compute the sliding temporal mean of the square of the post-synaptic firing rate in the variable <code>theta</code>. This variable has the flag <code>postsynaptic</code>, as it needs to be computed only once per post-synaptic neuron. The connection weights <code>w</code> are then updated according to the IBCM rule and limited to positive values through the <code>min=0.0</code> flag.
+</figcaption>
+</figure>
+</div>
+<section id="rate-coded-neurons" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="rate-coded-neurons">Rate-coded neurons</h4>
+<p>The definition of a rate-coded neuron model is done by instantiating a <code>Neuron</code> object, with arguments specifying the parameters and variables of the neuron. Let us consider a simple noisy leaky-integrator rate-coded neuron:</p>
+<p><span id="eq-fini:noisyleaky"><span class="math display">
+\tau \cdot \frac{d r(t)}{dt} + r(t) = \sum_{i=1}^N w_i \cdot r_i(t) + B(t) + \mathcal{u}(-1, 1)
+\tag{6.2}</span></span></p>
+<p>where <span class="math inline">r(t)</span> is the instantaneous firing rate of the neuron at time <span class="math inline">t</span>, <span class="math inline">\tau</span> its time constant, <span class="math inline">B(t)</span> its baseline firing rate (which can change over time), <span class="math inline">\mathcal{u}(-1, 1))</span> a random variable taken at each time <span class="math inline">t</span> in the uniform range <span class="math inline">[-1, 1]</span> in order to add noise and <span class="math inline">\sum_{i=1}^N w_i \cdot r_i</span> represents the weighted sum of excitatory inputs to a particular neuron. <a href="#fig-fini:ratecoded" class="quarto-xref">Figure&nbsp;<span>6.2</span></a> a shows a possible implementation of such a neuron in ANNarchy.</p>
+<p>The first argument <code>parameters</code> is a string or multi-line string defining two parameters: <code>tau</code>, the time constant of the neuron, initialized to 10 milliseconds, and <code>B</code>, the baseline firing rate, initialized to 0. Parameter definitions can be placed on different lines or separated by semi-colons. Once a population is created, these parameters are accessible and modifiable through population attributes. Various flags can be set after the <code>:</code> symbol. In this example, the flag <code>population</code> tells the code generator that the value of <code>tau</code> will be shared by all neurons of a population, so it only needs to store one value. It is also possible to specify the type of the parameter: parameters (and variables) are by default represented by double precision floating-point values. The <code>int</code> and <code>bool</code> flags change the type of the attribute to integer or boolean, if needed.</p>
+<p>The second argument <code>equations</code> defines the variables of the neuron, whose value will evolve with time during the simulation. The number of variables defined in the model is unlimited, but at least one of them should be named <code>r</code>, as this is the default variable used by post-synaptic neurons to compute their weighted sum of inputs. The code corresponding to <a href="#eq-fini:noisyleaky" class="quarto-xref">Equation&nbsp;<span>6.2</span></a> is straightforward. The temporal derivative of <span class="math inline">r(t)</span> is symbolized by the term <code>dr/dt</code>. The random variable <span class="math inline">\mathcal{u}(-1, 1))</span> is generated by the term <code>Uniform(-1.0, 1.0)</code>, where -1.0 and 1.0 and the bounds of the uniform range. Different distributions can be used in an equation, including the normal, log-normal, exponential and gamma distributions. The weighted sum of excitatory inputs is represented by <code>sum(exc)</code>, which sums over all projections possibly reaching a particular neuron the product between the connection weight <code>w</code> and the firing rate of the pre-synaptic neuron <code>r</code>. The term <code>exc</code> corresponds to the target name defined when creating the projections. By default, this ODE will be solved using the explicit (forward) Euler method, but other methods are available, see <a href="#sec-numerical-methods" class="quarto-xref"><span>Section 6.3.4</span></a>. The flag <code>init</code> defines the initial value of the variable for all neurons and <code>min</code> defines a lower bound for the variable (if <code>r</code> is negative after an update, it will be set to 0), as the firing rate <code>r</code> is usually ensured positive in rate-coded networks. The <code>max</code> flag is also available.</p>
+</section>
+<section id="rate-coded-synapses" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="rate-coded-synapses">Rate-coded synapses</h4>
+<p>When the pre-synaptic population of a projection is rate-coded, the synapses of the projection are assumed to be also rate-coded. A synapse is represented by a fixed connection weight (or synaptic efficiency) named <code>w</code> and a delay in synaptic transmission <code>d</code> (in milliseconds). Each synapse will participate in the weighted sum of inputs of the post-synaptic neuron with <span class="math inline">w(t) * r(t-d)</span>, where <span class="math inline">r(t-d)</span> is the firing rate of the pre-synaptic neuron at time <span class="math inline">t-d</span>. Synaptic delays in a network must be a multiple of the fixed integration step <code>dt</code> (see <a href="#sec-numerical-methods" class="quarto-xref"><span>Section 6.3.4</span></a>), but each synapse of a projection can define a different delay. The minimal delay is <code>dt</code>, as neurons can only access the value of variables computed at the previous time step (synchronous computation). Note that the Brian simulator can simulate rate-coded synapses, but only without delay.</p>
+<p>In a learning context, connection weights evolve with time according to a variety of learning rules <span class="citation" data-cites="Dayan2001">(<a href="References.html#ref-Dayan2001" role="doc-biblioref">Dayan and Abbott, 2001</a>)</span>. <code>Synapse</code> models can be created to override the default behavior and implement synaptic plasticity or non-linear transmission. <a href="#fig-fini:ratecoded" class="quarto-xref">Figure&nbsp;<span>6.2</span></a> b shows a possible implementation of the IBCM learning rule (Intrator and Cooper form of the BCM rule) <span class="citation" data-cites="Intrator1992">(<a href="References.html#ref-Intrator1992" role="doc-biblioref">Intrator and Cooper, 1992</a>)</span>. It is a Hebb-like product of the pre-synaptic firing rate and a quadratic function of the post-synaptic firing rate. The quadratic function uses a dynamical threshold <span class="math inline">\theta(t)</span> which is defined as the expectation of the square of the post-synaptic firing rate:</p>
+<p><span id="eq-fini:bcm"><span class="math display">
+  \begin{aligned}
+    \theta(t) &amp;= E(y^2(t)) \\
+    \frac{d w(t)}{dt} &amp;= y(t) \cdot (y(t) - \theta(t)) \cdot x(t)
+  \end{aligned}
+\tag{6.3}</span></span></p>
+<p>where <span class="math inline">x(t)</span> is the pre-synaptic firing rate, <span class="math inline">y(t)</span> the post-synaptic one, <span class="math inline">w(t)</span> the connection weight and <span class="math inline">\theta(t)</span> is defined as the moving average of <span class="math inline">y^2(t)</span> through the <span class="math inline">E()</span> expectation operator. In the code displayed on <a href="#fig-fini:ratecoded" class="quarto-xref">Figure&nbsp;<span>6.2</span></a> b, the moving average is calculated using a first-oder ODE integrating the square of the post-synaptic firing rate, with a time constant <code>tau</code> of 2 seconds by default. Pre- and post-synaptic neural variables (usually the firing rate <code>r</code>, but any other variable can be used) can be accessed by prefixing the variable name by <code>pre.</code> and <code>post.</code>, respectively.</p>
+<p>The update rule for the weight <code>w</code> is simply derived from <a href="#eq-fini:bcm" class="quarto-xref">Equation&nbsp;<span>6.3</span></a> using these conventions. <code>theta</code> is a post-synaptic variable, as it only depends on the post-synaptic neural activity. It would therefore be a waste of resources to compute it for each synapse: once per post-synaptic neuron is enough. The equation for <code>theta</code> (as well as the corresponding parameter <code>tau</code>) is associated with the flag <code>postsynaptic</code>, which has a similar meaning as <code>population</code> for a neuron: the global variable will be updated only once per post-synaptic neuron. The variable <code>w</code> is local to a synapse, so the flag should not be set. Instead, <code>min=0.0</code> is used to ensure that the weight will not become negative over time.</p>
+<p>In a rate-coded neuron model, the term <code>sum(exc)</code> represents by default the weighted sum of excitatory inputs to this neuron. It is possible to change this behavior in the synapse definition by adding a <code>psp</code> argument to the synapse definition, whose default value is <code>"w * pre.r"</code>. Non-linear synapses, where for example <span class="math inline">w_i \cdot \log(r_i)</span> should be summed over all synapses instead of <span class="math inline">w_i \cdot r_i</span>, can be implemented by setting <code>psp = "w * log(pre.r)"</code>. The summation operation can also be changed, by defining the <code>operator</code> argument, whose default value is <code>"sum"</code>. If <code>"max"</code>, <code>"min"</code> or <code>"mean"</code> is used, the maximal (resp. minimal or mean) value of <code>psp</code> is calculated over all synapses associated to the target <code>exc</code> will be returned by <code>sum(exc)</code>. This is particularly useful for pooling operations, which are used for example in hierarchical visual processing <span class="citation" data-cites="Riesenhuber1999 Hamker2004">(<a href="References.html#ref-Hamker2004" role="doc-biblioref">Hamker, 2004</a>; <a href="References.html#ref-Riesenhuber1999" role="doc-biblioref">Riesenhuber and Poggio, 1999</a>)</span>.</p>
+</section>
+</section>
+<section id="sec-spiking-neurons-and-synapses" class="level3" data-number="6.2.4">
+<h3 data-number="6.2.4" class="anchored" data-anchor-id="sec-spiking-neurons-and-synapses"><span class="header-section-number">6.2.4</span> Spiking neurons and synapses</h3>
+<div id="fig-fini:spikecoded" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fini:spikecoded-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/fini/spikecoded.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fini:spikecoded-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.3: Examples of spiking neuron and synapse definitions. a) Izhikevich neuron. The <code>parameters</code> and <code>equations</code> fields follow the same principles as for rate-coded neurons. The variable <code>I</code> gathers the inputs to the neuron, namely the sum of the excitatory <code>g_exc</code> and inhibitory <code>g_inh</code> input currents and a constant current <code>i_offset</code>. The membrane potential <code>v</code> and the recovery variable <code>u</code> are updated according to the desired dynamics, with initial values specified with the <code>init</code> keyword. The <code>spike</code> field defines the condition for emitting a spike, here when the membrane potential <code>v</code> exceeds the threshold <code>v_thresh</code>. The <code>reset</code> field specifies the modifications happening after a spike is emitted. Here the membrane potential is clamped to the value <code>c</code> and the recovery variable <code>u</code> is incremented by <code>d</code>. The refractory period is determined by the <code>refractory</code> field, here 2 milliseconds. b) Short-term plasticity (STP) synapse. For this synapse, the increment of the post-synaptic conductance <code>g_target</code> when a pre-synaptic spike arrives depends not only on the synaptic efficiency <code>w</code>, but also on the value of variables internal to the synapse <code>x</code> and <code>u</code>. These are updated through two mechanisms: the <code>equations</code> field specifies their exponentially-decreasing dynamics, while the <code>pre_spike</code> defines their increments when a pre-synaptic spike arrives at the synapse. However, the integration of the corresponding ODEs is event-driven through the use of the <code>event-driven</code> flag: when a pre- or post-synaptic spikes occurs, the new value of these variables is directly computed using the analytical solution of the ODE. This can speed up the simulation if the number of spiking events is low. c) Spike-timing dependent plasticity (STDP) synapse. For this synapse, the post-synaptic conductance is increased by <code>w</code> after a pre-synaptic spike is received, but the synaptic efficiency is adapted depending on two internal variables <code>Apre</code> and <code>Apost</code>. The <code>pre_spike</code> field states what should happen when a pre-synaptic spike arrives at the synapse, while the <code>post_spike</code> field describes the changes occuring when the post-synaptic neuron fires. The variables <code>Apre</code> and <code>Apost</code> are integrated in an event-driven manner. The <code>clip()</code> function is used to maintain <code>w</code> in the range [0, <code>w_max</code>]. d) NMDA non-linear synapse. This synapse does not transmit information to the post-synaptic neuron in an event-driven manner. Rather, the synaptic variable <code>g</code> is summed at each time step by the post-synaptic neuron, as for rate-coded networks. This is specified by the <code>psp</code> field. When a pre-synaptic spike occurs, the variable <code>x</code> is increased by <code>w</code>, which in turn will modify the evolution of <code>g</code> through the coupled equations described in the <code>equations</code> field. These equations cannot be solved with the event-driven method, as their values should be available at each time step.
+</figcaption>
+</figure>
+</div>
+<section id="spiking-neurons" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="spiking-neurons">Spiking neurons</h4>
+<p>Integrate-and-fire neurons (IF) describe the temporal evolution of the membrane potential <span class="math inline">v(t)</span> through a system of first-order ODEs. When the membrane potential exceeds a given threshold, a spike is emitted and the value of the different neural variables is clamped to a reset value for a certain duration called the refractory period. The condition for spike emission as well as the reset and refractory behaviors have to be explicitly defined in addition to the internal dynamics. More complex spiking neurons such as the Hodgkin-Huxley neuron model have their own dynamics for the reset and refractory mechanisms. <a href="#fig-fini:spikecoded" class="quarto-xref">Figure&nbsp;<span>6.3</span></a> a shows a possible implementation of the Izhikevich neuron described by <a href="#eq-fini:izhikevich" class="quarto-xref">Equation&nbsp;<span>6.1</span></a>.</p>
+<p>As for rate-coded neurons, the argument <code>parameters</code> describes the different parameters of the neuron model: <code>a</code>, <code>b</code>, <code>c</code> and <code>d</code> are dimension-less parameters, <code>v_thresh</code> is the spiking threshold, <code>noise</code> is a multiplying factor on the noise random variable and <code>tau</code> is the time constant in milliseconds of the conductances. The argument <code>equations</code> describes the evolution of the three variables <code>I</code>, <code>v</code> and <code>u</code> of <a href="#eq-fini:izhikevich" class="quarto-xref">Equation&nbsp;<span>6.1</span></a>. <code>Normal(0., 1.)</code> is a random variable taken fromthe standard normal distribution. <code>g_exc</code> and <code>g_inh</code> represent the total excitatory and inhibitory currents or conductances generated by incoming pre-synaptic spikes. They are the equivalent for spiking neurons of <code>sum(exc)</code> and <code>sum(inh)</code> for rate-coded neurons. The syntax <code>g_target</code> is different from the rate-coded case because they have a different behavior: while <code>sum(target)</code> is computed at every time step of the simulation by summing pre-synaptic activity, <code>g_target</code> is event-driven. Every time a pre-synaptic spike arrives to a neuron, the corresponding conductance is increased from a value corresponding to the weight (or efficiency) <code>w</code> of the synapse. If no spike arrives, the conductance evolves with its own dynamics, independently from inputs.</p>
+<p>The default behavior for conductances is governed by instantaneous synapses: once all the incoming spikes have been summed, the total conductance is reset to 0 for the next time step. More realistic models use exponentially decreasing or alpha (double exponential) functions to model the dynamics of the conductance. The example of <a href="#fig-fini:spikecoded" class="quarto-xref">Figure&nbsp;<span>6.3</span></a> a uses exponentially decreasing synapses, by specifying a linear first-order ODE for the conductances <code>g_exc</code> and <code>g_inh</code>. If no spike arrives for a certain duration, the conductances will progressively decay back to 0, with a time constant defined by the parameter <code>tau</code>.</p>
+<p>Two other arguments of the Neuron object have to be defined: <code>spike</code> defines the spiking condition, i.e.&nbsp;the condition that must be satisfied in order to emit a spike (typically when the membrane potential exceeds a given threshold); <code>reset</code> describes what should happen after a spike is emitted. The spiking condition has to be a boolean expression; it can depend on any parameter or variable, possibly combined through the logical operators <code>and</code> and <code>or</code>. The <code>reset</code> statement forces some neural variables to take predefined values after a spike is emitted: here the membrane potential is clamped to a reset value <code>c</code> and the recovery variable is incremented by <code>d</code>.</p>
+<p>Spiking neurons can also define a refractory period, during which the ODEs are not evaluated (i.e.&nbsp;the membrane potential stays at its reset value), except for the conductances <code>g_exc</code> and <code>g_inh</code>. This corresponds to the hyper-polarized state of a neuron after spike emission, where no spike can be further emitted. The duration of this refractory period is set through the <code>refractory</code> argument, which takes here a constant value of 2 milliseconds, but the name of a parameter or variable can be given, allowing for dynamical refractory period: for example, the refractory period can be progressively increased if the firing rate becomes too high.</p>
+<p>As shown in <span class="citation" data-cites="Stimberg2014">Stimberg et al. (<a href="References.html#ref-Stimberg2014" role="doc-biblioref">2014</a>)</span>, the five arguments <code>parameters</code>, <code>equations</code>, <code>spike</code>, <code>reset</code> and <code>refractory</code> are sufficient to describe the dynamics of most point-spiking neurons, including IF and Hodgkin-Huxley models, and are directly related to the Brian syntax (although <code>parameters</code> is implicit in Brian). They are not well suited to describe multi-compartment models, which are the main focus of simulators such as NEURON or GENESIS. However, Brian 2 introduces support for this kind of models.</p>
+</section>
+<section id="event-driven-synaptic-transmission" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="event-driven-synaptic-transmission">Event-driven synaptic transmission</h4>
+<p>Synaptic behavior in spiking networks is also different from rate-coded networks, and requires additional description. The basic type of synapses is the linear synapse, where synaptic transmission is event-driven: when the pre-synaptic neuron emits a spike, it increases the corresponding post-synaptic conductance by a given value (generally the synaptic efficiency <code>w</code>). If no spike occurs, the synapse does not need to transmit any information: the dynamics of conductances are already defined at the post-synaptic neuron level. As in Brian, a spiking synapse can therefore define two additional arguments: <code>pre_spike</code> which specifies what should happen when a pre-synaptic spike arrives at the synapse (potentially after a given delay) and <code>post_spike</code> when the post-synaptic neuron emits a spike. The default linear synapse only defines <code>pre_spike</code> with the value <code>g_target += w</code>. <code>g_target</code> is a generic name for the conductance associated to the synapse. Depending on the target of the projection, <code>g_target</code> will be replaced by <code>g_exc</code> or <code>g_inh</code>, for example. The underlying idea is that the same synapse type can be used in different projections, regardless of their target.</p>
+<p>Some event-driven synapse models modify the post-synaptic conductance with a value depending on specific synaptic variables. This is for example the case in short-term plasticity (STP) synapses <span class="citation" data-cites="Markram1998">(<a href="References.html#ref-Markram1998" role="doc-biblioref">Markram et al., 1998</a>)</span>, where the increment of the post-synaptic conductance depends on the history of the synapse. Frequent stimulation of a facilitating synapse leads to an increased influence on the post-synaptic neuron, while depressing synapses show the opposite effect. A possible model of STP synapses uses two internal variables <span class="math inline">u(t)</span> and <span class="math inline">x(t)</span>, which evolve continuously according to linear ODEs:</p>
+<p><span id="eq-fini:stp"><span class="math display">
+\begin{aligned}
+\tau_\text{rec} \cdot \frac{dx(t)}{dt} &amp;= 1 - x(t) \\
+\tau_\text{facil} \cdot \frac{du(t)}{dt} &amp;= U - u(t) \\
+\end{aligned}
+\tag{6.4}</span></span></p>
+<p>When a pre-synaptic spike arrives at the synapse, the post-synaptic conductance should be incremented with <span class="math inline">w(t) \cdot u(t) \cdot x(t)</span>, while the synaptic variables should be modified according to:</p>
+<p><span id="eq-fini:stpevent"><span class="math display">
+\begin{aligned}
+x(t) &amp;\leftarrow x(t) \cdot (1 - u(t))  \\
+u(t) &amp;\leftarrow u(t) + U \cdot (1 -u(t)) \\
+\end{aligned}
+\tag{6.5}</span></span></p>
+<p><a href="#fig-fini:spikecoded" class="quarto-xref">Figure&nbsp;<span>6.3</span></a> b shows an implementation of a synapse with short-term plasticity. The parameters are <code>tau_rec</code>, <code>tau_facil</code> and <code>U</code>, which define the dynamics of the synapse and whether it is facilitating or depressing. The two variables <code>u</code> and <code>x</code> directly relate to <a href="#eq-fini:stp" class="quarto-xref">Equation&nbsp;<span>6.4</span></a>. The <code>pre_spike</code> argument defines what should be modified when the pre-synaptic spike occurs: <code>g_target</code> should be incremented with <code>w*u*x</code> instead of <code>w</code> by default, and <code>u</code> and <code>x</code> are modified according to <a href="#eq-fini:stpevent" class="quarto-xref">Equation&nbsp;<span>6.5</span></a>.</p>
+<p>The equations for <code>u</code> and <code>x</code> use the flag <code>event-driven</code>. As explained later in <a href="#sec-numerical-methods" class="quarto-xref"><span>Section 6.3.4</span></a>, this defines the numerical method used to integrate the ODE. Here both variables are defined by first-order linear ODEs, so their current value can be directly calculated whenever a pre- or post-synaptic spike occurs, based on the time elapsed since the last event (exponentially decreasing function of time). This can spare a lot of computations if the number of spikes in the network is not very high.</p>
+<p>An event-driven synapse does not need to rely only on spike times for its dynamics. As for rate-coded synapses, it can access pre- and post-synaptic variables during updates: the pre- (resp. post-) synaptic membrane potential is accessed with <code>pre.v</code> (resp. <code>post.v</code>). Pre-synaptic variables are delayed if necessary. However, only the post-synaptic conductance <code>g_target</code> can be modified by a synapse, contrary to Brian 2.</p>
+</section>
+<section id="synaptic-plasticity" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="synaptic-plasticity">Synaptic plasticity</h4>
+<p>Synaptic plasticity can also be described using event-driven mechanisms: the weight <code>w</code> of a synapse usually only needs to be updated when a pre- or post-synaptic spike occurs. Most biologically-realistic synaptic plasticity mechanisms in spiking networks indeed derive from the <em>spike timing dependent plasticity (STDP) rule</em> <span class="citation" data-cites="Gerstner1996 Markram1997">(<a href="References.html#ref-Gerstner1996" role="doc-biblioref">Gerstner et al., 1996</a>; <a href="References.html#ref-Markram1997" role="doc-biblioref">Markram et al., 1997</a>)</span>. Although many different implementations exist, there is an online version of STDP which is event-driven <span class="citation" data-cites="Song2000">(<a href="References.html#ref-Song2000" role="doc-biblioref">Song et al., 2000</a>)</span>. With this rule, each synapse integrates two variables <span class="math inline">A_\text{pre}(t)</span> and <span class="math inline">A_\text{post}(t)</span> which represent traces of the pre- and post-synaptic spikes, respectively. Between two spikes, they follow linear first-order ODEs:</p>
+<p><span id="eq-fini:stdp"><span class="math display">
+\begin{aligned}
+\tau_\text{+} \cdot \frac{dA_\text{pre}(t)}{dt} &amp;= - A_\text{pre}(t) \\
+\tau_\text{-} \cdot \frac{dA_\text{post}(t)}{dt} &amp;= - A_\text{post}(t) \\
+\end{aligned}
+\tag{6.6}</span></span></p>
+<p>When a pre-synaptic spike occurs, the pre-synaptic trace <span class="math inline">A_\text{pre}(t)</span> is incremented by a fixed value, and at the same time the post-synaptic trace <span class="math inline">A_\text{post}(t)</span> is substracted from the synaptic efficiency <span class="math inline">w(t)</span>, allowing long-term depression (LTD):</p>
+<p><span id="eq-fini:stdppre"><span class="math display">
+\begin{aligned}
+A_\text{pre}(t) &amp;\leftarrow A_\text{pre}(t) + A_+ \cdot w_\text{max}\\
+w(t) &amp;\leftarrow w(t) - A_\text{post}(t) \\
+\end{aligned}
+\tag{6.7}</span></span></p>
+<p>with <span class="math inline">w_\text{max}</span> being the maximal value allowed for the weight. When a post-synaptic spike occurs, the post-synaptic trace is incremented, and the synaptic efficiency <span class="math inline">w(t)</span> is increased from the pre-synaptic trace, allowing long-term potentiation (LTP):</p>
+<p><span id="eq-fini:stdppost"><span class="math display">
+\begin{aligned}
+A_\text{post}(t) &amp;\leftarrow A_\text{post}(t) + A_- \cdot w_\text{max}\\
+w(t) &amp;\leftarrow w(t) + A_\text{pre}(t) \\
+\end{aligned}
+\tag{6.8}</span></span></p>
+<p><a href="#fig-fini:spikecoded" class="quarto-xref">Figure&nbsp;<span>6.3</span></a> c shows a possible implementation of this STDP plasticity rule. The equations for <code>Apre</code> and <code>Apost</code> can be integrated with an event-driven method, as their value is only required when a pre- or post-synaptic spike occurs. Synaptic transmission is linear, so <code>pre_spike</code> defines <code>g_target += w</code>. The increments in <code>pre_spike</code> and <code>post_spike</code> follow <a href="#eq-fini:stdppre" class="quarto-xref">Equation&nbsp;<span>6.7</span></a> and <a href="#eq-fini:stdppost" class="quarto-xref">Equation&nbsp;<span>6.8</span></a>, while the weight <code>w</code> is clipped between 0 and <span class="math inline">w_\text{max}</span> by using the <code>clip</code> function. An alternative implementation could have used the <code>min</code> and <code>max</code> flags instead of the <code>clip</code> function, as <code>w</code> is a variable of the synapse.</p>
+</section>
+<section id="continuous-synaptic-transmission" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="continuous-synaptic-transmission">Continuous synaptic transmission</h4>
+<p>In some cases, synaptic transmission cannot be described in an event-driven framework. Synapses using the NMDA neurotransmitter are for example often modeled as non-linear synapses <span class="citation" data-cites="Wang2002">(<a href="References.html#ref-Wang2002" role="doc-biblioref">Wang, 2002</a>)</span>. These synapses require the post-synaptic conductance to be a sum of synapse-specific variables, as for rate-coded neurons, and not simply incremented when a pre-synaptic spike occurs. This is similar to the <code>summed</code> flag of Brian 2. NMDA synapses can be represented by two variables <span class="math inline">x(t)</span> and <span class="math inline">g(t)</span> following first-order ODEs:</p>
+<p><span id="eq-fini:nmda"><span class="math display">
+\begin{aligned}
+\tau \cdot \frac{dx(t)}{dt} &amp;= - x(t) \\
+\tau \cdot \frac{dg(t)}{dt} &amp;= - g(t) +  x(t) \cdot (1 - g(t))
+\end{aligned}
+\tag{6.9}</span></span></p>
+<p>When a pre-synaptic spike occurs, <span class="math inline">x(t)</span> is incremented by the weight <span class="math inline">w(t)</span>. However, it does not directly influence the post-synaptic neuron, as the output of a synapse is the signal <span class="math inline">g(t)</span>. The post-synaptic conductance is defined at each time <span class="math inline">t</span> as the sum over all synapses of the same type of their variable <span class="math inline">g(t)</span>:</p>
+<p><span class="math display">
+    g_\text{exc}(t) = \sum_{i=1}^{N_\text{exc}} g_i (t)
+</span></p>
+<p><a href="#fig-fini:spikecoded" class="quarto-xref">Figure&nbsp;<span>6.3</span></a> d shows a possible implementation of such a non-linear NMDA synapse. The main difference with the previous models is that it defines a <code>psp</code> argument which means that the post-synaptic conductance should be summed over this value (<code>g</code> in this case) at every time step. It is therefore not possible to use the event-driven scheme for such non-linear synapses. The <code>psp</code> argument can access any synaptic variable, as well as any pre- or post-synaptic variable. For example, it can be used for gap junctions (also called electrical synapses) which do not exchange spikes but directly a function of the pre- and post-synaptic membrane potentials.</p>
+</section>
+</section>
+<section id="additional-features" class="level3" data-number="6.2.5">
+<h3 data-number="6.2.5" class="anchored" data-anchor-id="additional-features"><span class="header-section-number">6.2.5</span> Additional features</h3>
+<section id="standard-neurons-and-synapses" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="standard-neurons-and-synapses">Standard neurons and synapses</h4>
+<p>Although the definition of neuron and synapse types is rather simple, the library provides a set of predefined models which can be used directly when creating populations and projections. Spiking neuron models are conveniently standardized, especially since the introduction of the PyNN interface <span class="citation" data-cites="Davison2008">(<a href="References.html#ref-Davison2008" role="doc-biblioref">Davison et al., 2008</a>)</span>. Using the PyNN nomenclature for the model names and parameters, ANNarchy provides the main neuron models common to most neural simulators: simple integrate-and-fire neuron, using either exponentially-decaying or alpha-shaped conductances or currents (<code>IF_curr_exp, IF_cond_exp, IF_curr_alpha, IF_cond_alpha</code>), adaptive integrate-and-fire neurons (<code>Izhikevich, EIF_cond_alpha_isfa_ista, EIF_cond_exp_isfa_ista</code>) or Hodgkin-Huxley neurons (<code>HH_cond_exp</code>). Synapse models include short-term plasticity (<code>STP</code>) and spike-timing dependent plasticity (<code>STDP</code>). Each model is associated with a docstring describing completely the parameters and equations, allowing to easily create a new derivative model. Rate-coded neuron models are less standardized than spiking ones. The library only provides a generic leaky-integrator neuron similar to <a href="#eq-fini:noisyleaky" class="quarto-xref">Equation&nbsp;<span>6.2</span></a>. Rate-coded synapses include the Hebbian learning rule (<code>Hebb</code>), the Oja learning rule (<code>Oja</code>) and the IBCM learning rule described by <a href="#eq-fini:bcm" class="quarto-xref">Equation&nbsp;<span>6.3</span></a> (<code>IBCM</code>). The available rate-coded models will be extended in future versions.</p>
+</section>
+<section id="specific-populations" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="specific-populations">Specific populations</h4>
+<p>Specific populations are available to provide functions which are difficult or unnecessarily complicated to implement with single neuron models. The <code>PoissonPopulation</code> class allows to directly create a population of spiking neurons whose spikes are generated from a Poisson distribution. The rate underlying the distribution can be a single value or one value per neuron (homogeneous Poisson process, as the rate for each neuron is constant), or a string expression defining the evolution of rate over time (e.g.&nbsp;<code>'1 + sin(2*pi*t)'</code>, heterogenous Poisson process). The <code>SpikeArray</code> class allows to create a population and to specify for each neuron the exact times at which they will emit a spike. These spiking times can be modified between two simulations using attributes.</p>
+<p>The <code>ImagePopulation</code> class allows to represent images through the firing rates of a rate-coded population with the same geometry as the image (two-dimensional for grayscale, three for colored images, the last dimension representing the R, G and B components). Firing rates are normalized between 0 and 1. It relies on the Python Imaging Library (PIL), which allows the use of many file formats, including JPEG. Similarly, the <code>VideoPopulation</code> class allows to grab image streams from webcams and use them as firing rates of a population. It relies on the OpenCV 2.x C++ library to access the desired hardware. Grabbing images has to be explicitly called by the user between two simulations.</p>
+</section>
+<section id="hybrid-networks" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="hybrid-networks">Hybrid networks</h4>
+<p>Apart from the neuron and synapse definitions, there is no difference in the interface between rate-coded and spiking networks: populations and projections behave the same regardless of the framework. It then becomes possible to create hybrid networks, composed of rate-coded and spiking populations interacting with each other. Interaction between the two types of neurons is achieved by introducing specific populations and projections to perform the conversion.</p>
+<p>Converting a rate-coded population into a spiking one is straightforward: the output <code>r</code> of the rate-coded population is interpreted as an instantaneous firing rate in Hz and used to generate spikes according to a Poisson distribution. The abovementioned <code>PoissonPopulation</code> object accepts a <code>target</code> argument, stating that the rate of each Poisson neuron is determined by its weighted sum of inputs:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pop1 <span class="op">=</span> Population(<span class="dv">1</span>, Neuron(equations<span class="op">=</span><span class="st">"r = 1 + sin(2*pi*t)"</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>pop2 <span class="op">=</span> PoissonPopulation(<span class="dv">100</span>, target<span class="op">=</span><span class="st">'exc'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>proj <span class="op">=</span> Projection(pop1, pop2, <span class="st">'exc'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>proj.connect_all_to_all(<span class="fl">1.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The connectivity matrix can have any form, but in the most simple case one single rate-coded neuron should determine the firing rate of a group of spiking neurons (one-to-many pattern). The weight of the connection determines the scaling: a weight of 1.0 means that a pre-synaptic rate of 1.0 will generate Poisson spike trains at 1 Hz. With a weight of 100.0, the train would be at 100 Hz. Other distributions than Poisson will be added in future versions.</p>
+<p>Converting a spiking population into a rate-coded one is a much more difficult problem. Estimating neural firing rates from single spike trains instead of averaging over multiple trials is an open issue in neuroscience <span class="citation" data-cites="Cunningham2009">(<a href="References.html#ref-Cunningham2009" role="doc-biblioref">Cunningham et al., 2009</a>)</span>. The main methods include peri-stimulus time histograms (PSTH, <span class="citation" data-cites="Gerstein1960">Gerstein and Kiang (<a href="References.html#ref-Gerstein1960" role="doc-biblioref">1960</a>)</span>), smoothing kernels <span class="citation" data-cites="Nawrot1999">(<a href="References.html#ref-Nawrot1999" role="doc-biblioref">Nawrot et al., 1999</a>)</span>, Kalman filters <span class="citation" data-cites="Wu2004">(<a href="References.html#ref-Wu2004" role="doc-biblioref">Wu et al., 2004</a>)</span> or Bayesian estimation <span class="citation" data-cites="Shimokawa2009">(<a href="References.html#ref-Shimokawa2009" role="doc-biblioref">Shimokawa and Shinomoto, 2009</a>)</span>. All these methods are biased and can only infer firing frequencies in a particular bandwidth. Here, the problem is even more difficult as it has to be performed online during the simulation: in the interval between two spikes of the same neuron, it is not possible to predict the real instantaneous firing rate of the neuron, as future incoming spikes are still unknown.</p>
+<p>ANNarchy provides a simple method to infer online the firing rate of a spiking population, using the assumption that a rate-coded neuron usually represents a large group of spiking neurons. The two populations are connected with a specific projection object <code>DecodingProjection</code> and a many-to-one pattern. For example, a single rate-coded neuron could decode the firing rate of a population of 1000 Poisson neurons:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pop1 <span class="op">=</span> PoissonPopulation(<span class="dv">1000</span>, rates<span class="op">=</span><span class="fl">100.0</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pop2 <span class="op">=</span> Population(<span class="dv">1</span>, Neuron(equations<span class="op">=</span><span class="st">"r=sum(exc)"</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>proj <span class="op">=</span> DecodingProjection(pop1, pop2, <span class="st">'exc'</span>, window<span class="op">=</span><span class="fl">10.0</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>proj.connect_all_to_all(<span class="fl">1.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The input <code>sum(target)</code> of a post-synaptic neuron at time <span class="math inline">t</span> is a weighted sum of all spikes received during a sliding window of duration <span class="math inline">T</span> (defined by the argument <code>window</code>), normalized by the total number of synapses to this neuron:</p>
+<p><span class="math display">
+\text{sum(target)}(t) = \frac{\text{Weighted sum of spikes received in } [t - T , t]}{T * \text{Number of incoming synapses}}
+</span></p>
+<p>It approximates the mean firing rate in the pre-synaptic population during the last <span class="math inline">T</span> milliseconds. By default, <span class="math inline">T</span> is equal to the simulation step <code>dt</code>, but the decoded rate may be fluctuating if the number of pre-synaptic neurons is too small. One should either increase <span class="math inline">T</span> or apply a low-pass filter to <code>sum(target)</code> in the post-synaptic neuron. The weights of the projection can be used to scale the output firing rate: by default, an input firing rate at 1 Hz leads to <code>sum(target)=1.0</code>.</p>
+<div id="fig-fini:hybrid" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fini:hybrid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/fini/hybrid.jpg" class="img-fluid figure-img" style="width:70.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fini:hybrid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.4: Example of an hybrid network encoding a rate-coded population into a spiking population (<code>PoissonPopulation</code>) and decoded back to the rate-coded domain (<code>DecodingProjection</code>). The script for this plot is provided in the Supplementary Material. a) Raster plot of the spiking population reacting to step-wise inputs for 1 second. Each step lasts 250 ms (0, 10, 50 and 100 Hz). b) Firing rate of a single rate-coded neuron decoding the corresponding spiking neuron. The blue line shows the firing rate in the input population and the green line shows the decoded firing rate. It follows the original firing rate with some noise due to the stochastic nature of the spike trains and some delay due to the integration window. c) Relative decoding error (<span class="math inline">\epsilon = \frac{1}{250} \int_{t=0}^{250} \frac{|r(t) - F|}{F} dt</span>) depending on the number of spiking neurons used for decoding, for different input firing rates (10, 50 and 100 Hz). For small number of neurons, the decoding error is high as individual spike trains are stochastic. When the number of neurons is increased (over 200), the decoding error is reduced. Decoding is relatively more precise at high frequencies than at low ones.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-fini:hybrid" class="quarto-xref">Figure&nbsp;<span>6.4</span></a> illustrates the use of hybrid networks. A single rate-coded neuron is used to activate a population of 1000 Poisson neuron with a firing rate increasing every 250 ms (0, 10, 50 and 100 Hz). <a href="#fig-fini:hybrid" class="quarto-xref">Figure&nbsp;<span>6.4</span></a> a shows a raster plot of the spikes emitted by the Poisson population. <a href="#fig-fini:hybrid" class="quarto-xref">Figure&nbsp;<span>6.4</span></a> b shows the original (blue) and decoded (green) firing rate, for a single rate-coded neuron connected to all 1000 Poisson neurons. The projection uses a sliding window of 10 ms to smoothen the rate. The decoded firing rate follows the original one, but with a small variance due to the stochastic nature of the Poisson spike trains, and with a small temporal lag corresponding to the sliding window: when the firing rate suddenly increases, it takes approximately <span class="math inline">T</span> milliseconds to completely reflect the change.</p>
+<p><a href="#fig-fini:hybrid" class="quarto-xref">Figure&nbsp;<span>6.4</span></a> c shows the effect of the number of connected neurons on the precision of the decoding. For the three stimulations at 10, 50 and 100 Hz, we measure the mean of the normalized error between the decoded firing rate <span class="math inline">r(t)</span> and its target value <span class="math inline">F \in [10, 50, 100]</span>: <span class="math inline">\epsilon = \frac{1}{250} \int_{t=0}^{250} \frac{|r(t) - F|}{F} dt</span> for post-synaptic neurons receiving 1 to 1000 inputs from the Poisson population. Unsurprisingly, the more inputs are used for decoding, the better is the precision. The sliding window method is also more precise at high frequencies, as more spikes can be used to estimate the firing rate. The remaining error for a high number of neurons is mostly due to the temporal lag of the integration. The script allowing to reproduce <a href="#fig-fini:hybrid" class="quarto-xref">Figure&nbsp;<span>6.4</span></a> is given in the Supplementary Material.</p>
+</section>
+<section id="weight-sharing-and-convolution-operations" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="weight-sharing-and-convolution-operations">Weight sharing and convolution operations</h4>
+<p>Regular projections instantiate a set of connection weights per post-synaptic neuron. This can be a waste of resources when the weights are identical for each neuron, the only difference being the coordinates of the corresponding neurons in the pre-synaptic population, as it is the case in convolutional networks <span class="citation" data-cites="Lecun1998">(<a href="References.html#ref-Lecun1998" role="doc-biblioref">Lecun et al., 1998</a>)</span> or image filtering. Such convolution operations can be implemented by creating a <code>SharedProjection</code> instead of a <code>Projection</code> and calling the <code>convolve()</code> connector method:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>proj <span class="op">=</span> SharedProjection(pre<span class="op">=</span>pop1, post<span class="op">=</span>pop2, target<span class="op">=</span><span class="st">'exc'</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>proj.convolve(weights<span class="op">=</span>kernel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The generated code depends on the respective geometry of the pre- and post-synaptic populations, as well as on the weights kernel. If they all have the same number of dimensions (for example two-dimensional), a regular convolution will be performed:</p>
+<p><span class="math display">
+\text{sum}_\text{exc}(x, y) = \sum_{i=-d_i}^{d_i} \sum_{j=-d_j}^{d_j} W(i, j) \cdot \text{pre.r}(x - i, y - j)
+</span></p>
+<p>with <span class="math inline">(d_i, d_j)</span> representing the extent of the weights kernel <span class="math inline">W</span>. If the pre- and post-populations do not have the same number of neurons in each dimension (for example <span class="math inline">200*200</span> and <span class="math inline">100*100</span>, corresponding to a sub-sampling ratio of 2), the mapping between the coordinates of the post-synaptic neurons and the center of the corresponding pre-synaptic region is automatically computed, but this can be overwritten.</p>
+<p>The convolution operation can also be performed in parallel over a specific dimension of the pre-synaptic population. For example, if the last dimension of the population represents the RGB color channels of an image, the first two being the width and height, a two-dimensional filter can be applied on each color channel separately. The post-synaptic population has then three dimensions too. It is also possible to apply a bank of filters on the pre-synaptic population (e.g.&nbsp;edge detection with different orientations), leading to a post-synaptic population with one additional dimension (feature map).</p>
+<p>Pooling (e.g.&nbsp;max-pooling) can also be implemented using a shared projection. The operation must be specified when creating the projection, before calling the <code>pooling</code> connector method:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>proj <span class="op">=</span> SharedProjection(pre<span class="op">=</span>pop1, post<span class="op">=</span>pop2, target<span class="op">=</span><span class="st">'exc'</span>, operation<span class="op">=</span><span class="st">'max'</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>proj.pooling()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Each post-synaptic neuron will be associated to a region of the pre-synaptic population and will extract the maximal firing rate in this region, without defining any weight. For example, if the two populations are <span class="math inline">200*200</span> and <span class="math inline">100*100</span>, each post-synaptic neuron covers a <span class="math inline">2*2</span> area. The extent of the region is automatically computed based on the respective geometries, but this can be overwritten. The operation can be changed to the minimal or mean firing rate in the region (<code>'min'</code> and <code>'mean'</code>). Weight sharing is for the moment only possible for rate-coded networks and learning is disabled. This will be improved in future versions.</p>
+</section>
+<section id="recording-of-variables" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="recording-of-variables">Recording of variables</h4>
+<p>All neural and synaptic variables (defined in the <code>equations</code> argument of a neuron or synapse) can be recorded during a simulation. Populations (or subsets of a population) and projections can be associated to a <code>Monitor</code> object together with a list of variable names. A frequency of recording can also be defined, e.g.&nbsp;once every 10 ms. In the following calls to <code>simulate()</code>, the value of these variables for all neurons/synapses will be internally appended to a vector until <code>get()</code> is called, which returns a matrix containing the recorded values and empties the recording vectors. Recording can be stopped, paused and resumed using methods of <code>Monitor</code>.</p>
+<p>The advantage of this recording method is that the user is not bound to a specific file format: the returned values are a dictionary of Numpy arrays (one per variable) which can be directly manipulated or saved into a file. The drawback is that the available RAM can quickly be filled, especially when recording synaptic variables such as weights. It is the user’s responsibility to record only the necessary periods of the simulation (using pause/resume) and to save intermediary results regularly.</p>
+</section>
+<section id="conditional-simulations" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="conditional-simulations">Conditional simulations</h4>
+<p>By default, <code>simulate()</code> runs the simulation for a fixed duration. In some cases it may be useful to simulate until a criterion is reached, for example when the maximal firing rate in a population crosses a threshold, or a neuron has emitted a certain number of spikes. This can be used to run conditional simulations, e.g.&nbsp;the network has made a decision and we need to perform the corresponding action. Each population accepts a <code>stop_condition</code> argument, which states the condition that must be true to stop the simulation. In the following example, the simulation would be stopped when one or more neurons of the population have a firing rate <code>r</code> higher than 1:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pop1 <span class="op">=</span> Population( ... , stop_condition <span class="op">=</span> <span class="st">"r &gt; 1.0"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The stop condition can use any neural parameter or variable, and can combine several boolean predicates using the <code>and</code>, <code>or</code> and <code>not</code> operators. If the simulation should be stopped when the condition is true for all neurons, not just any of them, the <code>: all</code> flag can be appended to the condition. The simulation can then be run with the <code>simulate_until()</code> method, which accepts a maximal duration for the simulation (if the criteria is never met) and a (list of) population(s) whose criteria should be checked.</p>
+</section>
+<section id="structural-plasticity" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="structural-plasticity">Structural plasticity</h4>
+<p>The number of synapses in a network is determined at the time when projections are created and is usually constant during the simulation. Some networks require to dynamically add or remove synapses between neurons during the simulation, a mechanism called <em>structural plasticity</em> <span class="citation" data-cites="Butz2009">(<a href="References.html#ref-Butz2009" role="doc-biblioref">Butz et al., 2009</a>)</span>. Projections define <code>create_synapse()</code> and <code>prune_synapse()</code> methods which allow to dynamically create or delete synapses between any pair of neurons. These functions are called from Python, so the user has to regularly stop the simulation and check if the conditions for creating or deleting a synapse are met, depending on some neural or synaptic variable or randomly. If the structural plasticity mechanism is applied frequently, it will slow down the simulation because of the constant switches between Python and C++.</p>
+<p>Alternatively, simple rules for the creation or deletion of a synapse can be passed to the definition of the synapse model. The <code>pruning</code> argument takes a simple boolean expression which, when true, will lead to the online deletion of the synapse. Oppositely, the <code>creating</code> argument defines a binary condition which leads to the creation of a synapse if it does not exist yet. Creation or deletion can be made probabilistic by passing the flag <code>proba</code> after the rule. The weight and delay of created synapses can also be specified.</p>
+<p>In the following example, each synapse updates an <code>age</code> variable which is incremented at each simulation step, but is reset to 0 when both pre- and post-synaptic neurons are simultaneously active. When the age of a synapse exceeds a given threshold, the synapse is pruned with a probability of 0.5. Similarly, a synapse can be created when two unconnected neurons are strongly active at the same time.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>StructuralPlasticity <span class="op">=</span> Synapse(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    parameters <span class="op">=</span> <span class="st">"max_age = 1000.0 : postsynaptic"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    equations <span class="op">=</span> <span class="st">"age = if pre.r * post.r &gt; 0.9: 0.0 else: age + dt"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    pruning <span class="op">=</span> <span class="st">"age &gt; max_age : proba=0.5"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    creating <span class="op">=</span> <span class="st">"pre.r * post.r &gt; 0.9 : proba=0.5, w=0.5"</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Creation and pruning of synapses have to be explicitly started with <code>start_creating()</code> and <code>start_pruning()</code> methods, which also accept a <code>period</code> argument defining how often the structural plasticity conditions will be checked (by default at every time step, which is computationally inefficient and probably unnecessary in most cases). Structural plasticity is available for spiking networks, but creating and pruning can not be linked to events such as the emission of a spike: it must rely on continuous variables.</p>
+</section>
+<section id="reporting" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="reporting">Reporting</h4>
+<p>As noted by <span class="citation" data-cites="Stimberg2014">Stimberg et al. (<a href="References.html#ref-Stimberg2014" role="doc-biblioref">2014</a>)</span>, the equation-based representation of neural networks allows the automatic documentation of models. Parameters are known, equations can be parsed to &nbsp;mathematical code, and the structure of the network is simply defined in terms of populations and projections. User-defined neuron or synapse models can be documented by adding a name and a detailed text description of its behavior. Calling the <code>report()</code> method will generate a complete &nbsp;file, organized in tables as suggested by <span class="citation" data-cites="Nordlie2009">Nordlie et al. (<a href="References.html#ref-Nordlie2009" role="doc-biblioref">2009</a>)</span>. It contains a summary of the network, a list of all the populations (including their size and the neuron model), a list of all the projections with a description of the connectivity and the synapse model, a textual description of each neuron and synapse models used in the network (with the parsed equations) and finally the initial value of the parameters used in each population and projection. The generated file still requires some editing before being published, but it should ease the modeler’s work.</p>
+</section>
+</section>
+</section>
+<section id="code-generation" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="code-generation"><span class="header-section-number">6.3</span> Code generation</h2>
+<p>The approach chosen for the neural simulator is based on a complete code generation mechanism. As noted in <span class="citation" data-cites="Goodman2010">Goodman (<a href="References.html#ref-Goodman2010" role="doc-biblioref">2010</a>)</span>, code generation allows to couple the flexibility of a high-level language (here Python) with the speed and hardware specificities of a low-level language (C++). This approach is used in Brian to speed up some code portions and is further extended in Brian 2 where a complete C++ code for the network can be optionally generated at runtime <span class="citation" data-cites="Stimberg2014">(<code>cpp_standalone</code> mode, <a href="References.html#ref-Stimberg2014" role="doc-biblioref">Stimberg et al., 2014</a>)</span>. ANNarchy relies entirely on this concept, by generating and compiling a shared C++ library during the call to <code>compile()</code>. Only this library will hold the data representing the model. The library is then imported by the Python script which transfers the initial value of all parameters and variables and starts the simulation. The Python script has only an indirect access to the C++ data and possible recordings through Cython wrappings. Cython is a Python-like compiled language allowing to execute instructions at C-speed and to access C or C++ data structures and methods <span class="citation" data-cites="Behnel2009">(<a href="References.html#ref-Behnel2009" role="doc-biblioref">Behnel et al., 2009</a>)</span>. Cython was for example used to create maintainable bindings to NEST <span class="citation" data-cites="Zaytsev2014">(<a href="References.html#ref-Zaytsev2014" role="doc-biblioref">Zaytsev and Morrison, 2014</a>)</span>.</p>
+<p>The main advantage of a complete code generation in comparison to a simple interface to a low-level simulator [as in PyNest; <span class="citation" data-cites="Eppler2008">Eppler et al. (<a href="References.html#ref-Eppler2008" role="doc-biblioref">2008</a>)</span>] is that it allows to optimize the execution regarding the structure of the network. For example, if the model does not use delays in synaptic transmission (which require to implement queues for the output variables), or if no structural plasticity mechanism is involved (requiring more flexible data structures for the synapses), the corresponding code is not generated, reducing the complexity of the code and avoiding unnecessary overhead. Furthermore, the code can be adapted to the parallel computing platform, either a shared memory system with OpenMP (the parallel strategy can be different depending on whether 4 or 256 cores are available) or a graphical processing unit with CUDA (depending on its model or version). A drawback is that the structure of the network cannot be changed after the call to <code>compile()</code>: no population or projection can be added, or equations modified. The only changes possible are parameter or variable values, as well as the dynamical addition or suppression of synapses in case of structural plasticity.</p>
+<section id="sec-internal-representation-of-data" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="sec-internal-representation-of-data"><span class="header-section-number">6.3.1</span> Internal representation of data</h3>
+<p>Each population and projection is represented by a C++ structure storing each attribute, either a parameter or a variable. Their name is easily extracted from the <code>parameters</code> and <code>equations</code> arguments to the neuron model: they are alone on the left side of the equation, except for ODEs where it is surrounded by <code>d</code> and <code>/dt</code>. Local attributes of a population are represented by a standard C++ vector with as many elements as neurons in the population while global ones (annotated by the <code>population</code> flag) are represented by a single value. Indexing is simple because all neurons have the same attributes.</p>
+<p>For projections, the data representation depends on the platform: on shared memory systems with openMP, local attributes are represented by a vector of vectors, one per post-synaptic neuron receiving connections. Each of these vectors represents all synapses reaching this post-synaptic neuron (they can have different sizes). The connectivity matrix is therefore stored as a list of lists (LIL) structure in order to associate each value to the corresponding synapse. On graphical cards with CUDA, the connectivity is stored in the compressed sparse row (CSR) format, where the values of each attribute are flattened into a single vector and a list of row pointers allow to attribute portions of this array to a single post-synaptic neuron <span class="citation" data-cites="Brette2011">(see <a href="References.html#ref-Brette2011" role="doc-biblioref">Brette and Goodman, 2011</a> for a review)</span>. These different data structures lead to a better parallel performance: CSR representations ensure a <em>coalesced</em> access to the attributes (i.e.&nbsp;the data is contiguous in memory), which is a strong condition for GPU computations to be efficient <span class="citation" data-cites="Brette2012">(<a href="References.html#ref-Brette2012" role="doc-biblioref">Brette and Goodman, 2012</a>)</span>, while the LIL structure allows a faster distribution of the data to the different OpenMP threads <span class="citation" data-cites="Dinkelbach2012">(<a href="References.html#ref-Dinkelbach2012" role="doc-biblioref">Dinkelbach et al., 2012</a>)</span>. LIL and CSR representations have similar memory requirements, but LIL is more adapted to the dynamical addition or suppression of synapses: structural plasticity is very inefficient on the GPU platform and is currently disabled.</p>
+<p>The ability to adapt the data structures to the hardware is a clear advantage of the code generation approach, especially when the number and type of attributes is <em>a priori</em> unknown. These data structures can furthermore be easily exported to the Python namespace through the generation of Cython bindings, so the choice of the data structure is transparent to the user.</p>
+</section>
+<section id="sec-simulation-steps" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="sec-simulation-steps"><span class="header-section-number">6.3.2</span> Simulation steps</h3>
+<p>ANNarchy performs the simulation with an equidistant time grid, where the integration step size <code>dt</code> is fixed for all equations. Although this scheme is natural for rate-coded networks, it can have a negative influence on spiking networks because of the forced alignment of spike times on this grid <span class="citation" data-cites="Morrison2007">(<a href="References.html#ref-Morrison2007" role="doc-biblioref">Morrison et al., 2007</a>)</span>. Brian also allows the use of different clocks for different parts of the model, which is currently impossible in ANNarchy. Future versions will address this issue.</p>
+<p>Each simulation step is composed of several successive computational processes, which are mainly common to spiking and rate-coded networks:</p>
+<ol type="1">
+<li><p><em>Propagation</em>: the results of the previous simulation step is propagated in the network. For rate-coded projections, the weighted sum of pre-synaptic firing rates is accumulated in the post-synaptic population. For spiking projections, the post-synaptic conductances are increased from the synaptic weight (or any other value defined in the <code>pre_spike</code> argument of the synapse) if the corresponding pre-synaptic neuron has emitted a spike. The variable updates defined in <code>pre_spike</code> are also processed if they exist (e.g.&nbsp;in the STDP rule). In both cases, if delays in synaptic transmission are defined, these operations are performed on the value of these variables at the corresponding time.</p></li>
+<li><p><em>Neural update</em>: the variables of each population are updated according to their definition in the <code>equations</code> argument of the neuron model. For spiking populations, the spiking condition is then evaluated. If the condition is met, the rank of the neuron is appended to a vector, the reset statement is evaluated and the neuron is possibly put into a refractory state. However, if a spiking neuron is in the refractory state, only the ODEs corresponding to the conductances are updated until the refractory period has elapsed, so no spike can be emitted.</p></li>
+<li><p><em>Delayed outputs</em>: before the simulation starts, each population computes the maximal delay in synaptic transmission required by outgoing projections and instantiates a double-ended queue of the adequate size. In this step, the new value of the output variable (firing rate or spike) is appended to the queue while the oldest value is removed.</p></li>
+<li><p><em>Synaptic updates</em>: the variables of each projection (if any) are updated, including synaptic plasticity.</p></li>
+<li><p><em>Post-synaptic events</em>: for each spiking projection where a post-synaptic neuron has emitted a spike, the <code>post_spike</code> statement is evaluated for all synapses reaching this neuron.</p></li>
+<li><p><em>Structural plasticity</em>: if structural plasticity is defined, the addition/suppression of synapses is evaluated.</p></li>
+<li><p><em>Recording</em>: each neural or synaptic variable is associated with a boolean flag which enables the recording of the variable with a given period. When the criterion is met, the value of the variable is appended to a vector.</p></li>
+</ol>
+<p>Finally, the internal time <code>t</code> is incremented. These steps are all performed sequentially to ensure the correctness of the simulation. Parallel computations only occur within each of these steps if possible. The only difference between rate-coded and spiking networks are the <code>pre_spike</code> and <code>post_spike</code> statements, as well as the spike emission mechanism. This common structure allows hybrid networks to be simulated.</p>
+</section>
+<section id="mathematical-parser" class="level3" data-number="6.3.3">
+<h3 data-number="6.3.3" class="anchored" data-anchor-id="mathematical-parser"><span class="header-section-number">6.3.3</span> Mathematical parser</h3>
+<p>The different mechanisms described above are based on the equations defined at the neural or synaptic level. As the simulation is performed in C++, the computations are not vectorized, so an update rule for the variable has to be defined for each neuron of a population or each synapse of a projection. The transformation between the mathematical equation and the corresponding C++ code snippet is performed through the use of the Sympy library <span class="citation" data-cites="Joyner2012">(<a href="References.html#ref-Joyner2012" role="doc-biblioref">Joyner et al., 2012</a>)</span> coupled with regular expressions.</p>
+<p>The first step in the analysis of a neuron or synapse model is to determine with regular expressions the list of parameters and variables (by analysing the left side of the equation), their locality (presence of <code>population</code> or <code>postsynaptic</code> in the flags), their type (int, float or bool), bounds (min and max), initial value (init) and eventually the associated numerical method. The value of each parameter (e.g.&nbsp;<code>tau = 10.0</code>) is stored in a temporary dictionary which will be transferred to the C++ library when it is instantiated.</p>
+<p>For each variable, the equation is first manipulated to extract non-standard vocabulary. For example, the weighted sum in a rate-coded neuron (<code>sum(exc)</code>) is extracted and replaced by a temporary variable name (<code>_sum_exc_</code>). The same is done for random number distributions (<code>Uniform(0, 1)</code> is replaced by <code>_rand_</code>) and global operations (<code>mean(pre.r)</code> by <code>_mean_pre_r</code>). Conditional statements (<code>if A: B else: C</code>) are also extracted and each of the three terms are recursively analyzed. These temporary variables are added to the list of parameters and variables of the model.</p>
+<p>This list allows to build a dictionary where the correspondence between the name of an attribute and its C++ equivalent is calculated. Each attribute belongs to a C++ structure representing a population or projection, so the name of the attribute must be prepended by the instance of the structure: <code>pop%(id)s.</code> for populations, <code>proj%(id)s.</code> for projections, where <code>%(id)s</code> will be replaced by the ID of the population or projection when the complete code is generated. As the update will be performed in a loop over all neurons or synapses, the index of the neuron in its population (<code>[i]</code>) or of the synapse in the projection (<code>[i][j]</code> for the LIL structure) is appended to this name. For example, the firing rate <code>r</code> of a neuron is represented by <code>pop%(id)s.r[i]</code> while the weight of a synapse becomes (<code>proj%(id)s.w[i][j]</code>).</p>
+<p>Once the dictionary is built, Sympy is able to directly generate the C++ code equivalent to each side of the equation: constants (such as numbers) and functions of the C math library are automatically recognized and correctly translated. The temporary variables introduced for the weighted sums or random distributions are finally replaced by the adequate code thanks to regular expressions. As an example, the following equation for a neuron:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> <span class="bu">sum</span>(exc) <span class="op">+</span> B <span class="op">+</span> cos(<span class="dv">2</span><span class="op">*</span>pi<span class="op">*</span>t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>with <code>B</code> being a global parameter and <code>t</code> the current time in milliseconds, leads to the following code:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pop<span class="op">%(</span>id<span class="op">)</span>s<span class="op">.</span>r<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> pop<span class="op">%(</span>id<span class="op">)</span>s<span class="op">.</span>sum_exc<span class="op">[</span>i<span class="op">]</span> <span class="op">+</span> pop<span class="op">%(</span>id<span class="op">)</span>s<span class="op">.</span>B <span class="op">+</span> cos<span class="op">(</span><span class="fl">2.0</span><span class="op">*</span>M_PI<span class="op">*</span><span class="dt">double</span><span class="op">(</span>t<span class="op">)*</span>dt<span class="op">))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="sec-numerical-methods" class="level3" data-number="6.3.4">
+<h3 data-number="6.3.4" class="anchored" data-anchor-id="sec-numerical-methods"><span class="header-section-number">6.3.4</span> Numerical methods</h3>
+<p>A special case has to be made for ODEs, as the desired numerical method will influence the resulting C++ code. Additionally, a neuron or synapse can be described by a set of coupled ODEs, so the code generation must be performed globally depending on the numerical method. We retained an approach similar to the one described in <span class="citation" data-cites="Stimberg2014">Stimberg et al. (<a href="References.html#ref-Stimberg2014" role="doc-biblioref">2014</a>)</span>, except that we do not explicitly generate an abstract code representation of the equations, but rather directly manipulate Sympy symbols.</p>
+<p>To illustrate how the numerical methods are applied, we take the example of a simple spiking neuron defined by <a href="#eq-fini:numericalmethod" class="quarto-xref">Equation&nbsp;<span>6.10</span></a>, but the principle is similar for synapses or rate-coded models, regardless of the number of ODEs.</p>
+<p><span id="eq-fini:numericalmethod"><span class="math display">
+\begin{aligned}
+\tau \cdot \frac{dv(t)}{dt} + v(t) &amp;= g_\text{exc} (t) - u(t) \\
+\tau \cdot \frac{du(t)}{dt} + u(t) &amp;= v(t)
+\end{aligned}
+\tag{6.10}</span></span></p>
+<p>Such a neuron could be represented by the following description:</p>
+<pre><code>tau * dv/dt + v = g_exc - u
+tau * du/dt + u = v</code></pre>
+<p>with <code>tau</code> being a global parameter of the population. The problem to be addressed by the numerical method is to find the next value of the variables <code>v</code> and <code>u</code> based on the value they had at the previous time step and the current value of the conductance <code>g_exc</code>. <a href="#fig-fini:numericalmethod" class="quarto-xref">Figure&nbsp;<span>6.5</span></a> shows the code generated for these equations by the different available numerical methods (<code>explicit</code>, <code>implicit</code>, <code>exponential</code> and <code>midpoint</code>).</p>
+<div id="fig-fini:numericalmethod" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fini:numericalmethod-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/fini/numericmethod.jpg" class="img-fluid figure-img" style="width:70.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fini:numericalmethod-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.5: Example of code generated for <a href="#eq-fini:numericalmethod" class="quarto-xref">Equation&nbsp;<span>6.10</span></a> using different numerical methods: 1. Explicit Euler, 2. Implicit Euler, 3. Exponential Euler, 4. Midpoint (Runge-Kutta method of order 2). <code>pop0</code> is a C++ structure holding the different attributes of the population: the vectors <code>v</code> and <code>u</code> for the two variables, the vector <code>g_exc</code> for the excitatory inputs and the double value <code>tau</code> for the time constant. All methods compute first the increments <code>_v</code> and <code>_u</code> before adding them to <code>v</code> and <code>u</code>, in order to make sure the update rules use the previous values of these variables. The number of elementary operations differs from one method to another, increasing the simulation runtime, but the numerical precision and stability of the more complex methods might be required in some cases.
+</figcaption>
+</figure>
+</div>
+<section id="explicit-euler" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="explicit-euler">Explicit Euler</h4>
+<p>The explicit (or forward) Euler method evaluates the gradients <code>dv/dt</code> and <code>du/dt</code> at the current time <span class="math inline">t</span>. In the textual representations of the equations, <code>dv</code> and <code>du</code> are simply replaced by two new variables <code>_v</code> and <code>_u</code>, and the system of equations is solved and simplified to find the value of these increments as a function of <code>v</code>, <code>u</code>, <code>tau</code> and <code>g_exc</code>. Here, the problem is simple because <code>_v</code> and <code>_u</code> are present only once per equation: the equations are not coupled. The increments are translated into a C++ code snippet using the same dictionary-based approach as for regular equations, and the increments are then added to the previous value of <code>v</code> and <code>u</code>.</p>
+</section>
+<section id="implicit-euler" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="implicit-euler">Implicit Euler</h4>
+<p>The implicit (or backward) Euler method evaluates the gradients <code>dv/dt</code> and <code>du/dt</code> at the next time <span class="math inline">t+dt</span>. <code>dv</code> and <code>du</code> are replaced by <code>_v - v</code> and <code>_u - u</code>, where <code>_v</code> and <code>_u</code> represent the next value of the variables, and all occurrences of <code>v</code> and <code>u</code> are replaced by <code>_v</code> and <code>_u</code>. This leads to a system of two linear equations with two variables, which is solved using the Sympy linear solver. Contrary to the explicit method, the equations are coupled, and the solver will only succeed if the equations are linear in <code>v</code> and <code>u</code>. The parser will return an error if not. Once the solution is found, we subtract <code>v</code> and <code>u</code> to <code>_v</code> and <code>_u</code> and simplify the equation in order to find the increment that will be added to the previous value of the variables.</p>
+</section>
+<section id="exponential-euler" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exponential-euler">Exponential Euler</h4>
+<p>The exponential Euler method is a special forward method which has the smallest numerical error on uncoupled linear first-order ODEs. The first step is to canonize each equation in the form <span class="math inline">\tau \cdot \frac{dx(t)}{dt} + x(t) = A(t)</span>, with <span class="math inline">\tau</span> being the time constant of the variable and <span class="math inline">A(t)</span> its steady state. Here the equations are already in this form, but a conductance-based neuron with the equation <code>tau*dv/dt + v = g_exc*(E-v)</code> would have an equivalent time constant of <code>tau/(1+g_exc)</code> and a steady state of <code>g_exc*E/(1+g_exc)</code>. Once these equivalent time constants and steady states are identified and simplified for each equation, the increments can be directly obtained through:</p>
+<p><span class="math display"> x(t+dt) = x(t) + (1 - \exp(- \frac{dt}{\tau} ) ) \cdot (A(t) - x(t)))</span></p>
+</section>
+<section id="midpoint" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="midpoint">Midpoint</h4>
+<p>The midpoint method is a Runge-Kutta method of order 2, described in <span class="citation" data-cites="Stimberg2014">Stimberg et al. (<a href="References.html#ref-Stimberg2014" role="doc-biblioref">2014</a>)</span>. It evaluates successively the gradient at <span class="math inline">t</span> and in the middle of the interval <span class="math inline">[t, t + dt]</span>. The gradient at <span class="math inline">t</span> is evaluated using the same mechanism as in the explicit Euler method and stored in the variables <code>_k_v</code> and <code>_k_u</code>. These variables allow to estimate the value of <code>v</code> and <code>u</code> by <code>v + dt/2*_k_v</code> and <code>u + dt/2*_k_u</code>, respectively. The equations are again manipulated, by replacing all occurrences of <code>v</code> and <code>u</code> by their estimates at <span class="math inline">t+dt/2</span> and finding the corresponding increment using the explicit Euler method. This method has a much smaller numerical error and is more stable than the explicit or implicit methods, but requires more computations during the simulation, as the gradient is evaluated twice.</p>
+</section>
+<section id="event-driven-integration" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="event-driven-integration">Event-driven integration</h4>
+<p>This method is only available for spiking synapses, if the ODEs are linear (which is the case for the online STDP rule). For this method, the equations are not evaluated at each time step, but only when a pre- or post-synaptic spike occurs for a synapse. The new value of the variables is then computed exactly, using the time elapsed since the last event. Event-driven integration is not yet available for neural equations, as it requires to predict the occurrence of the next spike. Future versions of ANNarchy will address this mechanism. However, it may only speed simulations up if the network is small and does not generate too many spikes per step <span class="citation" data-cites="Morrison2007 Brette2007">(<a href="References.html#ref-Brette2007" role="doc-biblioref">Brette et al., 2007</a>; <a href="References.html#ref-Morrison2007" role="doc-biblioref">Morrison et al., 2007</a>)</span>.</p>
+</section>
+</section>
+<section id="openmp-and-cuda-code-generation" class="level3" data-number="6.3.5">
+<h3 data-number="6.3.5" class="anchored" data-anchor-id="openmp-and-cuda-code-generation"><span class="header-section-number">6.3.5</span> OpenMP and CUDA code generation</h3>
+<div id="fig-fini:generatedcode" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fini:generatedcode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/fini/generatedcode.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fini:generatedcode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.6: Code generated for a single population <code>pop0</code> of 1000 identical neurons. a) Neuron model used for code generation: a global parameter <code>tau</code> and a local variable <code>r</code> following a linear ODE and limited to positive values. b) Code generated for the OpenMP framework. The code is pasted into the main C++ code <code>ANNarchy.cpp</code> and called at each step. It iterates over the 1000 neurons of the population and updates their firing rate depending on the corresponding code snippet. It operates directly on the data contained in the structure <code>pop0</code>. A simple <code>#pragma</code> statement allows parallel processing over the available threads. c) Code generated for the CUDA framework. The code is pasted into the specific <code>ANNarchy.cu</code> file. A copy of the vectors <code>_sum_exc</code> and <code>r</code> (prefixed by <code>gpu</code>) is sent to the device (GPU) through the call to <code>cuPop0_step</code> by the host (CPU). The code inside <code>cuPop0_step</code> is executed in parallel on the device for the 1000 neurons and updates the array corresponding to <code>r</code>. This copy of <code>r</code> is transfered back to the CPU at the end of the simulation block for analysis in Python. Note that the parser can be configured to not generate the struct prefixes as for the OpenMP backend.
+</figcaption>
+</figure>
+</div>
+<p>Once the structure of network is known and all equations have been analyzed, the C++ code corresponding to the simulation can be generated depending on the desired parallel framework. Each simulation step described in <a href="#sec-simulation-steps" class="quarto-xref"><span>Section 6.3.2</span></a> leads to the generation of a code portion for the corresponding populations and projections which is then integrated into the main simulation code. <a href="#fig-fini:generatedcode" class="quarto-xref">Figure&nbsp;<span>6.6</span></a> shows an example of a code portion for the update of the neural variables of a population <code>pop0</code> whose 1000 neurons are defined by the neuron model described on <a href="#fig-fini:generatedcode" class="quarto-xref">Figure&nbsp;<span>6.6</span></a> a. It defines a global parameter <code>tau</code> and the firing rate <code>r</code> is defined by the ODE <code>tau*dr/dt = sum(exc) - r</code>, limited to positive values with the flag <code>min=0.0</code>. The OpenMP implementation on <a href="#fig-fini:generatedcode" class="quarto-xref">Figure&nbsp;<span>6.6</span></a> b is in this case simple: the code snippet corresponding to the ODE (here using the explicit Euler method) is integrated into a for-loop over the 1000 neurons, where the value of each element in the corresponding vector is updated sequentially. The parallel execution of this loop over the available cores is ensured through the addition of an OpenMP <code>#pragma</code> statement. The complete code is pasted in a standard C++ file called <code>ANNarchy.cpp</code> and compiled using <code>g++</code> on Linux or <code>clang++</code> on MacOS X.</p>
+<p>The code generated for the same population in the CUDA framework is more complex, as shown on <a href="#fig-fini:generatedcode" class="quarto-xref">Figure&nbsp;<span>6.6</span></a> c.&nbsp;The instructions executed on the GPU have to be compiled with the NVIDIA compiler <code>nvcc</code>, so the code is generated in a special file called <code>ANNarchy.cu</code>. CUDA code generally consists of two sections: one is intended to run on the CPU (host code) while the other (flagged with the keywords <code>__global__</code> or <code>__device__</code>) will be executed on the GPU (device code). At the beginning of the simulation, the vectors holding population and projection data are transferred to the GPU using the CUDA method <code>cudaMemcpy()</code>. The CUDA object will work on these copies during the whole simulation and they will be transfered back to the host at the end, allowing the Python script to analyze the results. An exception is during the recording of variables: the arrays to be recorded are transferred to the host at each time step, as the amount of memory is usually limited on GPUs.</p>
+<p><a href="#fig-fini:generatedcode" class="quarto-xref">Figure&nbsp;<span>6.6</span></a> c shows the corresponding host and device code portions: the host code simply calls the device method with a copy of the necessary data. The device code updates the passed variables in parallel according to the desired numerical method. The same mechanism is used for all steps of the simulation. The weighted sum of inputs is for example executed in parallel over blocks of post-synaptic neurons with OpenMP. In contrast, parallel reduction is used in the CUDA implementation, as it leads to better performance <span class="citation" data-cites="Dinkelbach2012">(<a href="References.html#ref-Dinkelbach2012" role="doc-biblioref">Dinkelbach et al., 2012</a>)</span>. The main advantage of this code generation approach is that only the required steps are generated: spike-only mechanisms are skipped for rate-coded networks, as well as mechanisms for synaptic delays or structural plasticity if the network does not define them. This allows to minimize the code overhead and improves the readability of the generated code.</p>
+</section>
+</section>
+<section id="benchmarks" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="benchmarks"><span class="header-section-number">6.4</span> Benchmarks</h2>
+<p>We here report the parallel performance of the neural simulator but do not attempt to study it in all details. It is planned to issue future releases of ANNarchy, most improvements concerning the parallel performance. Nevertheless, we want to highlight that code generation already allows to obtain a parallel performance comparable to most specialized simulators. The OpenMP tests are performed on a Linux machine with 2 Intel XEON X5675 at 3 GHz (12 physical cores in total, with hyperthreading disabled) and 12 GB RAM. The CUDA tests are performed on a Linux machine with 2 Intel XEON E5-2650 at 2.6 GHz, 128 GB RAM and a NVIDIA Tesla K20m graphical card. The simulation times are measured and averaged over 10 different trials with the same initial conditions (standard deviations are omitted as they are negligible in all cases). All scripts used in this section are provided in the Supplementary Material.</p>
+<section id="rate-coded-benchmark" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="rate-coded-benchmark">Rate-coded benchmark</h4>
+<div id="fig-fini:perf-rate" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fini:perf-rate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/fini/perf_rate.jpg" class="img-fluid figure-img" style="width:70.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fini:perf-rate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.7: Speedup ratio obtained by ANNarchy for a fully connected rate-coded network composed of two populations of 1000 (resp. 4000) neurons each. The speedup ratio is defined by the ratio between the execution time (measured for a simulation of 1 second) of the single-threaded implementation and the one measured when using T threads. The single-threaded implementation does not use OpenMP nor CUDA primitives. For the OpenMP implementation, the number of threads is varied between 2 and 12. For the CUDA implementation, the default configuration of ANNarchy (32 threads for the neural variables updates, 192 threads for the weighted sums) is used. The CUDA implementation is run on a different machine for technical reasons, so the single-threaded baseline measured on this machine differs from the one used for OpenMP. Nevertheless, only the scaling ratio is interesting here, not the absolute execution times. The black line denotes the ideal linear scaling, the blue line the scaling of the network with 1000 neurons, the green one the scaling for 4000 neurons. With OpenMP, the scaling for 1000 neurons is slightly sub-optimal, while the one for 4000 neurons saturates quickly at a ratio of 2.9. The situation is reversed with CUDA: the network with 1000 neurons only achieves a speedup ratio of 3.8, while the network with 4000 neurons achieves a ratio of 7.15.
+</figcaption>
+</figure>
+</div>
+<p>To test the parallel performance of rate-coded networks, we used a simple network of two populations composed of N = 1000 (resp. 4000) neuron each, connected with a all-to-all projection representing 1 (resp. 16) million connections. Each neuron is a simple leaky-integrator of excitatory inputs with a firing rate defined by the ODE <code>tau*dr/dt + r =  sum(exc)</code>, <code>tau</code> being a global parameter of the population. Unlike spiking networks, the simulation time of a rate-coded network does not depend on the activity in the network and the summation of inputs for all-to-all connectivity patterns hugely overcomes the update of neural variables <span class="citation" data-cites="Dinkelbach2012">(<a href="References.html#ref-Dinkelbach2012" role="doc-biblioref">Dinkelbach et al., 2012</a>)</span>, so such a simple network is sufficient to exhibit the parallel performance of the simulation. As outlined in the introduction, we are not aware of parallel simulators of rate-coded networks which could simply implement this network, so we only present in <a href="#fig-fini:perf-rate" class="quarto-xref">Figure&nbsp;<span>6.7</span></a> the speed-up ratio of the simulation time when using 1 to 12 threads with OpenMP or when using CUDA as the simulation backend. The single-threaded implementation is performed without the OpenMP primitives, so it avoids the small sequential overhead of OpenMP. The CUDA implementation uses the default configuration used by ANNarchy (32 threads for the neural variables updates, 192 threads for the weighted sums), but this can be changed by the user.</p>
+<p>The network with 1000 neurons in each population shows a fairly efficient scaling behavior, while the network with 4000 neurons quickly saturates to a speed-up of approximately 2.9. This can be explained by the fact that the connectivity matrix with 16 million synapses (each connection weight being represented by a double floating-point value) cannot fit into the cache, so we have a memory-bound problem where memory transfers between the RAM and the processor limit the efficiency of the parallel implementation on shared-memory systems. This limitation is well-known for this kind of operation, especially because of the LIL structure used for the connectivity matrix. We chose this structure as it allows easier modification through structural plasticity mechanisms and internal tests showed that a CSR structure does not improve much the performance. We will investigate further the influence of data structures on parallel performance. The main operation performed here is a matrix-vector multiplication. The strategy to efficiently parallelize this operation depends on the sparseness of the connectivity matrix. Depending on this type, there are multiple methods available, including single-instruction-multiple-data operations (SIMD), cache blocking, loop unrolling, prefetching and autotuning <span class="citation" data-cites="Williams2007 Kelefouras2015">(<a href="References.html#ref-Kelefouras2015" role="doc-biblioref">Kelefouras et al., 2015</a>; <a href="References.html#ref-Williams2007" role="doc-biblioref">Williams et al., 2007</a>)</span>. Thanks to the code generation approach used in ANNarchy, we will be able in future versions to implement these improvements depending on the known connectivity before compilation.</p>
+<p>The situation is reversed for the CUDA implementation: the network with 1000 neurons is speeded up by a factor 3.8, while the network with 4000 neurons obtains a speedup of 7.15, more than three times the maximal speedup obtained with OpenMP. This confirms our previous work showing that rate-coded networks with a relatively small number of connections might benefit more from a CPU-based implementation, while networks with many connections should be run on a GPU <span class="citation" data-cites="Dinkelbach2012">(<a href="References.html#ref-Dinkelbach2012" role="doc-biblioref">Dinkelbach et al., 2012</a>)</span>.</p>
+</section>
+<section id="spiking-benchmark" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="spiking-benchmark">Spiking benchmark</h4>
+<div id="fig-fini:perf-spike" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fini:perf-spike-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/fini/perf_spike_new2.jpg" class="img-fluid figure-img" style="width:70.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fini:perf-spike-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.8: Comparison of the simulation times of different simulators depending on the number of threads on a shared-memory system. The parallel performance of the simulators Brian (version 1.4.1), Brian 2 (version 2.0b3), NEST (with Python bindings, version 2.4.2), Auryn (version 0.4.1) and ANNarchy (version 4.4.0) are investigated up to 12 threads. Two versions of NEST are used: one using the Runge-Kutta-Fehlberg 4(5) method (noted NEST-RK45), and a patched version using the explicit Euler method (NEST-Euler). The simulation times are normalized to show the real-time ratio: a normalized time of 1 means that simulating the network for one second takes exactly one second of computer time (simulations are run for 10 seconds). Both axes use a logarithmic scale. Brian only allows single-threaded simulations. Brian 2, NEST and ANNarchy use OpenMP, while Auryn uses MPI (openMPI 1.4.3). Auryn only allows a number of processes which is a multiple of 2. The single-threaded version of ANNarchy compares well to other neural simulators, but its scaling properties are not optimal compared to NEST.
+</figcaption>
+</figure>
+</div>
+<p>For spiking networks, we compare the parallel performance of ANNarchy with other neural simulators on the COBA benchmark proposed in <span class="citation" data-cites="Brette2007">Brette et al. (<a href="References.html#ref-Brette2007" role="doc-biblioref">2007</a>)</span> and based on the model of <span class="citation" data-cites="Vogels2005">Vogels and Abbott (<a href="References.html#ref-Vogels2005" role="doc-biblioref">2005</a>)</span>. The network is composed of 4000 integrate-and-fire neurons (3200 excitatory and 800 inhibitory) using exponentially-decreasing conductance-based synapses:</p>
+<p><span id="eq-fini:coba"><span class="math display">
+\begin{aligned}
+    C \cdot \frac{d v(t)}{dt} &amp; = g_L \cdot (E_l - v(t)) + g_e(t) \cdot (E_e - v(t)) + g_i(t) \cdot (E_i - v(t)) + I \\
+    \tau_e \cdot \frac{d g_e(t)}{dt} &amp; = - g_e(t) \\
+    \tau_i \cdot \frac{d g_i(t)}{dt} &amp; = - g_i(t) \\
+\end{aligned}
+\tag{6.11}</span></span></p>
+<p>All neurons are randomly connected with a probability of 0.02. We implemented this benchmark on ANNarchy (version 4.4.0), Brian (version 1.4.1), Brian 2 (version 2.0b3), NEST (with Python bindings, version 2.4.2) and Auryn (version 0.4.1). As noted in <span class="citation" data-cites="Zenke2014">Zenke and Gerstner (<a href="References.html#ref-Zenke2014" role="doc-biblioref">2014</a>)</span>, NEST uses by default the precise but very expensive Runge-Kutta-Fehlberg 4(5) (RK45) numerical method, while Brian and Auryn use the faster explicit Euler method. We therefore also applied the patch provided by <span class="citation" data-cites="Zenke2014">Zenke and Gerstner (<a href="References.html#ref-Zenke2014" role="doc-biblioref">2014</a>)</span> to force NEST to use the Euler method (noted NEST-Euler as opposed to NEST-RK45). The Auryn simulator was modified to use synaptic delays of 0.1 ms. The code for Brian 2 uses the <code>cpp_standalone</code> mode to generate efficient C++ code and OpenMP parallel processing. All simulations were run using the same parameters, random number generator seeds (for the initial values of the membrane potential) and connectivity matrix (generated as a Scipy sparse matrix and loaded into the different simulators). The ANNarchy and Brian implementations produced exactly the same spiking patterns, while the other simulators showed only minor deviations. The time needed for 10 seconds of simulation (excluding building time) was measured using the Python time module, except for Auryn where MPI timer routines were used.</p>
+<p>The results are shown on <a href="#fig-fini:perf-spike" class="quarto-xref">Figure&nbsp;<span>6.8</span></a>. In agreement with the results of <span class="citation" data-cites="Zenke2014">Zenke and Gerstner (<a href="References.html#ref-Zenke2014" role="doc-biblioref">2014</a>)</span>, the default NEST implementation with RK45 is roughly ten times slower than the modified NEST version with explicit Euler, but both have a very good scaling behavior. In the single-threaded version, Brian 2 is much faster than Brian and comparable to ANNarchy, but its scaling behavior is not as optimal as other simulators. It should be noted that Brian 2 is still in development, so this result is only preliminary. Auryn is almost one order of magnitude faster than the other simulators and with an satisfying scaling behavior (although the number of MPI processes must be a multiple of 2). The single-threaded implementation of ANNarchy is in comparison fairly efficient, but the scaling properties could be further improved. This is mostly due to the spike propagation mechanism (increasing post-synaptic conductances when a spike is emitted), which scales poorly in comparison to the neural variable updates. Future work will investigate different implementations of this mechanism.</p>
+</section>
+</section>
+<section id="discussion" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="discussion"><span class="header-section-number">6.5</span> Discussion</h2>
+<p>We have described the core principles of the neural simulator ANNarchy. It provides a high-level interface in Python similar to PyNN to facilitate the creation of rate-coded, spike-coded or hybrid neural networks. An important set of neuron and synapse models can be implemented with an equation-oriented syntax close to the one proposed by Brian. These definitions are used to generate an entire C++ library optimized for the underlying parallel framework (OpenMP for shared memory systems, CUDA for GPU cards). Different numerical methods are available for solving the possible ODEs. Code generation allows complete control over data structures and computational methods, which leads to the execution of fine-tuned and simple code. It allows to obtain a parallel performance comparable to specialized simulators.</p>
+<p>ANNarchy brings the flexibility of the Brian interface to rate-coded networks, while being compatible with state-of-the-art spiking simulators. Although several features and concepts for spiking networks are comparable to other simulators <span class="citation" data-cites="Stimberg2014">(especially Brian 2, <a href="References.html#ref-Stimberg2014" role="doc-biblioref">Stimberg et al., 2014</a>)</span>, ANNarchy also provides novel features to the community. Structural plasticity can be easily implemented through simple synapse-specific rules. Any neural or synaptic variable can be easily recorded during the simulation. The network can be easily interfaced to external C/C++ libraries through the Cython bindings, so images or video streams can efficiently be fed to the network, or neural activity read to control robots in real-time. Automatic reporting allows to generate complete reports in &nbsp;about the current network model, including the network structure, the equations used for the neurons and synapses, as well as the different parameters used. Brian 2 provides a similar feature as it is also based on Sympy, but only for individual equations. Some features are implemented only for rate-coded networks (such as convolution or pooling operations which do not make much sense for spiking networks), but the hybrid ability of ANNarchy allows for example to integrate convoluted rate-coded networks for vision with spiking cognitive models.</p>
+<p>The chosen equation-oriented approach is very powerful, but has some limitations, some of which are already listed in <span class="citation" data-cites="Stimberg2014">Stimberg et al. (<a href="References.html#ref-Stimberg2014" role="doc-biblioref">2014</a>)</span>. The number of explicit neural states is limited to two for spiking neurons (active or refractory) and only one for rate-coded ones. However, the syntax allows the use of conditional statements which can modify entirely the properties of a neuron, mimicking additional states. The equation-oriented syntax is also limited in its current form to the description of point-neurons, neglecting the effects of the neurons’ morphology on their properties. Such neurons would require the use of another simulator such as NEURON or GENESIS.</p>
+<p>As Brian 2 and ANNarchy are based on the principles stated in <span class="citation" data-cites="Stimberg2014">Stimberg et al. (<a href="References.html#ref-Stimberg2014" role="doc-biblioref">2014</a>)</span>, one should highlight the main differences between the two equation-oriented interfaces for spiking networks. Brian 2 proposes a powerful mechanism to incrementally build connection matrices by accessing the underlying data structure, possibly through text-based rules. It is also possible to dynamically add and remove populations and projections between two simulations. This is currently impossible with ANNarchy: all data structures are linked to the generated library and are only indirectly accessible in Python. Synapse definition in Brian 2 allows to modify any pre- or post-synaptic neural variable. Because of the way the code is generated, ANNarchy only allows the synapse to modify the post-synaptic conductance in addition to synaptic variables. Brian 2 allows to solve stochastic differential equations (SDE), while ANNarchy is limited for now to ODEs: one can only use random variables inside an ODE to simulate for example intracellular noise, but this is not a stochastic process. Brian 2 allows a finer control on the evolution of neural variables during the refractory period, while ANNarchy freezes all variables during this period except for the conductances. SDEs and control over variables during the refractory period will be progressively introduced in future versions. On the other hand, ANNarchy proposes a solution to structural plasticity and hetero-synaptic plasticity (through the possible use of global post-synaptic variables in a projection) which could be integrated in Brian 2. It also provides additional control over the evolution of variables, such as their initial value and the minimal or maximal value they can take over the course of a simulation.</p>
+<p>ANNarchy will be further maintained and new features will be integrated in future releases. Learning in rate-coded networks is focused on biologically-plausible rules where all information is local to the synapse, which currently rules out methods such as backpropagation. Synaptic delays are currently only implemented between the pre-synaptic neuron and the synapse, while some plasticity models rely on an additional delay between the synapse and the soma of the post-synaptic neuron. Exact event-based integration of neural dynamics needs to be implemented <span class="citation" data-cites="Morrison2007">(<a href="References.html#ref-Morrison2007" role="doc-biblioref">Morrison et al., 2007</a>)</span>, as it allows to simulate faster low-firing networks of linear neurons. Additional numerical methods (such as Runge-Kutta of order 4) will be progressively introduced. Computations are limited to an equidistant time grid, as it is the easiest method for rate-coded networks. Some networks may nevertheless benefit from adaptive time steps, or of the use of different clocks in different parts of the model. This may be particularly useful for hybrid networks, as rate-coded networks often behave well with integration steps of 1 ms, while some spiking networks require at least 0.1 ms. Finally, as the chosen interface is very close to PyNN <span class="citation" data-cites="Davison2008">(<a href="References.html#ref-Davison2008" role="doc-biblioref">Davison et al., 2008</a>)</span>, we will implement a fully compatible interface so that ANNarchy can be used as an alternative simulation backend using the available standard models.</p>
+<p>As the interface is already stable, there is room for improvement regarding the parallel performance. On CPU-based shared memory systems, the OpenMP implementation is efficient for rate-coded networks (in the limit of memory bandwidth), but the spike propagation mechanism does not scale linearly yet, introducing a strong sequential component to the simulation. This issue will be investigated in future releases: based on our experiments, simulators using array-based computations (Brian 2, ANNarchy and partially Auryn) tend to scale sub-optimally, while NEST performs better. A possible reason for this difference is linked to the object-oriented design of NEST: each thread computes individual neurons, leading to a more cache-friendly access to the variables, especially when using synaptic delays. In contrast the array-based approach share neural and synaptic data among several threads and quickly fill the cache. The opposite effect seems to be true for the update of neural variables <span class="citation" data-cites="Zenke2014">(<a href="References.html#ref-Zenke2014" role="doc-biblioref">Zenke and Gerstner, 2014</a>)</span>. Hybrid solutions between array-based and object-oriented implementations might lead to a better parallel performance for spiking networks.</p>
+<p>Parallel computing on distributed memory systems is also planned. The performance of NEST on such systems suggests that this is an interesting solution for spiking networks, although it has been shown that memory transfers might impair scaling already for medium-scale spiking networks <span class="citation" data-cites="Zenke2014">(<a href="References.html#ref-Zenke2014" role="doc-biblioref">Zenke and Gerstner, 2014</a>)</span>. Communication costs might become a problem for rate-coded networks, as firing rates must be exchanged at each simulation step. However, if synaptic data is appropriately distributed on each node, it may increase the total available memory bandwidth, which is an important limiting factor. We are currently investigating hybrid MPI/OpenMP solutions which may minimize the communication costs through a structural analysis of the network’s topology.</p>
+<p>The generation of CUDA code for simulation on GPU platforms is still experimental and currently only available for rate-coded networks. One major issue is the choice of the correct configuration depending on the network, such as the number of threads per operation (the optimal number of threads for the summation of inputs is different from the one for the update of neural or synaptic variables). ANNarchy currently proposes a default configuration which can be overwritten by the user, but we will investigate solutions using auto-tuning of the simulation parameters <span class="citation" data-cites="Dinkelbach2012">(<a href="References.html#ref-Dinkelbach2012" role="doc-biblioref">Dinkelbach et al., 2012</a>)</span>.</p>
+<section id="disclosureconflict-of-interest-statement" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="disclosureconflict-of-interest-statement">Disclosure/Conflict-of-Interest Statement</h4>
+<p>The authors declare that the research was conducted in the absence of any commercial or financial relationships that could be construed as a potential conflict of interest.</p>
+</section>
+<section id="author-contributions" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="author-contributions">Author Contributions</h4>
+<p>JV and HÜD designed and wrote the library. JV wrote primarily the article and performed the tests. FH supervised the development and participated in the writing.</p>
+</section>
+<section id="acknowledgement" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="acknowledgement">Acknowledgement</h4>
+<p>The authors would like to thank Javier Baladron for useful discussions and suggestions. Parts of this work have been supported by the Deutsche Forschungsgemeinschaft (DFG) grants HA2630/4-2, GZ: INST 270/221-1 FUGG and by the European Project FP7-NBIS “Spatial Cognition” (grant no. 600785).</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Aisa2008" class="csl-entry" role="listitem">
+Aisa, B., Mingus, B., and O’Reilly, R. (2008). <span class="nocase">The emergent neural modeling system.</span> <em>Neural Netw.</em> 21, 1146–52. doi:<a href="https://doi.org/10.1016/j.neunet.2008.06.016">10.1016/j.neunet.2008.06.016</a>.
+</div>
+<div id="ref-Bednar2009" class="csl-entry" role="listitem">
+Bednar, J. A. (2009). <span class="nocase">Topographica: Building and Analyzing Map-Level Simulations from Python, C/C++, MATLAB, NEST, or NEURON Components.</span> <em>Front. Neuroinform.</em> 3, 8. doi:<a href="https://doi.org/10.3389/neuro.11.008.2009">10.3389/neuro.11.008.2009</a>.
+</div>
+<div id="ref-Behnel2009" class="csl-entry" role="listitem">
+Behnel, S., Bradshaw, R. W., and Seljebotn, D. S. (2009). <span class="nocase">Cython tutorial</span>. in <em>Proc. 8th python sci. conf.</em>, eds. G. Varoquaux, S. van der Walt, and J. Millman (Pasadena, CA USA: <a href="http://conference.scipy.org/proceedings/SciPy2009/paper_1" class="uri">http://conference.scipy.org/proceedings/SciPy2009/paper_1</a>), 4–14.
+</div>
+<div id="ref-Bekolay2014" class="csl-entry" role="listitem">
+Bekolay, T., Bergstra, J., Hunsberger, E., Dewolf, T., Stewart, T. C., Rasmussen, D., et al. (2014). <span class="nocase">Nengo: a Python tool for building large-scale functional brain models.</span> <em>Front. Neuroinform.</em> 7, 48. doi:<a href="https://doi.org/10.3389/fninf.2013.00048">10.3389/fninf.2013.00048</a>.
+</div>
+<div id="ref-Beuth2015" class="csl-entry" role="listitem">
+Beuth, F., and Hamker, F. H. (2015). <span class="nocase">A mechanistic cortical microcircuit of attention for amplification, normalization and suppression.</span> <em>Vision Res.</em> doi:<a href="https://doi.org/10.1016/j.visres.2015.04.004">10.1016/j.visres.2015.04.004</a>.
+</div>
+<div id="ref-Bienenstock1982" class="csl-entry" role="listitem">
+Bienenstock, E. L., Cooper, L. N., and Munro, P. W. (1982). <a href="https://www.ncbi.nlm.nih.gov/pubmed/7054394">Theory for the development of neuron selectivity: Orientation specificity and binocular interaction in visual cortex.</a> <em>J Neurosci</em> 2, 32–48.
+</div>
+<div id="ref-Bower2007" class="csl-entry" role="listitem">
+Bower, J. M., and Beeman, D. (2007). <span class="nocase">Constructing realistic neural simulations with GENESIS.</span> <em>Methods Mol. Biol.</em> 401, 103–25. doi:<a href="https://doi.org/10.1007/978-1-59745-520-6_7">10.1007/978-1-59745-520-6_7</a>.
+</div>
+<div id="ref-Brette2011" class="csl-entry" role="listitem">
+Brette, R., and Goodman, D. F. M. (2011). <span class="nocase">Vectorized algorithms for spiking neural network simulation.</span> <em>Neural Comput.</em> 23, 1503–35. doi:<a href="https://doi.org/10.1162/NECO_a_00123">10.1162/NECO_a_00123</a>.
+</div>
+<div id="ref-Brette2012" class="csl-entry" role="listitem">
+Brette, R., and Goodman, D. F. M. (2012). <span class="nocase">Simulating spiking neural networks on GPU.</span> <em>Network</em> 23, 167–82. doi:<a href="https://doi.org/10.3109/0954898X.2012.730170">10.3109/0954898X.2012.730170</a>.
+</div>
+<div id="ref-Brette2007" class="csl-entry" role="listitem">
+Brette, R., Rudolph, M., Carnevale, T., Hines, M., Beeman, D., Bower, J. M., et al. (2007). <span class="nocase">Simulation of networks of spiking neurons: a review of tools and strategies.</span> <em>J. Comput. Neurosci.</em> 23, 349–98. doi:<a href="https://doi.org/10.1007/s10827-007-0038-6">10.1007/s10827-007-0038-6</a>.
+</div>
+<div id="ref-Butz2009" class="csl-entry" role="listitem">
+Butz, M., Wörgötter, F., and Ooyen, A. van (2009). <span class="nocase">Activity-dependent structural plasticity.</span> <em>Brain Res. Rev.</em> 60, 287–305. doi:<a href="https://doi.org/10.1016/j.brainresrev.2008.12.023">10.1016/j.brainresrev.2008.12.023</a>.
+</div>
+<div id="ref-Carandini2012" class="csl-entry" role="listitem">
+Carandini, M., and Heeger, D. J. (2012). <span class="nocase">Normalization as a canonical neural computation.</span> <em>Nat. Rev. Neurosci.</em> 13, 51–62. doi:<a href="https://doi.org/10.1038/nrn3136">10.1038/nrn3136</a>.
+</div>
+<div id="ref-Carlson2014" class="csl-entry" role="listitem">
+Carlson, K. D., Nageswaran, J. M., Dutt, N., and Krichmar, J. L. (2014). <span class="nocase">An efficient automated parameter tuning framework for spiking neural networks.</span> <em>Front. Neurosci.</em> 8, 10. doi:<a href="https://doi.org/10.3389/fnins.2014.00010">10.3389/fnins.2014.00010</a>.
+</div>
+<div id="ref-Cunningham2009" class="csl-entry" role="listitem">
+Cunningham, J. P., Gilja, V., Ryu, S. I., and Shenoy, K. V. (2009). <span class="nocase">Methods for estimating neural firing rates, and their application to brain-machine interfaces.</span> <em>Neural Netw.</em> 22, 1235–46. doi:<a href="https://doi.org/10.1016/j.neunet.2009.02.004">10.1016/j.neunet.2009.02.004</a>.
+</div>
+<div id="ref-Davison2008" class="csl-entry" role="listitem">
+Davison, A. P., Brüderle, D., Eppler, J., Kremkow, J., Muller, E., Pecevski, D., et al. (2008). <span class="nocase">PyNN: A Common Interface for Neuronal Network Simulators.</span> <em>Front. Neuroinform.</em> 2, 11. doi:<a href="https://doi.org/10.3389/neuro.11.011.2008">10.3389/neuro.11.011.2008</a>.
+</div>
+<div id="ref-Dayan2001" class="csl-entry" role="listitem">
+Dayan, P., and Abbott, L. F. (2001). <em><span class="nocase">Theoretical Neuroscience: Computational and Mathematical Modeling of Neural Systems</span></em>. The MIT Press Available at: <a href="http://dl.acm.org/citation.cfm?id=1205781">http://dl.acm.org/citation.cfm?id=1205781</a>.
+</div>
+<div id="ref-Dinkelbach2012" class="csl-entry" role="listitem">
+Dinkelbach, H. Ü., Vitay, J., Beuth, F., and Hamker, F. H. (2012). <span class="nocase">Comparison of GPU- and CPU-implementations of mean-firing rate neural networks on parallel hardware.</span> <em>Network</em> 23, 212–36. doi:<a href="https://doi.org/10.3109/0954898X.2012.739292">10.3109/0954898X.2012.739292</a>.
+</div>
+<div id="ref-Djurfeldt2012" class="csl-entry" role="listitem">
+Djurfeldt, M. (2012). <span class="nocase">The connection-set algebra–a novel formalism for the representation of connectivity structure in neuronal network models.</span> <em>Neuroinformatics</em> 10, 287–304. doi:<a href="https://doi.org/10.1007/s12021-012-9146-1">10.1007/s12021-012-9146-1</a>.
+</div>
+<div id="ref-Dranias2008" class="csl-entry" role="listitem">
+Dranias, M. R., Grossberg, S., and Bullock, D. (2008). <span class="nocase">Dopaminergic and non-dopaminergic value systems in conditioning and outcome-specific revaluation.</span> <em>Brain Res.</em> 1238, 239–87. doi:<a href="https://doi.org/10.1016/j.brainres.2008.07.013">10.1016/j.brainres.2008.07.013</a>.
+</div>
+<div id="ref-Eliasmith2012" class="csl-entry" role="listitem">
+Eliasmith, C., Stewart, T. C., Choo, X., Bekolay, T., DeWolf, T., Tang, Y., et al. (2012). <span class="nocase">A large-scale model of the functioning brain.</span> <em>Science</em> 338, 1202–5. doi:<a href="https://doi.org/10.1126/science.1225266">10.1126/science.1225266</a>.
+</div>
+<div id="ref-Eppler2008" class="csl-entry" role="listitem">
+Eppler, J. M., Helias, M., Muller, E., Diesmann, M., and Gewaltig, M.-O. (2008). <span class="nocase">PyNEST: A Convenient Interface to the NEST Simulator.</span> <em>Front. Neuroinform.</em> 2, 12. doi:<a href="https://doi.org/10.3389/neuro.11.012.2008">10.3389/neuro.11.012.2008</a>.
+</div>
+<div id="ref-Fidjeland2009" class="csl-entry" role="listitem">
+Fidjeland, A. K., Roesch, E. B., Shanahan, M. P., and Luk, W. (2009). <span class="nocase">NeMo: A Platform for Neural Modelling of Spiking Neurons Using GPUs</span>. in <em>2009 20th IEEE int. Conf. Appl. Syst. Archit. process.</em> (IEEE), 137–144. doi:<a href="https://doi.org/10.1109/ASAP.2009.24">10.1109/ASAP.2009.24</a>.
+</div>
+<div id="ref-Gerstein1960" class="csl-entry" role="listitem">
+Gerstein, G. L., and Kiang, N. Y. (1960). <span class="nocase">An approach to the quantitative analysis of electrophysiological data from single neurons.</span> <em>Biophys. J.</em> 1, 15–28. Available at: <a href="http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=1366309&amp;tool=pmcentrez&amp;rendertype=abstract">http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=1366309&amp;tool=pmcentrez&amp;rendertype=abstract</a>.
+</div>
+<div id="ref-Gerstner1996" class="csl-entry" role="listitem">
+Gerstner, W., Kempter, R., Hemmen, J. L. van, and Wagner, H. (1996). <span class="nocase">A neuronal learning rule for sub-millisecond temporal coding.</span> <em>Nature</em> 383, 76–81. doi:<a href="https://doi.org/10.1038/383076a0">10.1038/383076a0</a>.
+</div>
+<div id="ref-Gewaltig2007" class="csl-entry" role="listitem">
+Gewaltig, M.-O., and Diesmann, M. (2007). <span>NEST (NEural Simulation Tool)</span>. <em>Scholarpedia</em> 2, 1430. doi:<a href="https://doi.org/10.4249/scholarpedia.1430">10.4249/scholarpedia.1430</a>.
+</div>
+<div id="ref-Goodman2010" class="csl-entry" role="listitem">
+Goodman, D. F. M. (2010). <span class="nocase">Code generation: a strategy for neural network simulators.</span> <em>Neuroinformatics</em> 8, 183–96. doi:<a href="https://doi.org/10.1007/s12021-010-9082-x">10.1007/s12021-010-9082-x</a>.
+</div>
+<div id="ref-Goodman2008" class="csl-entry" role="listitem">
+Goodman, D., and Brette, R. (2008). <span class="nocase">Brian: a simulator for spiking neural networks in python.</span> <em>Front. Neuroinform.</em> 2, 5. doi:<a href="https://doi.org/10.3389/neuro.11.005.2008">10.3389/neuro.11.005.2008</a>.
+</div>
+<div id="ref-Hamker2004" class="csl-entry" role="listitem">
+Hamker, F. H. (2004). <span class="nocase">Predictions of a model of spatial attention using sum- and max-pooling functions</span>. <em>Neurocomputing</em> 56, 329–343. doi:<a href="https://doi.org/10.1016/j.neucom.2003.09.006">10.1016/j.neucom.2003.09.006</a>.
+</div>
+<div id="ref-Hines1997" class="csl-entry" role="listitem">
+Hines, M. L., and Carnevale, N. T. (1997). <span class="nocase">The NEURON simulation environment.</span> <em>Neural Comput.</em> 9, 1179–209. Available at: <a href="http://www.ncbi.nlm.nih.gov/pubmed/9248061">http://www.ncbi.nlm.nih.gov/pubmed/9248061</a>.
+</div>
+<div id="ref-Intrator1992" class="csl-entry" role="listitem">
+Intrator, N., and Cooper, L. N. (1992). <span class="nocase">Objective function formulation of the BCM theory of visual cortical plasticity: Statistical connections, stability conditions</span>. <em>Neural Networks</em> 5, 3–17. doi:<a href="https://doi.org/10.1016/S0893-6080(05)80003-6">10.1016/S0893-6080(05)80003-6</a>.
+</div>
+<div id="ref-Izhikevich2003" class="csl-entry" role="listitem">
+Izhikevich, E. M. (2003). <span class="nocase">Simple model of spiking neurons.</span> <em>IEEE Trans. Neural Netw.</em> 14, 1569–72. doi:<a href="https://doi.org/10.1109/TNN.2003.820440">10.1109/TNN.2003.820440</a>.
+</div>
+<div id="ref-Joyner2012" class="csl-entry" role="listitem">
+Joyner, D., Čertı́k, O., Meurer, A., and Granger, B. E. (2012). <span class="nocase">Open source computer algebra systems</span>. <em>ACM Commun. Comput. Algebr.</em> 45, 225. doi:<a href="https://doi.org/10.1145/2110170.2110185">10.1145/2110170.2110185</a>.
+</div>
+<div id="ref-Kelefouras2015" class="csl-entry" role="listitem">
+Kelefouras, V., Kritikakou, A., Papadima, E., and Goutis, C. (2015). <span class="nocase">A methodology for speeding up matrix vector multiplication for single/multi-core architectures</span>. <em>J. Supercomput.</em> doi:<a href="https://doi.org/10.1007/s11227-015-1409-9">10.1007/s11227-015-1409-9</a>.
+</div>
+<div id="ref-Lecun1998" class="csl-entry" role="listitem">
+Lecun, Y., Bottou, L., Bengio, Y., and Haffner, P. (1998). <span class="nocase">Gradient-based learning applied to document recognition</span>. <em>Proc. IEEE</em> 86, 2278–2324. doi:<a href="https://doi.org/10.1109/5.726791">10.1109/5.726791</a>.
+</div>
+<div id="ref-Markram1997" class="csl-entry" role="listitem">
+Markram, H., Lubke, J., Frotscher, M., and Sakmann, B. (1997). <span class="nocase">Regulation of Synaptic Efficacy by Coincidence of Postsynaptic APs and EPSPs</span>. <em>Science (80-. ).</em> 275, 213–215. doi:<a href="https://doi.org/10.1126/science.275.5297.213">10.1126/science.275.5297.213</a>.
+</div>
+<div id="ref-Markram1998" class="csl-entry" role="listitem">
+Markram, H., Wang, Y., and Tsodyks, M. (1998). <span class="nocase">Differential signaling via the same axon of neocortical pyramidal neurons</span>. <em>Proc. Natl. Acad. Sci.</em> 95, 5323–5328. doi:<a href="https://doi.org/10.1073/pnas.95.9.5323">10.1073/pnas.95.9.5323</a>.
+</div>
+<div id="ref-Morrison2007" class="csl-entry" role="listitem">
+Morrison, A., Straube, S., Plesser, H. E., and Diesmann, M. (2007). <span class="nocase">Exact subthreshold integration with continuous spike times in discrete-time neural network simulations.</span> <em>Neural Comput.</em> 19, 47–79. doi:<a href="https://doi.org/10.1162/neco.2007.19.1.47">10.1162/neco.2007.19.1.47</a>.
+</div>
+<div id="ref-Mutch2010" class="csl-entry" role="listitem">
+Mutch, J., Knoblich, U., and Poggio, T. (2010). <span class="nocase">CNS: a GPU-based framework for simulating cortically-organized networks</span>. Cambridge, MA: MIT-CSAIL-TR-2010-013 / CBCL-286, Massachusetts Institute of Technology.
+</div>
+<div id="ref-Nawrot1999" class="csl-entry" role="listitem">
+Nawrot, M., Aertsen, A., and Rotter, S. (1999). <span class="nocase">Single-trial estimation of neuronal firing rates: from single-neuron spike trains to population activity.</span> <em>J. Neurosci. Methods</em> 94, 81–92. Available at: <a href="http://www.ncbi.nlm.nih.gov/pubmed/10638817">http://www.ncbi.nlm.nih.gov/pubmed/10638817</a>.
+</div>
+<div id="ref-Nordlie2009" class="csl-entry" role="listitem">
+Nordlie, E., Gewaltig, M.-O., and Plesser, H. E. (2009). <span class="nocase">Towards reproducible descriptions of neuronal network models.</span> <em>PLoS Comput. Biol.</em> 5, e1000456. doi:<a href="https://doi.org/10.1371/journal.pcbi.1000456">10.1371/journal.pcbi.1000456</a>.
+</div>
+<div id="ref-OReilly2006" class="csl-entry" role="listitem">
+O’Reilly, R. C., and Frank, M. J. (2006). <span class="nocase">Making working memory work: a computational model of learning in the prefrontal cortex and basal ganglia.</span> <em>Neural Comput.</em> 18, 283–328. doi:<a href="https://doi.org/10.1162/089976606775093909">10.1162/089976606775093909</a>.
+</div>
+<div id="ref-Oja1982" class="csl-entry" role="listitem">
+Oja, E. (1982). <span class="nocase">A simplified neuron model as a principal component analyzer.</span> <em>J. Math. Biol.</em> 15, 267–73. Available at: <a href="http://www.ncbi.nlm.nih.gov/pubmed/7153672">http://www.ncbi.nlm.nih.gov/pubmed/7153672</a>.
+</div>
+<div id="ref-Riesenhuber1999" class="csl-entry" role="listitem">
+Riesenhuber, M., and Poggio, T. (1999). <span class="nocase">Hierarchical models of object recognition in cortex.</span> <em>Nat. Neurosci.</em> 2, 1019–25. doi:<a href="https://doi.org/10.1038/14819">10.1038/14819</a>.
+</div>
+<div id="ref-Rougier2012" class="csl-entry" role="listitem">
+Rougier, N. P., and Fix, J. (2012). <span class="nocase">DANA: distributed numerical and adaptive modelling framework.</span> <em>Network</em> 23, 237–53. doi:<a href="https://doi.org/10.3109/0954898X.2012.721573">10.3109/0954898X.2012.721573</a>.
+</div>
+<div id="ref-Schroll2014" class="csl-entry" role="listitem">
+Schroll, H., Vitay, J., and Hamker, F. H. (2014). <span class="nocase">Dysfunctional and compensatory synaptic plasticity in Parkinson’s disease.</span> <em>Eur. J. Neurosci.</em> 39, 688–702. doi:<a href="https://doi.org/10.1111/ejn.12434">10.1111/ejn.12434</a>.
+</div>
+<div id="ref-Shimokawa2009" class="csl-entry" role="listitem">
+Shimokawa, T., and Shinomoto, S. (2009). <span class="nocase">Estimating instantaneous irregularity of neuronal firing.</span> <em>Neural Comput.</em> 21, 1931–51. doi:<a href="https://doi.org/10.1162/neco.2009.08-08-841">10.1162/neco.2009.08-08-841</a>.
+</div>
+<div id="ref-Song2000" class="csl-entry" role="listitem">
+Song, S., Miller, K. D., and Abbott, L. F. (2000). <span class="nocase">Competitive Hebbian learning through spike-timing-dependent synaptic plasticity.</span> <em>Nat. Neurosci.</em> 3, 919–26. doi:<a href="https://doi.org/10.1038/78829">10.1038/78829</a>.
+</div>
+<div id="ref-Stimberg2014" class="csl-entry" role="listitem">
+Stimberg, M., Goodman, D. F. M., Benichoux, V., and Brette, R. (2014). <span class="nocase">Equation-oriented specification of neural models for simulations.</span> <em>Front. Neuroinform.</em> 8, 6. doi:<a href="https://doi.org/10.3389/fninf.2014.00006">10.3389/fninf.2014.00006</a>.
+</div>
+<div id="ref-Thibeault2011" class="csl-entry" role="listitem">
+Thibeault, C. M., Hoang, R. V., and F. C., H. (2011). <span>A Novel Multi-GPU Neural Simulator</span>. in <em>3rd int. Conf. Bioinforma. Comput. Biol. (BICoB 2011)</em> (New Orleans, LA: ISCA), 146–151.
+</div>
+<div id="ref-Vogels2005" class="csl-entry" role="listitem">
+Vogels, T. P., and Abbott, L. F. (2005). <span class="nocase">Signal propagation and logic gating in networks of integrate-and-fire neurons.</span> <em>J. Neurosci.</em> 25, 10786–95. doi:<a href="https://doi.org/10.1523/JNEUROSCI.3508-05.2005">10.1523/JNEUROSCI.3508-05.2005</a>.
+</div>
+<div id="ref-VanderWalt2011" class="csl-entry" role="listitem">
+Walt, S. van der, Colbert, S. C., and Varoquaux, G. (2011). <span class="nocase">The NumPy Array: A Structure for Efficient Numerical Computation</span>. <em>Comput. Sci. Eng.</em> 13, 22–30. doi:<a href="https://doi.org/10.1109/MCSE.2011.37">10.1109/MCSE.2011.37</a>.
+</div>
+<div id="ref-Wang2002" class="csl-entry" role="listitem">
+Wang, X.-J. (2002). <span class="nocase">Probabilistic decision making by slow reverberation in cortical circuits.</span> <em>Neuron</em> 36, 955–68. Available at: <a href="http://www.ncbi.nlm.nih.gov/pubmed/12467598">http://www.ncbi.nlm.nih.gov/pubmed/12467598</a>.
+</div>
+<div id="ref-Williams2007" class="csl-entry" role="listitem">
+Williams, S., Oliker, L., Vuduc, R., Shalf, J., Yelick, K., and Demmel, J. (2007). <span class="nocase">Optimization of sparse matrix-vector multiplication on emerging multicore platforms</span>. in <em>Proc. 2007 ACM/IEEE conf. Supercomput. - SC ’07</em> (New York, New York, USA: ACM Press), 1. doi:<a href="https://doi.org/10.1145/1362622.1362674">10.1145/1362622.1362674</a>.
+</div>
+<div id="ref-Wu2004" class="csl-entry" role="listitem">
+Wu, W., Black, M. J., Mumford, D., Gao, Y., Bienenstock, E., and Donoghue, J. P. (2004). <span class="nocase">Modeling and decoding motor cortical activity using a switching Kalman filter.</span> <em>IEEE Trans. Biomed. Eng.</em> 51, 933–42. doi:<a href="https://doi.org/10.1109/TBME.2004.826666">10.1109/TBME.2004.826666</a>.
+</div>
+<div id="ref-Zaytsev2014" class="csl-entry" role="listitem">
+Zaytsev, Y. V., and Morrison, A. (2014). <span class="nocase">CyNEST: a maintainable Cython-based interface for the NEST simulator.</span> <em>Front. Neuroinform.</em> 8, 23. doi:<a href="https://doi.org/10.3389/fninf.2014.00023">10.3389/fninf.2014.00023</a>.
+</div>
+<div id="ref-Zenke2014" class="csl-entry" role="listitem">
+Zenke, F., and Gerstner, W. (2014). <span class="nocase">Limits to high-speed simulations of spiking neural networks using general-purpose computers.</span> <em>Front. Neuroinform.</em> 8, 76. doi:<a href="https://doi.org/10.3389/fninf.2014.00076">10.3389/fninf.2014.00076</a>.
+</div>
+<div id="ref-Zirnsak2011" class="csl-entry" role="listitem">
+Zirnsak, M., Beuth, F., and Hamker, F. H. (2011). <span class="nocase">Split of spatial attention as predicted by a systems-level model of visual attention.</span> <em>Eur. J. Neurosci.</em> 33, 2035–45. doi:<a href="https://doi.org/10.1111/j.1460-9568.2011.07718.x">10.1111/j.1460-9568.2011.07718.x</a>.
+</div>
+</div>
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>The GeNN project, <a href="http://sourceforge.net/projects/genn">http://sourceforge.net/projects/genn/</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><a href="http://bitbucket.org/annarchy/annarchy">http://bitbucket.org/annarchy/annarchy</a> and <a href="http://annarchy.readthedocs.org">http://annarchy.readthedocs.org</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./5-FINR.html" class="pagination-link" aria-label="Timing and expectation of reward: a neuro-computational model of the afferents to the ventral tegmental area">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Timing and expectation of reward: a neuro-computational model of the afferents to the ventral tegmental area</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./References.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

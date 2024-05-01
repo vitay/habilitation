@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>On the role of dopamine in motivated behavior : a neuro-computational approach - 3&nbsp; A computational model of basal ganglia and its role in memory retrieval in rewarded visual memory tasks</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./4-NN.html" rel="next">
+<link href="./2-JOCN.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3-FICN.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A computational model of basal ganglia and its role in memory retrieval in rewarded visual memory tasks</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./img/tuc.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">On the role of dopamine in motivated behavior : a neuro-computational approach</a> 
+        <div class="sidebar-tools-main">
+    <a href="./thesis.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Abstract</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-JOCN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sustained activities and retrieval in a computational model of perirhinal cortex</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-FICN.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A computational model of basal ganglia and its role in memory retrieval in rewarded visual memory tasks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-NN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working memory and response selection: A computational account of interactions among cortico-basal ganglio-thalamic loops</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5-FINR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Timing and expectation of reward: a neuro-computational model of the afferents to the ventral tegmental area</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6-FINI.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ANNarchy: a code generation approach to neural simulations on parallel hardware</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">3.1</span> Introduction</a></li>
+  <li><a href="#material-and-methods" id="toc-material-and-methods" class="nav-link" data-scroll-target="#material-and-methods"><span class="header-section-number">3.2</span> Material and Methods</a>
+  <ul class="collapse">
+  <li><a href="#architecture-of-the-model" id="toc-architecture-of-the-model" class="nav-link" data-scroll-target="#architecture-of-the-model"><span class="header-section-number">3.2.1</span> Architecture of the model</a></li>
+  <li><a href="#perirhinal-cortex" id="toc-perirhinal-cortex" class="nav-link" data-scroll-target="#perirhinal-cortex"><span class="header-section-number">3.2.2</span> Perirhinal cortex</a></li>
+  <li><a href="#dorsolateral-prefrontal-cortex" id="toc-dorsolateral-prefrontal-cortex" class="nav-link" data-scroll-target="#dorsolateral-prefrontal-cortex"><span class="header-section-number">3.2.3</span> Dorsolateral prefrontal cortex</a></li>
+  <li><a href="#ventral-anterior-thalamus" id="toc-ventral-anterior-thalamus" class="nav-link" data-scroll-target="#ventral-anterior-thalamus"><span class="header-section-number">3.2.4</span> Ventral-anterior thalamus</a></li>
+  <li><a href="#caudate-nucleus" id="toc-caudate-nucleus" class="nav-link" data-scroll-target="#caudate-nucleus"><span class="header-section-number">3.2.5</span> Caudate nucleus</a></li>
+  <li><a href="#substantia-nigra-pars-compacta" id="toc-substantia-nigra-pars-compacta" class="nav-link" data-scroll-target="#substantia-nigra-pars-compacta"><span class="header-section-number">3.2.6</span> Substantia nigra pars compacta</a></li>
+  <li><a href="#substantia-nigra-pars-reticulata" id="toc-substantia-nigra-pars-reticulata" class="nav-link" data-scroll-target="#substantia-nigra-pars-reticulata"><span class="header-section-number">3.2.7</span> Substantia nigra pars reticulata</a></li>
+  <li><a href="#sec-ficn:tasks" id="toc-sec-ficn:tasks" class="nav-link" data-scroll-target="#sec-ficn\:tasks"><span class="header-section-number">3.2.8</span> Experiments</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">3.3</span> Results</a>
+  <ul class="collapse">
+  <li><a href="#sec-ficn:concurrentlearning" id="toc-sec-ficn:concurrentlearning" class="nav-link" data-scroll-target="#sec-ficn\:concurrentlearning"><span class="header-section-number">3.3.1</span> Concurrent learning of the different tasks</a></li>
+  <li><a href="#temporal-evolution-of-the-activities-after-learning" id="toc-temporal-evolution-of-the-activities-after-learning" class="nav-link" data-scroll-target="#temporal-evolution-of-the-activities-after-learning"><span class="header-section-number">3.3.2</span> Temporal evolution of the activities after learning</a></li>
+  <li><a href="#sec-ficn:competitionsnr" id="toc-sec-ficn:competitionsnr" class="nav-link" data-scroll-target="#sec-ficn\:competitionsnr"><span class="header-section-number">3.3.3</span> Effect of the competition in SNr</a></li>
+  <li><a href="#sec-ficn:numbercells" id="toc-sec-ficn:numbercells" class="nav-link" data-scroll-target="#sec-ficn\:numbercells"><span class="header-section-number">3.3.4</span> Influence of the number of cells in SNr</a></li>
+  <li><a href="#sec-ficn:traceconditioning" id="toc-sec-ficn:traceconditioning" class="nav-link" data-scroll-target="#sec-ficn\:traceconditioning"><span class="header-section-number">3.3.5</span> Reward-related clustering in CN</a></li>
+  </ul></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion"><span class="header-section-number">3.4</span> Discussion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-chapter:BG" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A computational model of basal ganglia and its role in memory retrieval in rewarded visual memory tasks</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="abstract" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="abstract">Abstract</h4>
+<p>Visual working memory tasks involve a network of cortical areas such as inferotemporal, medial temporal and prefrontal cortices. We suggest here to investigate the role of the basal ganglia in the learning of delayed rewarded tasks through the selective gating of thalamocortical loops. We designed a computational model of the visual loop linking the perirhinal cortex, the basal ganglia and the thalamus, biased by sustained representations in prefrontal cortex. This model learns concurrently different delayed rewarded tasks that require to maintain a visual cue and to associate it to itself or to another visual object to obtain reward. The retrieval of visual information is achieved through thalamic stimulation of the perirhinal cortex. The input structure of the basal ganglia, the striatum, learns to represent visual information based on its association to reward, while the output structure, the substantia nigra pars reticulata, learns to link striatal representations to the disinhibition of the correct thalamocortical loop. In parallel, a dopaminergic cell learns to associate striatal representations to reward and modulates learning of connections within the basal ganglia. The model provides testable predictions about the behavior of several areas during such tasks, while providing a new functional organization of learning within the basal ganglia, putting emphasis on the learning of the striatonigral connections as well as the lateral connections within the substantia nigra pars reticulata. It suggests that the learning of visual working memory tasks is achieved rapidly in the basal ganglia and used as a teacher for feedback connections from prefrontal cortex to posterior cortices.</p>
+</section>
+<section id="introduction" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">3.1</span> Introduction</h2>
+<p>During object-based visual search, target templates stored in visual working memory (WM) can bias attentional processing in visual areas to favorize the relevant objects <span class="citation" data-cites="desimone1995 Woodman2007b">(<a href="References.html#ref-desimone1995" role="doc-biblioref">Desimone and Duncan, 1995</a>; <a href="References.html#ref-Woodman2007b" role="doc-biblioref">Woodman and Luck, 2007</a>)</span>. Visual WM can be investigated through a number of different tasks in rats, primates or humans, among which change detection, recall procedures, delayed matching to sample (DMS), delayed nonmatching to sample (DNMS) or delayed pair-association (DPA) tasks are frequently used. These experiments have allowed to shed light on the psychophysical mechanisms involved in visual WM <span class="citation" data-cites="luck1997a">(<a href="References.html#ref-luck1997a" role="doc-biblioref">Luck and Vogel, 1997</a>)</span> as well as to delineate the neural substrates subserving these functions <span class="citation" data-cites="ranganath2006">(<a href="References.html#ref-ranganath2006" role="doc-biblioref">Ranganath, 2006</a>)</span>. Visual WM has several computational aspects: encoding of the relevant items (potentially in an abstract manner), maintenance of the items through time in face of distractors, retrieval of the sensory content of the item, abstraction of the underlying rule. It faces both a structural credit assignment problem (which item to store and retrieve) and a temporal assignment problem (how to link encoding in WM with the delayed delivery of reward).</p>
+<p>Specific attention has been directed towards the prefrontal cortex which is well-known to be involved in WM maintenance and manipulation in various modalities <span class="citation" data-cites="fuster1971 funahashi1989">(<a href="References.html#ref-funahashi1989" role="doc-biblioref">Funahashi et al., 1989</a>; <a href="References.html#ref-fuster1971" role="doc-biblioref">Fuster and Alexander, 1971</a>)</span>. Prefrontal lesions do not totally eliminate visual WM but impairs the ability to maintain it during long delays or in front of distractors <span class="citation" data-cites="Petrides2000 DEsposito2006">(<a href="References.html#ref-DEsposito2006" role="doc-biblioref">D’Esposito et al., 2006</a>; <a href="References.html#ref-Petrides2000" role="doc-biblioref">Petrides, 2000</a>)</span>. Neurons in PFC exhibit robust object-specific sustained activities during the delay periods of visual WM tasks like DMS or DNMS <span class="citation" data-cites="miller1996">(<a href="References.html#ref-miller1996" role="doc-biblioref">Miller et al., 1996</a>)</span>. However the informational content of WM-related activities in PFC is still unclear <span class="citation" data-cites="Romanski2007">(<a href="References.html#ref-Romanski2007" role="doc-biblioref">Romanski, 2007</a>)</span>. Inferotemporal (IT) neurons have been shown to encode object-specific information <span class="citation" data-cites="Nakamura1994">(<a href="References.html#ref-Nakamura1994" role="doc-biblioref">Nakamura et al., 1994</a>)</span> as they are located at the end of the ventral visual pathway <span class="citation" data-cites="ungerleider1982">(<a href="References.html#ref-ungerleider1982" role="doc-biblioref">Ungerleider and Mishkin, 1982</a>)</span>. They have been shown to be critical for visual WM <span class="citation" data-cites="Fuster1981 Petrides2000">(<a href="References.html#ref-Fuster1981" role="doc-biblioref">Fuster et al., 1981</a>; <a href="References.html#ref-Petrides2000" role="doc-biblioref">Petrides, 2000</a>)</span> and also exhibit sustained activation during the delay period, even if their responses can be attenuated or cancelled by intervening distractors <span class="citation" data-cites="miller1993">(<a href="References.html#ref-miller1993" role="doc-biblioref">Miller et al., 1993</a>)</span>, what can be partly explained by feedback cortico-cortical connections originating from PFC <span class="citation" data-cites="Fuster1985 Webster1994">(<a href="References.html#ref-Fuster1985" role="doc-biblioref">Fuster et al., 1985</a>; <a href="References.html#ref-Webster1994" role="doc-biblioref">Webster et al., 1994</a>)</span>.</p>
+<p>The medial temporal lobe (MTL, composed of perirhinal - PRh -, entorhinal - ERh - and parahippocampal - PH - cortices) also plays an important also not essential role in visual WM. Compared to IT, a greater proportion of neurons in PRh and ERh exhibit sustained activation during the delay-period <span class="citation" data-cites="Nakamura1995">(<a href="References.html#ref-Nakamura1995" role="doc-biblioref">Nakamura and Kubota, 1995</a>)</span> and are robust to distractors <span class="citation" data-cites="suzuki1997">(<a href="References.html#ref-suzuki1997" role="doc-biblioref">Suzuki et al., 1997</a>)</span>. They are especially crucial when visual objects are novel and complex <span class="citation" data-cites="ranganath2005">(<a href="References.html#ref-ranganath2005" role="doc-biblioref">Ranganath and D’Esposito, 2005</a>)</span>. Particularly, PRh cells are more strongly involved in visual recognition when it requires visual WM processes <span class="citation" data-cites="lehky2007">(<a href="References.html#ref-lehky2007" role="doc-biblioref">Lehky and Tanaka, 2007</a>)</span>. They are reciprocally connected with IT neurons and can provide them with information about novelty or category membership since they can rapidly encode relationship between visual features <span class="citation" data-cites="Murray1999 rolls2000">(<a href="References.html#ref-Murray1999" role="doc-biblioref">Murray and Bussey, 1999</a>; <a href="References.html#ref-rolls2000" role="doc-biblioref">Rolls, 2000</a>)</span>, as well as the association of objects to reward <span class="citation" data-cites="mogami2006">(<a href="References.html#ref-mogami2006" role="doc-biblioref">Mogami and Tanaka, 2006</a>)</span>. <span class="citation" data-cites="ranganath2006">Ranganath (<a href="References.html#ref-ranganath2006" role="doc-biblioref">2006</a>)</span> provided a complete account of the functional relationship between IT, PFC and MTL in visual WM. He considers that the visual aspects of the remembered object are maintained in the ventral pathway at various levels of complexity (low-level features in V1 or V4, object-related representations in IT) through sustained activation of cells. Top-down activation of these neurons by MTL would provide them with information about novelty and help to reconstruct a coherent mental image of the objects composing the visual scene, thanks to the link between MTL and hippocampus. Top-down activation by PFC helps the ventral stream to maintain representations in face of distraction and also allows stimulus-stimulus associations (like in the delayed pair-association task) in IT <span class="citation" data-cites="Gutnikov1997">(<a href="References.html#ref-Gutnikov1997" role="doc-biblioref">Gutnikov et al., 1997</a>)</span>.</p>
+<p>A structure that is absent in this scheme but that is nevertheless very important in visual WM is the basal ganglia (BG), a set of nuclei in the basal forebrain. Human patients with BG disorders (such as Parkinson’s disease) show strong deficits in delayed response tasks <span class="citation" data-cites="Partiot1996">(<a href="References.html#ref-Partiot1996" role="doc-biblioref">Partiot et al., 1996</a>)</span>. Several experiments have recorded visual WM-related activities in various structures composing the BG, especially the striatum (STR) <span class="citation" data-cites="hikosaka1989 Mushiake1995 lewis2004 Chang2007">(<a href="References.html#ref-Chang2007" role="doc-biblioref">Chang et al., 2007</a>; <a href="References.html#ref-hikosaka1989" role="doc-biblioref">Hikosaka et al., 1989</a>; <a href="References.html#ref-lewis2004" role="doc-biblioref">Lewis et al., 2004</a>; <a href="References.html#ref-Mushiake1995" role="doc-biblioref">Mushiake and Strick, 1995</a>)</span>. Almost all cortical areas send projections to the input nuclei of BG (STR and the subthalamic nucleus STN), while the output nuclei of BG (the internal segment of globus pallidus GPi and the substantia nigra pars reticulata SNr) tonically inhibit various thalamic nuclei, allowing selective modulation of corticothalamic loops <span class="citation" data-cites="Parent1995a">(<a href="References.html#ref-Parent1995a" role="doc-biblioref">Parent and Hazrati, 1995</a>)</span>. The BG are organized through a series of closed loops, which receive inputs from segregated cortical regions and project back to them quite independently (see <span class="citation" data-cites="Haber2003">Haber (<a href="References.html#ref-Haber2003" role="doc-biblioref">2003</a>)</span> for a review). The number and functional domain of these loops is still an open issue <span class="citation" data-cites="Alexander1986 Lawrence1998 Nambu2002">(<a href="References.html#ref-Alexander1986" role="doc-biblioref">Alexander et al., 1986</a>; <a href="References.html#ref-Lawrence1998" role="doc-biblioref">Lawrence et al., 1998</a>; <a href="References.html#ref-Nambu2002" role="doc-biblioref">Nambu et al., 2002</a>)</span>, but two of them are of particular relevance for our model. The executive loop involves the dorsolateral part of PFC (dlPFC), the head of the caudate nucleus (a region of the dorsal striatum), GPi-SNr and the mediodorsal nuclei of thalamus (MD). The structures involved in this loop have all been shown to be involved in WM processes in various modalities and provide a basis for the maintenance and manipulation of items in cognitive tasks (see <span class="citation" data-cites="frank2001">Frank et al. (<a href="References.html#ref-frank2001" role="doc-biblioref">2001</a>)</span> for a review about the functional requirements of WM). The visual loop involves the inferotemporal and extrastriate occipital cortices, the body and tail of the caudate nucleus, SNr and the ventral-anterior nucleus of the thalamus (VA) <span class="citation" data-cites="Middleton1996 Seger2008">(<a href="References.html#ref-Middleton1996" role="doc-biblioref">Middleton and Strick, 1996</a>; <a href="References.html#ref-Seger2008" role="doc-biblioref">Seger, 2008</a>)</span>. This loop is particularly involved in visual categorization and visual discrimination, but also sends output to premotor areas to link category learning with appropriate behavior. In addition to IT neurons, the body of the caudate nucleus is involved in visual WM tasks, what suggests a role of the entire visual loop in visual WM <span class="citation" data-cites="Levy1997">(<a href="References.html#ref-Levy1997" role="doc-biblioref">Levy et al., 1997</a>)</span>.</p>
+<p>What remains unknown is how these two loops can interact together in order to subserve visual WM functions in the context of efficient behavior. Previous models have particularly addressed the updating of working memory content as part of the executive BG loop (e.g. <span class="citation" data-cites="Brown1999">Brown et al. (<a href="References.html#ref-Brown1999" role="doc-biblioref">1999</a>)</span> or <span class="citation" data-cites="OReilly2006">O’Reilly and Frank (<a href="References.html#ref-OReilly2006" role="doc-biblioref">2006</a>)</span>). We here focus on how such memory content can be used to bias the visual loop allowing for a goal-directed memory recall in the context of rewarded tasks such as DMS, DNMS or DPA. Among the different mechanisms by which two BG loops can interact, we focus on the overlapping projection fields of cortical areas: a cortical area sends principally projections to a limited region of the striatum, but its axons send collaterals along the surface of the striatum. In particular, the body of the caudate, which is part of the visual loop and principally innervated by inferotemporal projection neurons, also receives connections from the dorsolateral prefrontal cortex <span class="citation" data-cites="Selemon1985">(<a href="References.html#ref-Selemon1985" role="doc-biblioref">Selemon and Goldman-Rakic, 1985</a>)</span>. This model is thus composed of the visual loop linking PRh with BG and the thalamus, while the executive loop is reduced to sustained activation in dlPFC which projects on the region of the striatum belonging to the visual loop. The model is alternatively presented with specific combinations of visual cues and tasks symbols that allow the system to perform actions leading to the delivery of reward (as proposed by <span class="citation" data-cites="gisiger2006">Gisiger and Kerszberg (<a href="References.html#ref-gisiger2006" role="doc-biblioref">2006</a>)</span>. Our emphasis is on the reward-modulated self-organization of connectivity between distributed populations. The model provides hypotheses about how sustained representations in dlPFC can bias learning in the visual loop so that object-related activities in the ventral visual pathway can be retrieved through thalamic stimulation in the context of a particular cognitive task to provide anticipatory top-down signals for the visual system, as observed physiologically <span class="citation" data-cites="naya2003 Takeda2005">(<a href="References.html#ref-naya2003" role="doc-biblioref">Naya et al., 2003</a>; <a href="References.html#ref-Takeda2005" role="doc-biblioref">Takeda et al., 2005</a>)</span>. In particular, self-organization in the model relies on the competitive selection of relevant cortical representations in the output structures of the BG.</p>
+</section>
+<section id="material-and-methods" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="material-and-methods"><span class="header-section-number">3.2</span> Material and Methods</h2>
+<section id="architecture-of-the-model" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="architecture-of-the-model"><span class="header-section-number">3.2.1</span> Architecture of the model</h3>
+<p>Each structure used in this model is composed of a set of dynamical neurons, whose membrane potential is governed by a time-dependent differential equation and transformed into a mean firing rate through a non-linear transfer function. These neurons therefore exchange a real instantaneous value instead of spikes, as it saves considerably computational costs and allows to use efficient learning rules that are not yet available for spiking neurons. Although we do not capture some biophysical details, this paradigm is sufficiently complex to show the emergence of dynamic behaviors through the interaction of distributed computational units <span class="citation" data-cites="Rougier2009">(<a href="References.html#ref-Rougier2009" role="doc-biblioref">Rougier, 2009</a>)</span>. The differential equation that rules the evolution of the activity of each neuron is discretized according to the Euler method with a time-step of <span class="math inline">1</span> ms and is evaluated asynchronously to allow stochastic interactions between functional units <span class="citation" data-cites="rougier2006">(<a href="References.html#ref-rougier2006" role="doc-biblioref">Rougier and Vitay, 2006</a>)</span>.</p>
+<p>Biological details gave us some insights on the choice of certain parameters, such as the time constants for the different neurons, as we know for example that striatal cells are faster than cortical cells <span class="citation" data-cites="Plenz1996">(<a href="References.html#ref-Plenz1996" role="doc-biblioref">Plenz and Aertsen, 1996</a>)</span>. Other parameters have been set to bring the model into a functionally meaningful range. Control simulations showed that minor variations on their values do not change qualitatively the results presented here.</p>
+<p>The architecture of the model is depicted in <a href="#fig-ficn:model" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> A. Visual inputs are temporally represented in the perirhinal cortex (PRh), each cell firing for a particular visual object. These perirhinal representations project to the prefrontal cortex (dlPFC) where they are actively maintained for the duration of the task. These sustained activations in dlPFC are artificially controlled by a set of gating signals, leaving unaddressed the temporal credit assignment problem. PRh and dlPFC both project extensively to the caudate nucleus (CN), which learns to represent them in an efficient manner according to the task requirements. Depending on reward delivery in the timecourse of learning, each active striatal cell learns to integrate perirhinal and prefrontal information in a competitive manner due to inhibitory lateral connections. This mechanism leads to the formation through learning of clusters of striatal cells that represent particular combinations of cortical information depending on their association to reward. These CN cells send inhibitory projections to the SNr, whose cells are tonically active and learn to become selective for specific striatal patterns. This learning between CN and SNr is also dependent on reward delivery. Learning of the lateral connections between SNr cells additionally allows to limit the number of simultaneously inhibited SNr cells. These cells in SNr tonically inhibit thalamic cells (VA) which have reciprocal connections with PRh. The connections from SNr to VA and between VA and PRh are not learned but focused (one-to-one connection pattern), meaning that the inhibition of one SNr cell leads to the thalamic stimulation of a unique cell in PRh. A dopaminergic cell (SNc) receives information about the delivered reward (R) and learns to associate it with striatal activities. Its signal modulates learning at the connections between cortical areas (PRh and dlPFC) and CN, between CN and SNr, as well as within SNr. We now present in detail each structure and the differential equations followed by their neurons.</p>
+<div id="fig-ficn:model" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ficn:model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/ficn/vitay_figure_1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ficn:model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: (A) Architecture of the model. Pointed arrows denote excitatory connections and rounded arrows denote inhibitory ones. Circular arrows within an area represent lateral connections between the cells of this area. (B) Timecourse of the visual inputs presented to the network. Top: rewarded trials like DMS, DNMS or DPA. Bottom: delay conditioning.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="perirhinal-cortex" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="perirhinal-cortex"><span class="header-section-number">3.2.2</span> Perirhinal cortex</h3>
+<p>The input of our model is a high-level visual area with mnemonic functions which is able to bias processing in the ventral visual stream. In general, the area TE of the inferotemporal cortex is a potential candidate, but we particularly focused on PRh, as it has been shown to be preferentially involved in recognition tasks that require visual WM <span class="citation" data-cites="lehky2007">(<a href="References.html#ref-lehky2007" role="doc-biblioref">Lehky and Tanaka, 2007</a>)</span>. We previously designed a detailed computational model of PRh that is able to learn object-related representations in clusters of cells based on partial information <span class="citation" data-cites="Vitay2008">(<a href="References.html#ref-Vitay2008" role="doc-biblioref">Vitay and Hamker, 2008</a>)</span>. These clusters linked through lateral connections are able to exhibit sustained activation when the dopamine (DA) level in the network is within an optimal range. The visual information that they contain can also be easily retrieved through a partial stimulation coming from the thalamus. We hypothesize that this memory retrieval through thalamic stimulation under an accurate level of DA can be a basis for the guidance of visual search.</p>
+<p>Here, we reduced the size of PRh to <span class="math inline">8</span> cells, each of them representing a particular object that is presented to the network (see <a href="#sec-ficn:tasks" class="quarto-xref"><span>Section 3.2.8</span></a> for the description of these objects). In our previous model, PRh contained hundreds of cells and each object was represented by a cluster of different cells. Each cell <span class="math inline">i</span> has a membrane potential <span class="math inline">m_i(t)</span> and an instantaneous firing rate <span class="math inline">u^{\text{PRh}}_i(t)</span> which are governed by the following equations:</p>
+<p><span id="eq-ficn:mp-prh"><span class="math display">
+    \tau \cdot \frac{d m_i(t)}{d t} + m_i(t)  =  V_i(t) + W^{\text{VA}}_{i} \cdot u^{\text{VA}}_i(t) + \displaystyle\sum_{j \in \text{PRh}} W^{\text{PRh}}_{i,j} \cdot u^{\text{PRh}}_j(t)  + \epsilon(t)
+\tag{3.1}</span></span></p>
+<p><span class="math display">
+    u^{\text{PRh}}_i(t)  =  (m_i(t))^+
+</span></p>
+<p>where <span class="math inline">\tau =20</span> ms is the time constant of the cell, <span class="math inline">V_i(t)</span> its visual input (see <a href="#sec-ficn:tasks" class="quarto-xref"><span>Section 3.2.8</span></a>) and <span class="math inline">W^{\text{VA}}_{i} = 0.5</span> the weight of a connection coming from the corresponding thalamic cell whose firing rate is <span class="math inline">u^{\text{VA}}_i(t)</span>. <span class="math inline">\epsilon(t)</span> is an additional noise whose value varies uniformly at each time-step between <span class="math inline">-0.3</span> and <span class="math inline">0.3</span>. The transfer function used for perirhinal cells is simply the positive part of the membrane potential <span class="math inline">()^+</span>. Each perirhinal cell additionally receives inhibitory lateral connections from the seven neighboring perirhinal cells with a fixed weight of <span class="math inline">W^{\text{PRh}}_{i,j} = -0.3</span> to induce competition between the perirhinal cells.</p>
+</section>
+<section id="dorsolateral-prefrontal-cortex" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="dorsolateral-prefrontal-cortex"><span class="header-section-number">3.2.3</span> Dorsolateral prefrontal cortex</h3>
+<p>We do not model explicitly the executive loop and rather use a very simple WM representation in dlPFC, including mechanisms of updating and resetting. Future work will address these questions in the context of WM gating in the executive loop <span class="citation" data-cites="frank2001 gruber2006">(<a href="References.html#ref-frank2001" role="doc-biblioref">Frank et al., 2001</a>; <a href="References.html#ref-gruber2006" role="doc-biblioref">Gruber et al., 2006</a>)</span>. The dlPFC is here composed of 8 cells which keep track of activity in PRh through temporal integration:</p>
+<p><span id="eq-ficn:mp-pfc"><span class="math display">
+\begin{aligned}
+    \tau \cdot \frac{d m_i(t)}{d t}  &amp; = &amp; G(t) \cdot  W^{\text{PRh}}_{i} \cdot ( u^{\text{PRh}}_i(t) - 0.5 )^+  \\
+    u^{\text{dlPFC}}_i(t) &amp; = &amp;
+     \begin{cases}
+        0 &amp; \text{if $m_i(t) &lt; 0$}  \\
+        m_i(t)  &amp; \text{if $0 \leq m_i(t) \leq 1$} \\
+        1 &amp; \text{if $m_i(t) &gt; 1$}
+     \end{cases}
+\end{aligned}
+\tag{3.2}</span></span></p>
+<p>where <span class="math inline">\tau =10</span> ms is the time constant of the cell and <span class="math inline">G(t)</span> a gating signal allowing the entry of an item in working memory. Each dlPFC cell receives only one connection from a PRh cell with the weight <span class="math inline">W^{\text{PRh}}_{i} = 1.0</span>. As soon as the activity of a PRh cell exceeds 0.5, it is integrated in the corresponding prefrontal cell, whose activity saturates to a maximum value of <span class="math inline">1.0</span> thanks to the transfer function and stays at this value even if the perirhinal stimulation ends. The gating signal <span class="math inline">G(t)</span> is manually set to a value of <span class="math inline">1.0</span> when objects have to be maintained in WM and to a value of <span class="math inline">0.0</span> otherwise. The activity of the prefrontal cells is manually reset to zero at the end of a trial.</p>
+</section>
+<section id="ventral-anterior-thalamus" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="ventral-anterior-thalamus"><span class="header-section-number">3.2.4</span> Ventral-anterior thalamus</h3>
+<p>The portion of the ventral-anterior nucleus of the thalamus we consider here is represented by eight cells that are reciprocally connected with PRh. Its 8 cells send and receive a connection with only one perirhinal cell, forming segregated thalamocortical loops. In a more biologically detailed model, we would have to take into account the difference in the number of cells between VA and PRh, as well the more diffuse pattern of connections from thalamus to cortex. However, this simplification is justified by our previous detailed model of PRh, where we have shown that a thalamic cell can activate a functional cluster of cells representing a single object <span class="citation" data-cites="Vitay2008">(<a href="References.html#ref-Vitay2008" role="doc-biblioref">Vitay and Hamker, 2008</a>)</span>. The membrane potential and firing rate of these thalamic cells are ruled by the following equations:</p>
+<p><span id="eq-ficn:mp-va"><span class="math display">
+\begin{aligned}
+    \tau \cdot \frac{d m_i(t)}{d t} + m_i(t) &amp; =   W^{\text{PRh}}_{i} \cdot u^{\text{PRh}}_i(t)  +  W^{\text{SNr}}_{i} \cdot u^{\text{SNr}}_i(t) + M + \epsilon(t)  \\
+    u^{\text{VA}}_i(t) &amp; =  (m_i(t))^+
+\end{aligned}
+\tag{3.3}</span></span></p>
+<p>where <span class="math inline">\tau = 15</span> ms and <span class="math inline">M = 0.8</span>. In addition to the connection coming from one PRh cell with a weight of <span class="math inline">W^{\text{PRh}}_{i} = 0.5</span>, a thalamic cell also receives an inhibitory connection from one cell of SNr with a weight of <span class="math inline">W^{\text{SNr}}_{i} = -0.7</span>.</p>
+</section>
+<section id="caudate-nucleus" class="level3" data-number="3.2.5">
+<h3 data-number="3.2.5" class="anchored" data-anchor-id="caudate-nucleus"><span class="header-section-number">3.2.5</span> Caudate nucleus</h3>
+<p>The caudate nucleus of the striatum learns to represent the cortical information in PRh and dlPFC in an efficient manner based on dopaminergic signaling of reward-related information in SNc. Although some evidences suggest that the DA level can even influence the firing rate of striatal cells <span class="citation" data-cites="Nicola2000">(<a href="References.html#ref-Nicola2000" role="doc-biblioref">Nicola et al., 2000</a>)</span>, we here exclusively focus on the effect of DA on the synaptic learning of corticostriatal connections <span class="citation" data-cites="DiFilippo2009">(<a href="References.html#ref-DiFilippo2009" role="doc-biblioref">Di Filippo et al., 2009</a>)</span>. The striatum is mostly composed of medium spiny neurons that integrate cortical information and directly inhibit several structures such as the substantia nigra or the globus pallidus. These cells have also lateral inhibitory connections, either directly or through fast-spiking interneurons <span class="citation" data-cites="Tepper2008">(<a href="References.html#ref-Tepper2008" role="doc-biblioref">Tepper et al., 2008</a>)</span>. CN contains here 64 cells ruled by the following equations:</p>
+<p><span id="eq-ficn:mp-cn"><span class="math display">
+\begin{aligned}
+    \tau \cdot \frac{d m_i(t)}{d t} + m_i(t) &amp; = \displaystyle\sum_{j \in \text{Cx}} W^{\text{Cx}}_{i,j}(t) \cdot u^{\text{Cx}}_j(t) + \displaystyle\sum_{j \in \text{CN}} W^{\text{CN}}_{i,j} \cdot u^{\text{CN}}_j(t)  +  M + \epsilon(t) \\
+    u^{\text{CN}}_i(t) &amp; =  (m_i(t))^+
+\end{aligned}
+\tag{3.4}</span></span></p>
+<p>where <span class="math inline">\tau = 10</span> ms and <span class="math inline">M = 0.3</span>. Each striatal cell receives inhibitory lateral connections from the 63 other striatal cells with a weight of <span class="math inline">W^{\text{CN}}_{i,j} = -0.2</span>. The corticostriatal connections <span class="math inline">W^{\text{Cx}}_{i,j}(t)</span> coming either from PRh or dlPFc are learned according to a homeostatic covariance learning rule:</p>
+<p><span id="eq-ficn:weightcn"><span class="math display">
+\begin{aligned}
+    \eta \cdot \frac{d W^{\text{Cx}}_{i,j}(t)}{d t}  &amp; = ( \text{DA}(t) - \overline{\text{DA}}) \cdot (u^{\text{CN}}_i(t) - \overline{\text{CN}} )^+  \cdot (u^{\text{Cx}}_j(t) - \overline{\text{Cx}}) \nonumber\\
+    &amp;  - \alpha_i(t) \cdot  ((u^{\text{CN}}_i(t) - \overline{\text{CN}} )^+ )^2  \cdot W^{\text{Cx}}_{i, j}(t)
+\end{aligned}
+\tag{3.5}</span></span></p>
+<p>where <span class="math inline">\eta = 100</span> is the rate of learning, <span class="math inline">\text{DA}(t)</span> represents the synaptic level of DA (considered equal to the activity of the SNc cell), <span class="math inline">\overline{\text{DA}}</span> the baseline activity of the SNc cell, <span class="math inline">u^{\text{CN}}_i(t)</span> the firing rate of the striatal cell, <span class="math inline">\overline{\text{CN}}</span> the mean firing rate of the CN cells, <span class="math inline">u^{\text{Cx}}_j(t)</span> the firing rate of the cortical cell, <span class="math inline">\overline{\text{Cx}}</span> the mean firing rate of the considered cortical area and <span class="math inline">\alpha_i(t)</span> a cell-dependent regularization factor. The weights are randomly initialized with a value between <span class="math inline">-0.1</span> and <span class="math inline">0.1</span>.</p>
+<p>The first part of the right term of <a href="#eq-ficn:weightcn" class="quarto-xref">Equation&nbsp;<span>3.5</span></a> is a classical Hebbian learning rule (correlation between the activities of the presynaptic and postsynaptic cells) modulated by the DA level. The positive function applied to the striatal activity ensures that only the cells which are significantly activated compared to the rest of the population will update their selectivity for cortical patterns. The exact influence of DA on corticostriatal learning is still a matter of debate and depends on the type of dopaminergic receptor (D1 or D2) involved, the state of the membrane potential of the striatal cell (“up” and “down” states) and on the cortical patterns <span class="citation" data-cites="Calabresi2007">(<a href="References.html#ref-Calabresi2007" role="doc-biblioref">Calabresi et al., 2007</a>)</span>. We do not model in detail these mechanisms and consider that a phasic burst of DA (transient activity of the SNc cell above its baseline) globally favorizes long-term potentiation (LTP) of corticostriatal synapses, while DA depletion (activity below baseline) globally induces long-term depression (LTD) of the same synapses <span class="citation" data-cites="Reynolds2000">(<a href="References.html#ref-Reynolds2000" role="doc-biblioref">Reynolds and Wickens, 2000</a>)</span>.</p>
+<p>The second part of the right term of <a href="#eq-ficn:weightcn" class="quarto-xref">Equation&nbsp;<span>3.5</span></a> performs a homeostatic regularization of the corticostriatal synapses. Its shape is similar to the classical Oja learning rule <span class="citation" data-cites="Oja1982">(<a href="References.html#ref-Oja1982" role="doc-biblioref">Oja, 1982</a>)</span> to avoid an infinite increase of the weight values, but the difference is that the regularization factor <span class="math inline">\alpha_i(t)</span> is not fixed but varies with the activity of the cell <span class="citation" data-cites="Vitay2008">(<a href="References.html#ref-Vitay2008" role="doc-biblioref">Vitay and Hamker, 2008</a>)</span>. Homeostatic plasticity allows cells to adapt their learning behavior to ensure stability <span class="citation" data-cites="turrigiano2004">(<a href="References.html#ref-turrigiano2004" role="doc-biblioref">Turrigiano and Nelson, 2004</a>)</span>. In our case, we want to avoid that the striatal cells fire too much in order to save energy, by scaling down proportionally the weights of all the connections. <span class="math inline">\alpha_i(t)</span> therefore becomes positive when the firing rate of the cell exceeds a defined threshold <span class="math inline">u^\text{MAX}</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+    \tau \cdot \frac{d \alpha_{i}(t)}{d t} + \alpha_i(t) = (u^{\text{CN}}_i(t) - u^\text{MAX} )^+
+\end{aligned}
+</span> {eq-ficn:alphanacc}</p>
+<p>with <span class="math inline">\tau = 20</span> ms and <span class="math inline">u^\text{MAX} = 1.0</span>. In addition to dynamically and locally normalizing the afferent connections to the cells, this homeostatic regularization term also allows to sharpen the selectivity of the cell. Homeostatic plasticity has been observed in the nucleus accumbens, a part of the striatum <span class="citation" data-cites="Ishikawa2009">(<a href="References.html#ref-Ishikawa2009" role="doc-biblioref">Ishikawa et al., 2009</a>)</span>.</p>
+</section>
+<section id="substantia-nigra-pars-compacta" class="level3" data-number="3.2.6">
+<h3 data-number="3.2.6" class="anchored" data-anchor-id="substantia-nigra-pars-compacta"><span class="header-section-number">3.2.6</span> Substantia nigra pars compacta</h3>
+<p>The dopaminergic cells contained in SNc have the property to respond to the delivery of unexpected rewards by a phasic burst of activity above baseline <span class="citation" data-cites="Mirenowicz1994">(<a href="References.html#ref-Mirenowicz1994" role="doc-biblioref">Mirenowicz and Schultz, 1994</a>)</span>. However, in conditioning tasks, the amplitude of this response to primary rewards gradually decreases through learning and is transferred to the appearance of the conditioned stimulus <span class="citation" data-cites="Pan2005">(<a href="References.html#ref-Pan2005" role="doc-biblioref">Pan et al., 2005</a>)</span>. In addition, when reward is omitted, these dopaminergic cells show a phasic depletion of activity (below baseline) at the time reward was expected <span class="citation" data-cites="Schultz1997">(<a href="References.html#ref-Schultz1997" role="doc-biblioref">Schultz et al., 1997</a>)</span>. Several theories have tried to explain this behavior related to reward expectation, including an analogy with the error signal of the temporal difference (TD) algorithm of reinforcement learning <span class="citation" data-cites="Suri1999">(<a href="References.html#ref-Suri1999" role="doc-biblioref">Suri and Schultz, 1999</a>)</span> or more biologically detailed models <span class="citation" data-cites="Brown1999 OReilly2007">(<a href="References.html#ref-Brown1999" role="doc-biblioref">Brown et al., 1999</a>; <a href="References.html#ref-OReilly2007" role="doc-biblioref">O’Reilly et al., 2007</a>)</span>. The TD analogy considers that DA phasic activation or depletion at the time of reward delivery or conditioned stimulus appearance are due to a unique mechanism. The more biologically detailed approaches contrarily highlight the role of afferent structures in the different components of this behavior: the phasic activation to primary rewards may be due to excitatory connections coming from the pedunculopontine tegmental nucleus, and its amplitude is gradually decreased by the learning of the reward expectation through inhibitory connections coming from the striatum. In these models, the DA phasic activation for the appearance of a conditioned stimuli is provoked by different mechanisms than for the delivery of primary rewards. The depletion in DA activity when reward is omitted is controlled by an external timing mechanism, presumably computed by an intracellular calcium-dependent mechanism in striatal cells <span class="citation" data-cites="Brown1999">(<a href="References.html#ref-Brown1999" role="doc-biblioref">Brown et al., 1999</a>)</span> or by an external signal computed in the cerebellum <span class="citation" data-cites="OReilly2007">(<a href="References.html#ref-OReilly2007" role="doc-biblioref">O’Reilly et al., 2007</a>)</span>. We followed the assumptions of these models, but did not model explicitly this timing signal.</p>
+<p>We used only one cell in SNc, which receives information about the received reward <span class="math inline">R(t)</span> and learns to predict its association with striatal representations through learnable inhibitory connections. The activity of this cell is ruled by the following equations:</p>
+<p><span id="eq-ficn:mp-snc"><span class="math display">
+\begin{aligned}
+    \tau \cdot \frac{d m(t)}{dt} + m(t) &amp; =   R(t) + P(t) \cdot \displaystyle\sum_{j \in \text{CN}} W^{\text{CN}}_{j}(t) \cdot u^{\text{CN}}_j(t)  +  \overline{\text{DA}} \\
+    \text{DA}(t) &amp; =  (m(t))^+
+\end{aligned}
+\tag{3.6}</span></span></p>
+<p>where <span class="math inline">\tau = 10</span> ms, <span class="math inline">\overline{\text{DA}} = 0.5</span>. The reward <span class="math inline">R(t)</span> (set to 0.5 when received, 0.0 otherwise) and the timing of its occurrence <span class="math inline">P(t)</span> (set to 1.0 when expected, 0.0 otherwise) are external to the neuronal model. When reward is delivered, <span class="math inline">R(t)</span> will drive the activity of the cell above its baseline but this effect will be reduced by the learning of the inhibitory connections between the striatum and SNc. When reward is expected but not delivered, the striatal inhibition will force the cell to exhibit an activity below baseline. The connections between CN and SNc are learned according to the following rule:</p>
+<p><span id="eq-ficn:weightsnc"><span class="math display">
+\begin{aligned}
+    \eta \cdot \frac{d W^{\text{CN}}_{j}(t)}{d t}  &amp; =&amp; - f( \text{DA}(t) - \overline{\text{DA}} ) \cdot (u^{\text{CN}}_j(t) - \overline{\text{CN}})^+
+\end{aligned}
+\tag{3.7}</span></span></p>
+<p><span id="eq-ficn:fsnc"><span class="math display">\begin{aligned}
+    f(x) &amp; = &amp;
+     \begin{cases}
+        x &amp; \text{if $x &gt; 0$}  \\
+        5 \cdot x  &amp; \text{else.}
+     \end{cases}
+\end{aligned}
+\tag{3.8}</span></span></p>
+<p>where <span class="math inline">\eta = 10000</span>. The weights are initialized with a value of <span class="math inline">0.0</span>, so that striatal representations have initially no association to reward. When <span class="math inline">\text{DA}(t)</span> is above baseline (reward has been delivered), the inhibitory connections are further decreased, which means that the striatal representation increases its associative value. When <span class="math inline">\text{DA}(t)</span> is below baseline (reward has been omitted), the same striatal representation decreases its association to reward. This dopaminergic signal is used to modulate learning in CN and SNr.</p>
+</section>
+<section id="substantia-nigra-pars-reticulata" class="level3" data-number="3.2.7">
+<h3 data-number="3.2.7" class="anchored" data-anchor-id="substantia-nigra-pars-reticulata"><span class="header-section-number">3.2.7</span> Substantia nigra pars reticulata</h3>
+<p>The output nuclei of the BG (GPi and SNr) have the particularity to be tonically active (with an elevated firing rate of 25 Hz at rest and pause in firing when inhibited by striatal activity). They send inhibitory projections to ventral thalamic nuclei as well as various subcortical structures such as the superior colliculi. The SNr cells are selective for particular motor programs and can disinhibit various thalamocortical loops <span class="citation" data-cites="Chevalier1990">(<a href="References.html#ref-Chevalier1990" role="doc-biblioref">Chevalier and Deniau, 1990</a>)</span>. Their selectivity is principally due to the inhibitory connections originating from the striatum and GPe, but they also receive excitatory inputs from the subthalamic nucleus. However, the SNr cells also tonically inhibit each other, with a particular connectivity pattern suggesting they may subserve an important functional role <span class="citation" data-cites="Mailly2003">(<a href="References.html#ref-Mailly2003" role="doc-biblioref">Mailly et al., 2003</a>)</span>. When a SNr cell is inhibited by striatal activation, it stops inhibiting the other SNr cells, who consequently increase their firing rate and inhibit more strongly their efferent thalamic cells. Inhibitory connections within SNr may therefore help focusing on the disinhibition of the desired thalamocortical loop by suppressing the competing other loops <span class="citation" data-cites="Gulley2002">(<a href="References.html#ref-Gulley2002" role="doc-biblioref">Gulley et al., 2002</a>)</span>. Instead of considering the inhibitory effect of high nigral activity, we modeled this competition between SNr cells by an excitatory effect of low nigral activity, what is functionally equivalent. The 8 cells in SNr evolve according to the following equations:</p>
+<p><span id="eq-ficn:mp-snr"><span class="math display">
+\begin{aligned}
+    \tau \cdot \frac{d m_i(t)}{d t}  + m_i(t) &amp; =   \displaystyle\sum_{j \in \text{CN}} W^{\text{CN}}_{i,j}(t) \cdot  u^{\text{CN}}_j(t) + \displaystyle\sum_{j \in \text{SNr}} W^{\text{SNr}}_{i,j}(t) \cdot  (M - u^{\text{SNr}}_j(t) )^+ + M + \epsilon(t) \nonumber\\ &amp; &amp;\\
+    u^{\text{SNr}}_i(t) &amp; =
+     \begin{cases}
+        0 &amp; \text{if $m_i(t) &lt; 0$}  \\
+        m_i(t)  &amp; \text{if $0 \leq m_i(t) \leq M$} \\
+        \displaystyle\frac{1}{1 + e^{-\frac{m_i(t) - M}{20}}} + 0.5 &amp; \text{if $m_i(t) &gt; M$}
+     \end{cases}
+\end{aligned}
+\tag{3.9}</span></span></p>
+<p>where <span class="math inline">\tau = 10</span> ms, <span class="math inline">M = 1.0</span> and <span class="math inline">\epsilon(t)</span> is an additional noise randomly picked between <span class="math inline">-0.3</span> and <span class="math inline">0.3</span>. The excitatory connections from neighboring SNr cells are active when their corresponding activity is below baseline. The transfer function ensures that activities exceeding <span class="math inline">M</span> saturate to a value of 1.5 with a sigmoidal shape. The inhibitory connections originating in CN are learned according to an equation similar to <a href="#eq-ficn:weightcn" class="quarto-xref">Equation&nbsp;<span>3.5</span></a>. Even if little is known about synaptic learning in SNr, the strong dopaminergic innervation of nigral cells <span class="citation" data-cites="Ibanez-Sandoval2006">(<a href="References.html#ref-Ibanez-Sandoval2006" role="doc-biblioref">Ibañez-Sandoval et al., 2006</a>)</span> makes it reasonable to hypothesize that DA modulates the learning of striatonigral connections in a way similar to the corticostriatal ones.</p>
+<p><span id="eq-ficn:weightgpi"><span class="math display">
+\begin{aligned}
+    \eta^{\text{inh}} \cdot \frac{d W^{\text{CN}}_{i,j}(t)}{d t}  &amp; = f(\text{DA}(t) - \overline{\text{DA}}) \cdot g( \overline{\text{SNr}} - u^{\text{SNr}}_i(t))  \cdot (u^{\text{CN}}_j(t) - \overline{\text{CN}})^+ \\
+    &amp;  - \alpha^{\text{inh}}_i(t) \cdot ( (\overline{\text{SNr}} -u^{\text{SNr}}_i(t) )^+ )^2 \cdot W^{\text{SNr}}_{i, j}(t)
+\end{aligned}
+\tag{3.10}</span></span></p>
+<p><span id="eq-ficn:fgpi"><span class="math display">
+    f(x)  =
+     \begin{cases}
+        x &amp; \text{if $x &gt; 0$}  \\
+        10 \cdot x  &amp; \text{else.}
+     \end{cases}
+\tag{3.11}</span></span></p>
+<p><span id="eq-ficn:ggpi"><span class="math display">
+    g(x)  =  \displaystyle\frac{1}{1 + e^{-\frac{x}{20}}} - 0.5
+\tag{3.12}</span></span></p>
+<p><span class="math display">
+    \tau^{\text{inh}}_{\alpha} \cdot \frac{d \alpha^{\text{inh}}_{i}(t)}{d t} + \alpha^{\text{inh}}_i(t)  = K^{\text{inh}}_{\alpha} \cdot ( m_i(t) )^-
+</span></p>
+<p>where <span class="math inline">\eta^{\text{inh}} = 500</span>, <span class="math inline">\overline{\text{SNr}}</span> is the mean activity of all the cells in SNr, <span class="math inline">\tau^{\text{inh}}_{\alpha} = 10</span> ms, <span class="math inline">K^{\text{inh}}_{\alpha} = 2.0</span> and <span class="math inline">()^-</span> is the negative part of the membrane potential. The weights are randomly initialized between <span class="math inline">-0.15</span> and <span class="math inline">-0.05</span> and later restricted to negative values. DA depletion (below baseline) has been given a greater influence in the learning rule through the <span class="math inline">f()</span> function, because at the beginning of learning DA depletion has a much smaller amplitude than the DA bursts. Contrary to the classical Hebbian learning rule, the postsynaptic activity influences here the learning rule through a sigmoidal function <span class="math inline">g()</span>, what makes it closer to the BCM learning rule <span class="citation" data-cites="Bienenstock1982">(<a href="References.html#ref-Bienenstock1982" role="doc-biblioref">Bienenstock et al., 1982</a>)</span>. Similarly to BCM, there is a threshold (here the mean activity of the nuclei) on the postsynaptic activity that switches the learning rule from LTD to LTP. This learning rule is meant to increase the selectivity of each SNr cell regarding to its neighbors as well as the signal-to-noise ratio in the population. Another way for the nigral cells to increase their selectivity is competition through their lateral connections. There are two different learning rules used depending on whether the DA level is above or below baseline. When DA is above its baseline, the lateral connections are updated according to the following equation:</p>
+<p><span id="eq-ficn:latgpipos"><span class="math display">
+\begin{aligned}
+    \eta^{\text{lat}} \cdot \frac{d W^{\text{SNr}}_{i,j}(t)}{d t}  &amp; = (\text{DA}(t) - \overline{\text{DA}}) \cdot ( \overline{\text{SNr}} - u^{\text{SNr}}_i(t))^+  \cdot ( \overline{\text{SNr}} - u^{\text{SNr}}_j(t))^+ \\
+    &amp;  - \alpha^{\text{lat}}_i(t) \cdot ( (\overline{\text{SNr}} -u^{\text{SNr}}_i(t) )^+ )^2 \cdot W^{\text{SNr}}_{i, j}(t)
+\end{aligned}
+\tag{3.13}</span></span></p>
+<p>where <span class="math inline">\eta^{\text{lat}}= 500</span>. The weights are initially set to <span class="math inline">0.0</span>. This rule is similar to a classical anti-Hebbian learning, as it favorizes the competition between two cells when they frequently have simultaneously low firing rates. In the case of a DA depletion, an important feature of the model is that the symmetry of the lateral connections between two inhibited cells has to be broken. DA depletion has then a punishing effect on the most inhibited cells, which will later receive much more excitation from previously moderately inhibited cells:</p>
+<p><span id="eq-ficn:latgpineg"><span class="math display">
+\begin{aligned}
+    \eta^{\text{lat}} \cdot \frac{d W^{\text{SNr}}_{i,j}(t)}{d t}  &amp; = (\overline{\text{DA}} - \text{DA}(t)) \cdot \sqrt{( \overline{\text{SNr}} - u^{\text{SNr}}_i(t))^+}  \cdot ( \overline{\text{SNr}} - u^{\text{SNr}}_j(t))^+  \\
+    &amp;  - \alpha^{\text{lat}}_i(t) \cdot ( (\overline{\text{SNr}} -u^{\text{SNr}}_i(t) )^+ )^2 \cdot W^{\text{SNr}}_{i, j}(t)
+\end{aligned}
+\tag{3.14}</span></span></p>
+<p>In both cases, two simultaneously inhibited cells will increase their reciprocal lateral connections. However, in the case of DA depletion, the square root function applied to the postsynaptic activity breaks the symmetry of the learning rule and the most inhibited cell will see its afferent lateral connections relatively more increased than the other cells. Thus, the inhibited cells which won the competition through lateral connections but provoked a DA depletion will be more likely to loose competition at the next trial. The effect of these asymmetric learning rules will be presented in section <a href="#sec-ficn:competitionsnr" class="quarto-xref"><span>Section 3.3.3</span></a>, where we will show that they are able to eliminate distractors. Both learning rules use the same equation for the updating of the regularization factor:</p>
+<p><span id="eq-ficn:alphagpilat"><span class="math display">\begin{aligned}
+    \tau^{\text{lat}}_{\alpha} \cdot \frac{d \alpha^{\text{lat}}_{i}(t)}{d t} + \alpha^{\text{lat}}_i(t) &amp; = &amp; K^{\text{lat}}_{\alpha} \cdot ( m_i(t) - M)^+
+\end{aligned}
+\tag{3.15}</span></span></p>
+<p>where <span class="math inline">\tau^{\text{lat}}_{\alpha} = 10</span> ms and <span class="math inline">K^{\text{lat}}_{\alpha} = 1.0</span>.</p>
+</section>
+<section id="sec-ficn:tasks" class="level3" data-number="3.2.8">
+<h3 data-number="3.2.8" class="anchored" data-anchor-id="sec-ficn:tasks"><span class="header-section-number">3.2.8</span> Experiments</h3>
+<p>In order to test the ability of our model to perform visual WM tasks, we focused on three classical experimental paradigms: the delayed matching-to-sample (DMS), the delayed nonmatching-to-sample (DNMS) and the delayed pair-association (DPA) tasks. These three tasks classically consist in presenting to the subject a visual object (called the cue), followed after a certain delay by an array of objects, including a target towards which a response should be made (either a saccade or a pointing movement or a button press). In DMS, the target is the same object as the cue; in DNMS, the target is the object that is different from the cue; in DPA, the target is an object artificially but constantly associated to the cue. These three tasks are known to involve differentially IT, MTL, PFC and BG <span class="citation" data-cites="Sakai1991 Elliott1999 Chang2002">(<a href="References.html#ref-Chang2002" role="doc-biblioref">Chang et al., 2002</a>; <a href="References.html#ref-Elliott1999" role="doc-biblioref">Elliott and Dolan, 1999</a>; <a href="References.html#ref-Sakai1991" role="doc-biblioref">Sakai and Miyashita, 1991</a>)</span>.</p>
+<p>Similarly to the mixed-delayed response (MDR) task of <span class="citation" data-cites="gisiger2006">Gisiger and Kerszberg (<a href="References.html#ref-gisiger2006" role="doc-biblioref">2006</a>)</span>, we want our model to acquire knowledge about contextual information, allowing it to learn concurrently these three tasks with the same cued visual objects. We therefore need to provide the network with a symbol specifying which task has to be performed. The meaning of this symbol is however initially not known by the model and must be acquired through the interaction within the tasks. The top part of <a href="#fig-ficn:model" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> b shows the time course of the visual inputs presented to the network during a trial. Each trial is decomposed into periods of 150 ms. During the first period, a cue is presented to the network, followed by a delay period without visual stimulation. A visual object representing which task to perform (DMS, DNMS or DPA) is then presented, followed by the same delay period. During this presentation phase, the signal <span class="math inline">G(t)</span> in <a href="#eq-ficn:mp-pfc" class="quarto-xref">Equation&nbsp;<span>3.2</span></a> is set to 1.0 to allow the sustained activation in dlPFC of these two objects.</p>
+<p>In the choice period, two objects are simultaneously presented to the network: the target (whose identity is defined by the cue and the task symbol) and a distractor chosen randomly among the remaining cues. At the end of this period, the response of the network is considered to be performed, and reward is given accordingly through a probabilistic rule during the following reward period. For the entire duration of this reward period, the signal <span class="math inline">R(t)</span> in <a href="#eq-ficn:mp-snc" class="quarto-xref">Equation&nbsp;<span>3.6</span></a> is set to 0.5 if reward is given and to 0.0 otherwise. <span class="math inline">P(t)</span> is set to 1.0, denoting that reward is expected to occur. This reward period is followed by another delay period, the activities in dlPFC being manually reset to their baseline, allowing the network to go back to its resting state before performing a new trial.</p>
+<p>In these experiments, we use four different cues (labelled A, B, C and D) and three task symbols (DMS, DNMS and DPA) that stimulate each a different cell in PRh. The corresponding cells will therefore be successively activated according to the timecourse of the trial described on the top part of <a href="#fig-ficn:model" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> B. In the Results section, we will only consider subsets of combinations of cues and tasks. For example, we define DMS-DNMS_AB as a combination of four different trials: A followed by DMS (A+DMS), A followed by DNMS (A+DNMS), B followed by DMS (B+DMS) and B followed by DNMS (B+DNMS). These four different trials are randomly interleaved during the learning period. In the DMS trials, the target of the task is the same as the cue, the distractor being chosen in the remaining possible cues. In the DNMS trials, the target is the object that is different from the cue. In the DPA task, the target is an object artificially associated to the cue. In DMS-DPA_AB, the target of the trial A+DPA is C and the one of B+DPA is D.</p>
+<p>Each PRh cell is stimulated by its corresponding visual object by setting the signal <span class="math inline">V_i(t)</span> in <a href="#eq-ficn:mp-prh" class="quarto-xref">Equation&nbsp;<span>3.1</span></a> to a value of 1.0 during the whole period. In the choice period, <span class="math inline">V_i(t)</span> is limited to 0.5 for both cells (to mimic competition in the lower areas). To determine the response made by the system, we simply compare the activities of the two stimulated PRh cells at the end of the choice period. If the activity of the cell representing the target is greater than for the distractor, we hypothesize that this greater activation will feed back in the ventral stream and generate an attentional effect that will guide a saccade toward the corresponding object <span class="citation" data-cites="Hamker2004a Hamker2005">(<a href="References.html#ref-Hamker2004a" role="doc-biblioref">Hamker, 2004</a>; <a href="References.html#ref-Hamker2005" role="doc-biblioref">Hamker, 2005b</a>)</span>. We assume that this selection is noisy, what is modeled by introducing a probabilistic rule for the delivery of reward that depends on the difference of PRh activity for the two presented stimuli.</p>
+<p>If we note <span class="math inline">u^{\text{target}}</span> the activity of the PRh cell representing the target at the end of the choice period and <span class="math inline">u^{\text{dist}}</span> the activity of the cell representing the distractor, the signal <span class="math inline">R(t)</span> in <a href="#eq-ficn:mp-snc" class="quarto-xref">Equation&nbsp;<span>3.6</span></a> has the following probability to be delivered during the reward period:</p>
+<p><span id="eq-ficn:reward"><span class="math display">
+    \mathcal{P}(R)  =  0.5+ u^{\text{target}} - u^{\text{dist}}
+\tag{3.16}</span></span></p>
+<p>This probability is of course limited to values between 0.0 and 1.0. When the activities of the two cells are equal, reward is delivered randomly, as we consider that a saccade has been performed randomly towards one of the two objects, as the feedback from PRh to the ventral pathway is not sufficiently distinct to favorize one of the two targets. When the activity of the target cell becomes relatively higher, the probability of executing the correct saccade and receiving reward is linearly increased. When reward is delivered, the signal <span class="math inline">R(t)</span> has a value of 0.5 during the whole reward period, whereas it is set to 0.0 otherwise. We do not consider here the influence of rewards with different amplitudes.</p>
+<p>In delay conditioning, reward is delivered randomly with a fixed probability during the presentation of a visual object (called X). The timecourse of this task is depicted on the bottom part of <a href="#fig-ficn:model" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> B. This task is described in <a href="#sec-ficn:traceconditioning" class="quarto-xref"><span>Section 3.3.5</span></a> to study the effect of the probability of reward delivery on striatal representations and reward prediction in SNc.</p>
+<p>In <a href="#sec-ficn:numbercells" class="quarto-xref"><span>Section 3.3.4</span></a>, we will study the influence of the number of cells in SNr on the performance of the network. While this number is equal to 8 in the previous experiments, we vary it here from 6 to 16. When the number of cells in SNr exceeds 8, we simply added cells in SNr which receive striatal inhibition and compete with the others, but which do not inhibit any thalamic cell. When there is only 6 cells, we suppressed in SNr and VA the cells corresponding to the objects DPA and X, which are not used in this experiment.</p>
+</section>
+</section>
+<section id="results" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="results"><span class="header-section-number">3.3</span> Results</h2>
+<section id="sec-ficn:concurrentlearning" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="sec-ficn:concurrentlearning"><span class="header-section-number">3.3.1</span> Concurrent learning of the different tasks</h3>
+<div id="fig-ficn:tasks-result" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ficn:tasks-result-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/ficn/vitay_figure_2.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ficn:tasks-result-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2: Different success rates. (A) Mean value and standard deviation of the last incorrect trial during learning of 50 randomly initialized networks for different combinations of cues and tasks: 1) DMS-DNMS_AB; 2) DMS-DPA_AB; 3) DMS-DNMS_ABC; 4) DMS_ABCD; 5) DNMS_ABCD; 6) DPA_ABCD. (B) Average success rate of 50 networks presented with DMS-DNMS_AB. (C) Success rate of a particular network which learned DMS-DNMS_AB, but computed only on the trials composed of A as a cue followed by DNMS as a task symbol.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-ficn:tasks-result" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> A shows the learning behavior of the model when different combinations of tasks are presented. Each network was fed 1000 times with randomly alternated trials. The Y-axis represents the rank of the last trial during the learning sequence where the network produced a incorrect answer, which is a rather conservative measurement of behavior. After this last mistake, the performance of all networks are stable, even when more than 1000 trials are presented as further tests have shown. We represent here the performance of different combinations of tasks: DMS-DNMS_AB, DMS-DPA_AB, DMS-DNMS_ABC, DMS_ABCD, DNMS_ABCD and DPA_ABCD. For each combination of tasks, we used fifty different networks that were initialized randomly. One can notice that the different networks learn at very variable speeds, as shown by the standard deviation. For example, for the DMS-DNMS_AB task, some networks converged after 200 different trials whereas a few others needed 800 trials, what denotes the influence of initialization as well as the one of noise. The only significant difference between the combinations of tasks is that DMS-DNMS_AB is learned faster than DMS-DNMS_ABC, DMS_ABCD, DNMS_ABCD and DPA_ABCD (two-sample K–S test, <span class="math inline">P &lt; 0.05</span>). However, this can be simply explained by the fact that DMS-DNMS_ABC uses six different trials instead of four for DMS-DNMS_AB (C+DMS and C+DNMS have to be learned at the same time), and that DMS_ABCD, DNMS_ABCD and DPA_ABCD use a bigger set of possible distractors during the choice period. We will investigate in <a href="#sec-ficn:competitionsnr" class="quarto-xref"><span>Section 3.3.3</span></a> the influence of distractors on performance. The distributions of the numbers of trials needed to learn for each combination have no significant shape, though a Gaussian fit can not be rejected (<span class="math inline">\chi^2</span>-test, <span class="math inline">0.2 \leq P \leq 0.6</span>).</p>
+<p><a href="#fig-ficn:tasks-result" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> B shows the average success rate of 50 networks presented with the DMS-DNMS_AB task. The success rate of a network is computed after each trial during learning as the percentage of rewarded trials for the last ten trials: if the last ten trials were rewarded, the success rate is 100%, if only one trial was not rewarded, the success rate is 90% and so on. All networks have reached the maximum success rate before the <span class="math inline">800^{th}</span> trial, but some only need 200 trials. At the beginning of learning, the success rate is 50%, as the network does not really select a response and reward is given randomly according to the probabilistic rule of reward we use. This success rate quickly increases to a high value in around 300 trials, followed by a more flat phase where the competition in SNr temporarily deteriorates the performance of the networks.</p>
+<p>This flattening of the average success rate can be explained by observing <a href="#fig-ficn:tasks-result" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> C. We represent the success rate of a particular network which learned DMS-DNMS_AB, but this success rate is plotted for analysis purpose only from trials composed of A as a cue followed by DNMS as a task symbol. We see that the network performs this task accurately after only 40 trials and stays at this maximum until it makes a mistake shortly before the <span class="math inline">80^{th}</span> trial. We will later show that this temporary decrease in performance is due to the late involvement of selection in SNr. To quantify this behavior, we examined the success rates of the 50 networks used in <a href="#fig-ficn:tasks-result" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> B and decomposed them regarding to the four types of trials involved in the learning phase (A followed by DMS and so on). We found that 32.5% of trial-specific networks showed this type of behavior, by reaching success in at least ten successive trials before performing again a mistake. In average, these trial-specific networks reach stable success after only 14 trials and stay successful for 17 trials before performing a mistake. They then need on average 47 other trials before reaching definitely 100% success (last mistake after the <span class="math inline">78^{th}</span> trial). In comparison, the other trial-specific networks (67.5%) perform their last mistake at the <span class="math inline">64^{th}</span> trial on average, which is significantly shorter (<span class="math inline">\chi^2</span>-test, <span class="math inline">P \leq 0.05</span>).</p>
+</section>
+<section id="temporal-evolution-of-the-activities-after-learning" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="temporal-evolution-of-the-activities-after-learning"><span class="header-section-number">3.3.2</span> Temporal evolution of the activities after learning</h3>
+<div id="fig-ficn:timecourse" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ficn:timecourse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/ficn/vitay_figure_3.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ficn:timecourse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.3: Temporal evolution of the activity of several cells in a network which successfully learned DMS-DNMS_AB. The activities are plotted with regard to time (in ms) during a trial consisting of A as a cue, DNMS as a task symbol and B as a target. The first row represents the activities of three cells in PRh which are respectively selective for A (blue line), DNMS (red line) and B (green line). The second row shows the activities of two cells in CN, one being selective for the pair A+DMS (blue line), the other for the pair A+DNMS (green line). The third row represents the activities of three cells in SNr which are respectively selective for A (blue line), DNMS (red line) and B (green line). The fourth row represents the activities of three cells in VA which are respectively selective for A (blue line), DNMS (red line) and B (green line).
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-ficn:timecourse" class="quarto-xref">Figure&nbsp;<span>3.3</span></a> shows the temporal evolution of some cells of a particular network that successfully learned DMS-DNMS_AB. The learning phase consisted of 1000 randomly interleaved trials. At the end of learning, the network was able to generate systematically correct responses which all provoked the delivery of reward. The selectivity of CN cells developed to represent the different combinations of cues and task symbols through clusters of cells (see <a href="#sec-ficn:traceconditioning" class="quarto-xref"><span>Section 3.3.5</span></a>). SNr cells also became selective for some of these clusters and the learned competition between them ensured that only one SNr cell can be active at the same time in this context. The temporal evolution of the activity of the cells on <a href="#fig-ficn:timecourse" class="quarto-xref">Figure&nbsp;<span>3.3</span></a> was recorded during the course of a trial using A as a cue and DNMS as a task symbol. However, this pattern is qualitatively observed in every network that successfully learned the task and similar activation patterns occur for different tasks. The cells which are not shown on this figure do not exhibit significant activity after learning.</p>
+<p>When the object A is presented as a cue in PRh (and simultaneously enters the working memory in dlPFC), it excites a cluster of cells in CN which, in this example, represents the couple A+DMS (blue line). This cluster inhibits the cell representing A in SNr which in turn stops inhibiting the corresponding cell in VA. The thalamocortical loop is then disinhibited and the two cells representing A in PRh and VA excite each other. After 150 ms, the stimulation corresponding to the cue ends and the activity of the cells representing A slowly decreases to their baseline. At 300 ms, the object specifying the task (DNMS) stimulates a cell in PRh and enters WM in dlPFC. This information biases processing in CN so that a new cluster representing A+DNMS gets activated (green line) and disinhibits through SNr the cell in VA representing the object B, which is the target of the task. At 600 ms, when both objects A (distractor) and B (target) stimulates PRh, the perirhinal cell A only receives visual information, while the cell B receives both visual and thalamic stimulation. Consequently, its activity is higher than the cell A and will be considered as guiding a saccade toward the object B. The cell representing DNMS in SNr never gets inhibited because it has never been the target of a task during learning. The corresponding thalamic cell only shows a small increase during the presentation of the object in PRh because of the corticothalamic connection. In the Discussion, we will come back on the fact that, in this particular example, the system has learned to select B instead of avoiding A as it should do in a DNMS task.</p>
+<p>Three features are particularly interesting in this temporal evolution and have been observed for every network used in <a href="#sec-ficn:concurrentlearning" class="quarto-xref"><span>Section 3.3.1</span></a>. The first one is that the perirhinal and thalamic cells corresponding to the object B are activated in advance to the presentation of the target and the distractor. The network developed a predictive code by learning the input, context and target association. For example, the behavior of the perirhinal cell correlates with the finding of pair-recall activities in IT and PRh during DPA tasks: some cells visually selective for the associated object have been shown to exhibit activation in advance to its presentation <span class="citation" data-cites="naya2003">(<a href="References.html#ref-naya2003" role="doc-biblioref">Naya et al., 2003</a>)</span>. Similarly, the behavior of the thalamic cell can be compared to the delay period activity of MD thalamic cells (part of the executive loop) during oculomotor WM tasks <span class="citation" data-cites="Watanabe2004a">(<a href="References.html#ref-Watanabe2004a" role="doc-biblioref">Watanabe and Funahashi, 2004</a>)</span>. The second interesting observation is the sustained activation of the perirhinal cell B after the disappearance of the target (between 750 and 900 ms on the figure) which is solely provoked by thalamic stimulation (as the WM in dlPFC still excites CN), whereas classical models of visual WM suggest that it is due a direct feedback from dlPFC <span class="citation" data-cites="ranganath2006">(<a href="References.html#ref-ranganath2006" role="doc-biblioref">Ranganath, 2006</a>)</span>.</p>
+<p>The third interesting feature is the fact that the network, when only the cue was presented in PRh and dlPFC, already started to disinhibit the corresponding thalamic cell, somehow anticipating to perform the DMS task. We tested the 50 networks used in <a href="#sec-ficn:concurrentlearning" class="quarto-xref"><span>Section 3.3.1</span></a> after learning the DMS-DNMS_AB task and presented them with either A or B for 200 ms. By subsequently recording the activity of the corresponding cells in SNr, we noticed that they all tended to perform DMS on the cue, i.e.&nbsp;disinhibiting the corresponding thalamic cell. This can be explained by the fact that the representation of the cue in PRh is also the correct answer to the task when DMS is required, and the projection from PRh to CN therefore favorizes the selection of the striatal cluster representing A+DMS compared to A+DNMS. This can be interpreted such that the “normal” role of the visual loop is to maintain the visually presented objects, but that this behavior can be modified by additional prefrontal biasing (here the entry of DNMS into WM and its influence on striatal activation), as suggested by <span class="citation" data-cites="Miller2001">Miller and Cohen (<a href="References.html#ref-Miller2001" role="doc-biblioref">2001</a>)</span>.</p>
+</section>
+<section id="sec-ficn:competitionsnr" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="sec-ficn:competitionsnr"><span class="header-section-number">3.3.3</span> Effect of the competition in SNr</h3>
+<div id="fig-ficn:competition-closeup" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ficn:competition-closeup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/ficn/vitay_figure_4.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ficn:competition-closeup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.4: Evolution of internal variables in SNr for trials surrounding the mistake performed by the network on <a href="#fig-ficn:tasks-result" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> C. (A) Reward received at each trial. (B) Activity of four SNr cells at the time reward is received or expected during the trial. These cells are selective respectively for A (blue line), B (green line), C (red line) and D (turquoise line). (C) Striatal inhibition received by these four cells. (D) Competition term received by the same four cells.
+</figcaption>
+</figure>
+</div>
+<p>We focus now on what happens around the late incorrect trial in <a href="#fig-ficn:tasks-result" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> C to show that the first phase of learning corresponds to the selective learning of connections from cortex to CN and from CN to SNr, whereas the second one corresponds to the learning of lateral connections within SNr to decorrelate the activities in the structure. <a href="#fig-ficn:competition-closeup" class="quarto-xref">Figure&nbsp;<span>3.4</span></a> shows the evolution of some internal variables of SNr cells between the trials surrounding the mistake produced at the trial number 77 of <a href="#fig-ficn:tasks-result" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> C. These trials are all composed of A as a cue, DNMS as a task symbol and therefore B as a target. <a href="#fig-ficn:competition-closeup" class="quarto-xref">Figure&nbsp;<span>3.4</span></a> A shows that the preceding and following trials were rewarded, but not the trial 77. <a href="#fig-ficn:competition-closeup" class="quarto-xref">Figure&nbsp;<span>3.4</span></a> B shows the activity of four SNr cells at the exact time when reward is delivered or expected to be delivered (750 ms after the beginning of the trial on <a href="#fig-ficn:timecourse" class="quarto-xref">Figure&nbsp;<span>3.3</span></a>). These cells are selective respectively for A (blue line), B (green line), C (red line) and D (turquoise line). The four remaining cells in SNr are not plotted for the sake of readability, but they are not active anymore at this stage of learning. <a href="#fig-ficn:competition-closeup" class="quarto-xref">Figure&nbsp;<span>3.4</span></a> C represents the inhibition received by these cells at the same time, which means the weighted sum of inhibitory connections coming from CN. <a href="#fig-ficn:competition-closeup" class="quarto-xref">Figure&nbsp;<span>3.4</span></a> C represents the competition term received by these cells, which means the weighted sum of lateral connections in SNr (see <a href="#eq-ficn:mp-snr" class="quarto-xref">Equation&nbsp;<span>3.9</span></a>).</p>
+<p>Through learning in the 76 first trials consisting in A followed by DNMS, the cells B and C became strongly inhibited during the choice period. In the rest of the article, we will call “active” a cell which is strongly inhibited and has an activity close to 0.0. Both cells receive a strong inhibition from the same CN cluster but they still do not compete enough with each other so that only one remains active. As B is a target, this provokes the disinhibition of the thalamocortical loop corresponding to B, so that the cell B in PRh is much more active than the cell A, leading to a correct response and subsequent reward. The cell C is not involved in this particular task, so it is just a distractor: its activation does not interfere with the current task. However, this cell may be useful in other tasks, but the strong striatal inhibition it receives will make it harder to recruit it for other tasks. At the trial 77, the cell C in SNr competes sufficiently with the cell B so that the activity of the cell B becomes close to its baseline (around 0.7 on <a href="#fig-ficn:competition-closeup" class="quarto-xref">Figure&nbsp;<span>3.4</span></a> B). The difference between the activities of cells A and B in PRh becomes small, leading to an omission of reward on <a href="#fig-ficn:competition-closeup" class="quarto-xref">Figure&nbsp;<span>3.4</span></a> A according to the probabilistic rule we used. This omission has two effects through the depletion of DA: first, it reduces the striatal inhibition received by the two active cells, as seen on <a href="#fig-ficn:competition-closeup" class="quarto-xref">Figure&nbsp;<span>3.4</span></a> C; second, it increases the competition between the two active cells, but in an asymmetrical manner (<a href="#fig-ficn:competition-closeup" class="quarto-xref">Figure&nbsp;<span>3.4</span></a> B). According to <a href="#eq-ficn:latgpineg" class="quarto-xref">Equation&nbsp;<span>3.14</span></a>, the excitatory connection from the cell B to C will be much more increased than the one from the cell C to the cell B, as the cell C is much more inhibited than the cell B. Consequently, at trial 78, the cell C receives much more excitation from the cell B and its activity becomes above baseline. The cell B is then strongly inhibited by the same cluster in CN and generates a correct rewarded response. In the following trials, the cell B will further increase its selectivity for this cluster, whereas the other cells in SNr (including the cell C) will totally lose theirs and can become selective for other clusters.</p>
+<p>What happened around this trial shows the selection of a unique cell in SNr, even when the network already had a good performance. This selection relies on four different mechanisms. First, the network should have selected a number of cells in SNr which produce a correct answer. These cells include the target, but also distracting cells that are also selective for the same cluster in CN but which disinhibit irrelevant thalamocortical loops. Second, as the network produces correct answers, the cluster in CN becomes associated to a high reward-prediction value in SNc. The amplitude of phasic DA bursts is accordingly reduced. However, omission of reward will generate a greater depletion of the DA signal, compared to the beginning of learning when CN clusters had no association to reward and provoked no DA depletion. Third, omission of reward reduces the striatal inhibition received by active cells in SNr. However, if this was the only “punishing” mechanism, all the active cells will lose their selectivity. In this particular example, the cell B would gradually stop receiving inhibition from CN and all the preceding learning would be lost. Fourth, the learning of lateral connections in SNr is asymmetric with respect to DA firing: when a distractor progressively wins the competition until the response associated to the target is attenuated, this distractor becomes disadvantaged in the competition with the target. This is an indirect memory effect: as the cell corresponding to the target was previously activated and provoked reward delivery, the cease of its activation (provoking reward omission) is transmitted to the other cells in SNr through DA depletion, which “understand” that their activation is irrelevant and “get out” of the competition.</p>
+<p>It is important to note that this competition between cells in SNr stays completely local to the cells: there is no winner-take-all algorithm or supervising mechanism deciding which cell should be punished. This competition emerges only through the interaction of the cells and the learning of their reciprocal connections. As stated in <a href="#sec-ficn:concurrentlearning" class="quarto-xref"><span>Section 3.3.1</span></a>, the scheme described before occurs during learning in 32.5% of the networks we studied: the target cell in SNr temporarily loses the competition before being reselected. However, in other cases the target directly wins the competition and the distractors fade: there is no degradation in performance, what can explain the great variability in the number of trials needed to learn correctly all the tasks on <a href="#fig-ficn:tasks-result" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> A.</p>
+<div id="fig-ficn:weightchange" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ficn:weightchange-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/ficn/vitay_figure_5.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ficn:weightchange-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.5: Magnitude of weight changes during learning of DMS-DNMS_AB for two different networks, plotted here only for A+DMS trials. The top line corresponds to global weight changes in CN (projections from PRH and dlPFC), the middle one to the connections from CN to SNr, the bottom one to lateral connections within SNr. (A) Network showing a late competition mechanism in SNr selecting directly the correct target without provoking a mistake. (B) Network showing a late competition mechanism in SNr that led to the performance of mistakes and to a long period of instability. The amplitude of lateral weight changes has been thresholded during this unstable phase (it reaches up to 5000) in order to allow a better comparison with the first network.
+</figcaption>
+</figure>
+</div>
+<p>In order to better describe these two schemes of learning, we show on <a href="#fig-ficn:weightchange" class="quarto-xref">Figure&nbsp;<span>3.5</span></a> the magnitude of weight changes in CN and SNr during learning for two different networks. This magnitude is computed for each trial in the learning session by summing the absolute values of the discretized variations of weight values (<span class="math inline">|d W_{i,j}(t)|</span> in <a href="#eq-ficn:weightcn" class="quarto-xref">Equation&nbsp;<span>3.5</span></a>, <a href="#eq-ficn:weightgpi" class="quarto-xref">Equation&nbsp;<span>3.10</span></a>, <a href="#eq-ficn:latgpipos" class="quarto-xref">Equation&nbsp;<span>3.13</span></a> and <a href="#eq-ficn:latgpineg" class="quarto-xref">Equation&nbsp;<span>3.14</span></a> for all neurons in the considered area and for all computational timesteps in the entire trial (1050 in our design). These two networks have both learned the DMS-DNMS_AB task, but we represent here only the magnitude of weight changes occurring during A+DMS trials. The top row represents the magnitude of weight changes for striatal cells (<a href="#eq-ficn:weightcn" class="quarto-xref">Equation&nbsp;<span>3.5</span></a>), the middle row for the inhibitory connections from CN to SNr (<a href="#eq-ficn:weightgpi" class="quarto-xref">Equation&nbsp;<span>3.10</span></a>) and the bottom one for lateral connections within SNr (both <a href="#eq-ficn:latgpipos" class="quarto-xref">Equation&nbsp;<span>3.13</span></a> and <a href="#eq-ficn:latgpineg" class="quarto-xref">Equation&nbsp;<span>3.14</span></a>). The absolute amplitude of these weight changes is meaningless, as it depends on the number of cells in each areas and the number of afferent connections. On <a href="#fig-ficn:weightchange" class="quarto-xref">Figure&nbsp;<span>3.5</span></a> A, the network shows an early learning phase in the first thirty trials where both striatal and pallidal cells show great variations in weight values, denoting that the network tries to find a correct answer to the task. After this first period, the connections from CN to SNr cease to fluctuate, while the connections from PRh and dlPFC to CN gradually stabilize (rather slowly, as the computed magnitude also takes into account the regularization term in Eq. <a href="#eq-ficn:weightcn" class="quarto-xref">Equation&nbsp;<span>3.5</span></a>, as the striatal cells always tend to overshoot, and this magnitude only decays with the association to reward). However, after the <span class="math inline">50^{th}</span> trial, the lateral connections within SNr show another peak of variation. This corresponds to the simultaneous activation of two SNr cells, including the target. In this case, the correct target wins the competition and eliminates the distractor without provoking a mistake. The task has been correctly learned and the network slowly stabilizes its learning. Oppositely, the network shown on <a href="#fig-ficn:weightchange" class="quarto-xref">Figure&nbsp;<span>3.5</span></a> B has the same early phase of learning, but the late increase in magnitude of lateral weight changes is much higher and lasts for about 50 trials. This inefficient selection process might be due to interference with learning in other trials, but provokes no mistake for the task. However, around the <span class="math inline">120^{th}</span> trial, this competition leads the network to perform a mistake (as what happens in <a href="#fig-ficn:competition-closeup" class="quarto-xref">Figure&nbsp;<span>3.4</span></a>), and the connections within the network vary for a certain number of trials before finding the correct solution and stabilizing. The first scheme of learning is the most frequently observed, while the second one corresponds roughly to the 32.5% of networks found in <a href="#sec-ficn:concurrentlearning" class="quarto-xref"><span>Section 3.3.1</span></a>. We observed a third infrequent scheme of learning similar to the second one, but where only the connections from CN to SNr are modified in the second phase of learning, not the lateral ones. This can be explained by the fact that the target and the distractor have already learned to compete with each other during the learning of another type of trial.</p>
+</section>
+<section id="sec-ficn:numbercells" class="level3" data-number="3.3.4">
+<h3 data-number="3.3.4" class="anchored" data-anchor-id="sec-ficn:numbercells"><span class="header-section-number">3.3.4</span> Influence of the number of cells in SNr</h3>
+<div id="fig-ficn:parallellearning" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ficn:parallellearning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/ficn/vitay_figure_6.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ficn:parallellearning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.6: Influence of the number of cells in SNr. (A) Mean value and standard deviation of the last incorrect trial during learning of 50 randomly initialized networks learning DMS-DNMS_AB, depending on the number of cells in SNr. (B) Rank of the first trial during learning which got a success rate of 100% (computed on the ten preceding trials), depending on the number of cells in SNr.
+</figcaption>
+</figure>
+</div>
+<p>As the number of possible distractors in SNr may influence the number of trials needed to learn the tasks, we investigated the influence of the number of cells in SNr (method described in <a href="#sec-ficn:tasks" class="quarto-xref"><span>Section 3.2.8</span></a>). <a href="#fig-ficn:parallellearning" class="quarto-xref">Figure&nbsp;<span>3.6</span></a> A shows the average number of trials needed to learn DMS-DNMS_AB by fifty randomly initialized networks. One can observe that the mean number of trials needed to learn increases monotonically with the number of cells in SNr, but in a quite flat manner: from 360 trials with 6 cells to 510 trials with 16 cells (regression analysis <span class="math inline">y= 15.16 * x + 271.9</span>, with <span class="math inline">x</span> the number of cells in SNr and <span class="math inline">y</span> the time needed to learn, <span class="math inline">r^2 = 0.25</span>). This rather slow increase can be explained by the fact that the selection process in SNr through lateral connections do not concern cells two-by-two as shown on <a href="#fig-ficn:competition-closeup" class="quarto-xref">Figure&nbsp;<span>3.4</span></a>, but can eliminate several distractors at the same time. In addition, the variability of these numbers of trials is rather high, and some networks with 16 cells in SNr converge faster than some networks with only 6 cells depending on initialization and noise.</p>
+<p>As a matter of comparison, <a href="#fig-ficn:parallellearning" class="quarto-xref">Figure&nbsp;<span>3.6</span></a> B shows for the same networks the rank of the first trial in the learning sequence where the success rate was 100% (ten preceding trials were rewarded). One can observe that this first successful trial occurs on average at the same time in the learning sequence (around 150 trials), independently of the number of cells in SNr. We estimated the proportion of trial-specific networks that reached an early phase of success during at least ten consecutive trials before performing a mistake again. This proportion stays rather constant with the number of cells in SNr, the minimum being 32.5% for 8 cells and the maximum 40% for 14 cells. Taken together, the result presented here confirm that there are globally two stages of learning regarding SNr: a first stage of parallel search independent of the number of cells in SNr, where the system selects through striatal inhibition an ensemble of cells in SNr able to obtain rewards (including the target and several distractors) and a second stage of partially sequential search that depends on the number of cells in SNr, where the system tries to eliminate the distractors through lateral competition, what needs more time when the number of possible distractors increases.</p>
+</section>
+<section id="sec-ficn:traceconditioning" class="level3" data-number="3.3.5">
+<h3 data-number="3.3.5" class="anchored" data-anchor-id="sec-ficn:traceconditioning"><span class="header-section-number">3.3.5</span> Reward-related clustering in CN</h3>
+<div id="fig-ficn:clusterRF" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ficn:clusterRF-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/ficn/vitay_figure_7.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ficn:clusterRF-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.7: Receptive fields of some CN cells after learning DMS-DNMS_AB. The X-axis represent the cells in PRh and dlPFC and the Y-axis the different cells in CN. A white color represents a positive weight for the connection, grey represents a weight close to zero and black a negative weight.
+</figcaption>
+</figure>
+</div>
+<p>The CN cells learn to represent cortical information from PRh and PFC during the first stage of learning, together with the parallel selection in SNr. As the competition between CN cells is not very strong, a cluster of a few CN cells gradually become selective for a particular pattern of cortical activity which is rewarded. Each rewarded combination of cue and task symbols in the cortical areas gets represented by 2 to 5 cells in CN, whose identity may change through learning depending on reward delivery. <a href="#fig-ficn:clusterRF" class="quarto-xref">Figure&nbsp;<span>3.7</span></a> shows the receptive fields (connection pattern with the cortical neurons) of several cells in CN after learning DMS-DNMS_AB. One can observe that some cells developed a very sharp selectivity to the cue and task symbols in dlPFC, as well as for the target in PRh. They have very strong positive connection weights to these cells, and relatively strong negative connection weights to the others. For example, the four cells on the top of the figure are selective for A and DNMS in dlPFC and B in PRh. After learning, this cluster will selectively inhibit the cell B in SNr and generate a correct response towards B.</p>
+<p>According to these receptive fields, when a cue (e.g.&nbsp;A) is presented at the beginning of a trial, it will be represented in both PRh and dlPFC and therefore activate preferentially the cluster in CN selective for A+DMS. This explains the activation pattern of CN cells on <a href="#fig-ficn:timecourse" class="quarto-xref">Figure&nbsp;<span>3.3</span></a>: the presentation of the cue favorizes the DMS-related clusters. However, when DNMS or DPA appear, they tend to inhibit these clusters so that the correct cluster can emerge from the competition. This tendency of the network to perform the DMS task even when the task is not known may have some advantages: a cue which is reliably associated to reward will see its representation in PRh enhanced through disinhibition of its thalamocortical loop, compared with visual objects which were never associated with rewards. This is coherent with the findings of <span class="citation" data-cites="mogami2006">Mogami and Tanaka (<a href="References.html#ref-mogami2006" role="doc-biblioref">2006</a>)</span> who showed that the representation of visual objects in PRh is modulated by their association to reward.</p>
+<div id="fig-ficn:trace" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ficn:trace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/ficn/vitay_figure_8.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ficn:trace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.8: (A) Sum of activities in CN depending the probability of reward associated to the object X. (B) Association with reward of the cluster representing X in CN, depending on the probability of reward delivery.
+</figcaption>
+</figure>
+</div>
+<p>At the end of the learning phase, the clusters in CN are fully associated with reward, which means that they totally cancel the phasic DA bursts and could generate a maximal depletion of DA if reward was omitted. The question that arises is whether all rewarded objects get represented equally in CN. In order to investigate this issue, we now use the trace conditioning that we presented in <a href="#sec-ficn:tasks" class="quarto-xref"><span>Section 3.2.8</span></a>. This task consists in presenting to the network a visual object X which is randomly associated to reward with a fixed probability, whatever the response of the system. This trace conditioning task is randomly intermixed with the learning of DMS-DNMS_AB, for a total number of 1000 trials. <a href="#fig-ficn:trace" class="quarto-xref">Figure&nbsp;<span>3.8</span></a> A shows the sum of the activities of all CN cells at the time reward is given or expected, averaged over the last 50 conditioning trials of the learning sequence. Even with a low probability of reward like 0.1, the object X gets represented in CN by a sum of activity comprised between 3.0 and 5.0. This value must be compared to the sum of activities in CN when reward is never given (1.1) and which solely consists in weight initialization and noise. This sum of activities can represent a cluster of 3 to 6 cells depending on their activity.</p>
+<p><a href="#fig-ficn:trace" class="quarto-xref">Figure&nbsp;<span>3.8</span></a> B shows the association with reward associated of the object X at the time reward is given or expected, averaged over the last 50 conditioning trials of the learning sequence. This prediction of reward is computed as the absolute value of the weighted sum of connections from CN to SNc. Contrary to the striatal representations, this association to reward strongly depends on the probability of reward. It explains that even rarely rewarded objects can get represented in CN: the received reward generates a DA burst of activity that increases the corresponding corticostriatal connections, but it never becomes sufficiently associated to reward to generate a DA depletion that would decrease the same connections.</p>
+</section>
+</section>
+<section id="discussion" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="discussion"><span class="header-section-number">3.4</span> Discussion</h2>
+<p>We designed a computational model inspired by the functional anatomy of the visual loop connecting a high-level visual cortical area (PRh), some structures of BG (CN, SNc and SNr) and the corresponding thalamic nuclei (VA). The functioning of this closed loop is biased by the sustained activation of some prefrontal cells (dlPFC) which here artificially keep track of activity in PRh. This model is able to learn a mixture of visual WM tasks like DMS, DNMS and DPA in the context of reinforcement learning, where only a reward signal is delivered when the system answers correctly. This reward signal drives the activity of a dopaminergic cell which modulates Hebbian learning in the connections between the neurons of the model. With the combinations of tasks we tested, the network was able to learn perfectly the tasks after an average of 500 trials. Even if this number of trials may seem huge in comparison to experimental data on human adults, one has to consider that the system has absolutely no prior knowledge about the task: the symbols representing the tasks to perform within a trial are initially meaningless and the system only sees a couple of visual objects before being forced to make a choice in an array of objects.</p>
+<p>Even if the architecture of the visual BG loop has been simplified compared to the known literature (only the direct pathway is implemented) and some known mechanisms have not been taken into account (like the modulation of the activity of striatal cells by DA firing), this model is able to exhibit some interesting emergent behaviors which can be considered as predictions. First, we have observed sustained activation of PRh cells which is only due to thalamic stimulation. As we hypothesized in <span class="citation" data-cites="Vitay2008">(<a href="References.html#ref-Vitay2008" role="doc-biblioref">Vitay and Hamker, 2008</a>)</span>, the observed sustained activation in PRh (and IT) may not only be the consequence of direct feedback from prefrontal areas to temporal areas, but may also pass through the thalamus via the BG in order to gain more control on the relevance of this behavior during the reinforced learning phase. After this learning phase, the fronto-temporal connections may replace the BG-thalamus system and directly provoke the sustained activation. Second, the tendency of the model after learning to start performing DMS right after the presentation of the cue (as the cue is represented both in PRh and dlPFC) enhances the perirhinal representation of items that are reliably associated to reward, what is in agreement with the findings of <span class="citation" data-cites="mogami2006">Mogami and Tanaka (<a href="References.html#ref-mogami2006" role="doc-biblioref">2006</a>)</span>. It suggests that the default role of the visual loop of the BG is to favorize the representation of rewarded visual objects that are present in the visual scene, and that the role of the connections from dlPFC to the visual loop is to bias this behavior towards cognitively defined targets, as suggested by <span class="citation" data-cites="Miller2001">Miller and Cohen (<a href="References.html#ref-Miller2001" role="doc-biblioref">2001</a>)</span>. Third, cells in PRh and VA corresponding to the target in the task are activated in advance of the presentation of the search array. Especially in DNMS and DPA where the target differs from the cue, this behavior reminds the pair-recall activities found in IT and PRh <span class="citation" data-cites="naya2003">(<a href="References.html#ref-naya2003" role="doc-biblioref">Naya et al., 2003</a>)</span>, as well as the presaccadic activities in the medio-dorsal nucleus (MD) of the thalamus <span class="citation" data-cites="Watanabe2004a">(<a href="References.html#ref-Watanabe2004a" role="doc-biblioref">Watanabe and Funahashi, 2004</a>)</span>. We have not found similar results concerning the VA nucleus of the thalamus, but we predict that VA cells responsive for paired target of a DPA task will exhibit pair-recall activity.</p>
+<p>There are three different stages of learning in the model. The first stage consists in the representation of cortical information by the striatal cells based on the delivered reward. This striatal representation combines the content of the WM (a representation of the cue and the task in dlPFC) with the perirhinal representation of the target through the activation of a cluster of cells. These clusters are composed of a limited number of cells due to competition among striatal cells. The second stage of learning consists in the selective inhibition of a group of SNr cells by these clusters of striatal cells. This selective inhibition is strongly modulated by reward delivery, so that the inhibited SNr cells are able to disinhibit the perirhinal representation of the target but not the distractor. This phase is performed in a parallel manner which does not depend on the number of cells in SNr. The third stage of learning is the enhanced competition between SNr cells to decorrelate their activities. This phase is sometimes characterized by a temporary degradation of the performance of the network until the target cell gets selected by the competitive mechanism, what makes this phase sequential with regard to the number of cells in SNr. This phase strongly relies on the learned reward-association value of striatal clusters in SNc, so that omission of reward can generate a depletion of DA. However, this distinction into three different stages is made <em>a posteriori</em>, as all cells learn all the time through the experiments without any change of parameters in the learning rules.</p>
+<p>The role of the learned competition in SNr is to ensure that only the useful thalamocortical loop is disinhibited according to task requirements. Without this competition, several SNr cells would be inhibited by the same striatal cluster because the initialization of the connections between CN and SNr is randomly distributed. This could provoke parasitic disinhibition of thalamocortical loops, leading to involuntary movements or visual hallucinations. Without an additional self-organization of thalamocortical connections the search for the target cell requires in the progressive elimination of those distractors that strongly compete with the target, eventually leading to DA depletion to resolve the ambiguity. For large real-world networks one potential way to keep the sequential search in a reasonable bound would be to consider the topographical projections from cortex to striatum as well as from striatum to SNr. In our model, these projections are all-to-all and only become selective for particular patterns through learning. <span class="citation" data-cites="Zheng2002">Zheng and Wilson (<a href="References.html#ref-Zheng2002" role="doc-biblioref">2002</a>)</span> showed that adjacent cells in striatum have very little common input, leading to a sparse representation of cortical information. Similarly, projections from striatum to GPi and SNr also have a sparse connectivity <span class="citation" data-cites="Bar-Gad2003">(<a href="References.html#ref-Bar-Gad2003" role="doc-biblioref">Bar-Gad et al., 2003</a>)</span>, although some GPi cells have been shown to receive input from functionally different striatal regions <span class="citation" data-cites="Flaherty1994">(<a href="References.html#ref-Flaherty1994" role="doc-biblioref">Flaherty and Graybiel, 1994</a>)</span>. <span class="citation" data-cites="Wickens2000">Wickens and Oorshcot (<a href="References.html#ref-Wickens2000" role="doc-biblioref">2000</a>)</span> observed that striatal cells are organized into small assemblies of neurons that have mutually inhibitory connections. The number of such compartments is remarkably similar to the number of GPi neurons, what could suggest a topographical pattern of convergence from cortex to SNr through striatum that could allow to limit this competition in SNr to limited sets of functionally related cells instead of the whole population. This would in agreement with the found pattern of lateral connections between SNr cells belonging to the same or adjacent functional subdivision <span class="citation" data-cites="Mailly2003">(<a href="References.html#ref-Mailly2003" role="doc-biblioref">Mailly et al., 2003</a>)</span>.</p>
+<p>To our knowledge, this model is the first to address the issue of learning at the level of SNr, either from striatum to SNr or within SNr. The late selection of the useful-only SNr cells may allow the prediction that the mean activity of the SNr population will be lower during learning than after, in the sense that more SNr cells will be inhibited in the first stages of learning than when the competition takes place. In addition, one may observe that the performance of the subject could temporarily be degraded after a certain number of successful trials, due to the late involvement of competition in SNr. From a computational point of view, our model assigns a new functional role to SNr (and GPi) in the general framework of BG functioning and may guide to the development of a new class of BG models.</p>
+<p>The model currently solves the DNMS task by learning to select the target, not by learning to avoid the cue. If a novel target were presented together with the cue after the learning phase, the system would not respond systematically towards it. In this respect, what is learned by the model when DNMS is required is more a version of DPA that associates cues together than truly DNMS. In order to learn DNMS, we would have to close the thalamocortical loop corresponding to the cue even more strongly than when SNr cells are at their baseline level. That could be achieved by exciting strongly the SNr cell corresponding to the cue, therefore inhibiting the neighboring cells in SNr which can then let other thalamocortical loops become active. The indirect pathway of BG is a possible candidate to truly learn DNMS: the additional inhibitory relay through GPe allows striatal activation to indirectly excite the output nuclei GPi/SNr <span class="citation" data-cites="Albin1989 DeLong1990">(<a href="References.html#ref-Albin1989" role="doc-biblioref">Albin et al., 1989</a>; <a href="References.html#ref-DeLong1990" role="doc-biblioref">DeLong, 1990</a>)</span>. This indirect pathway is also particularly involved in the processing of DA depletion, as the striatal cells participating in this pathway have mainly D2-type DA receptors and are globally inhibited by DA release. Dopamine depletion could then favorize this pathway and signal precisely to the output nuclei the omission of the expected reward. Incorporating this indirect pathway could allow us to truly learn DNMS and might also allow to simplify the learning rules in SNr which treat differentially over- and below- baseline DA activities. The balance between the direct and indirect pathway may signal more elegantly these two different situations, without modifying the principal results presented here.</p>
+<p>On top of this possible influence of the indirect pathway on learning DNMS, <span class="citation" data-cites="Elliott1999">Elliott and Dolan (<a href="References.html#ref-Elliott1999" role="doc-biblioref">1999</a>)</span> showed that DMS and DNMS involve differentially cortical or subcortical structures, the MD nuclei of the thalamus (part of the executive loop) being for example more implicated in DNMS than DMS. This raises the issue of the involvement of the executive loop in solving these rewarded visual WM tasks. In the current model, only the connections originating from dlPFC (which simply stores perirhinal information) bias representations in CN to perform the tasks. The purpose of this model is only to show that it is possible to retrieve object-related information in high-level visual areas like IT or PRh through behaviorally-relevant BG gating. The role of the executive loop in rewarded visual WM tasks is obviously much more complex than just maintaining perirhinal representations: gating the entry of items in WM (if a distractor is systematically presented during the task but has no behavioral relevance, it should not enter WM), manipulating them (abstracting sensory information and applying rules) and eventually actively suppressing items from WM (at the end of a trial or when a new item makes it obsolete). Gating and suppression of items are manually performed in our current dlPFC model but can be learned through the loop linking dlPFC with the corresponding BG structures modulated by DA firing <span class="citation" data-cites="OReilly2006">(<a href="References.html#ref-OReilly2006" role="doc-biblioref">O’Reilly and Frank, 2006</a>)</span>. Manipulating and abstracting representations is a harder issue that involves specifically the prefrontal cortex, but some computational models have already started to address this problem <span class="citation" data-cites="Rougier2005">(<a href="References.html#ref-Rougier2005" role="doc-biblioref">Rougier et al., 2005</a>)</span>. It would be also interesting not only to learn to represent specific combinations of cues and task symbols, but also to abstract the rule behind the task: if a new cue is presented, the system has to learn again this specific combination. This generalization to novel cues may be the role of the executive loop which may bias the visual loop in a more abstract manner than just storing cues and task symbols. This view is supported by the findings of <span class="citation" data-cites="Parker1997">Parker et al. (<a href="References.html#ref-Parker1997" role="doc-biblioref">1997</a>)</span> which showed that MD (thalamic nuclei part of the executive loop) is crucial for learning DMS when the set of cues is big, but not when the set is small (what could be learned solely in the visual loop).</p>
+<p>An extension of our model that would be able to fully learn the DMS, DNMS and DPA (with generalization to novel cues for all tasks and avoidance of the cue instead of selection of the target for DNMS) would therefore be composed of the visual and executive loops of the BG, both incorporating at least the indirect pathway. The role of the visual loop would be to retrieve the visual information associated to rewarded objects in the temporal lobe, acting by default on visually presented objects. The role of the executive loop would be to bias this processing, either by forbidding the visual loop to perform its automatic behavior (as in DNMS) or by guiding this behavior towards objects retrieved from memory (as in DPA). The executive loop would also be responsible for managing the task in time (gating and updating the entry of items into WM) in order to solve the temporal credit assignment problem, which is hard-coded in the current model. It would also manage the generalization of the learned task to bigger sets of cues and ultimately abstract the underlying rule. The interaction between the executive and visual loops will still rely on overlapping projection fields from PRh and dlPFC on the caudate nucleus, but their synchronized learning will necessit to explore the spiraling pattern of connections between dopaminergic cells in SNc and the striatum discovered by <span class="citation" data-cites="Haber2003">Haber (<a href="References.html#ref-Haber2003" role="doc-biblioref">2003</a>)</span>, suggesting a hierarchical organization of BG loops in guiding behavior. However, we expect the principal results of the current model to remain true in this extended version: the sustained activation of the target is only due to the classical disinhibition mechanism of the BG; the anticipatory activities in the thalamus are due to the maintenance of cues and task symbols in the executive loop; and the split of learning in two phases at the level of SNr should not affected by the incorporation of the indirect pathway, whose role would be rather a simplification of the treatment of dopamine depletion than a modification of the competition mechanism.</p>
+<p>The way we modeled the dopaminergic firing in SNc is rather simple from a computational point of view. It receives information about the delivery of reward and learns to associate it with striatal representations. This reward association progressively cancels through learning the amplitude of the phasic DA bursts and provokes DA depletion at the time reward is expected (through an external timing signal) but not delivered. This behavior is consistent with the observations of <span class="citation" data-cites="Schultz1997">Schultz et al. (<a href="References.html#ref-Schultz1997" role="doc-biblioref">1997</a>)</span> about DA firing at the time of reward in conditioning tasks. It does not reproduce the observed phasic burst that appears after learning at the presentation of the conditioned stimuli (or cue in our case). However, contrary to the classical approach comparing DA firing with the error signal of the temporal difference (TD) algorithm <span class="citation" data-cites="Suri1999">(<a href="References.html#ref-Suri1999" role="doc-biblioref">Suri and Schultz, 1999</a>)</span>, we consider that this pattern of activation is computed by a separate mechanism, presumably by the selective entry in WM of the cue in the executive loop, as suggested by <span class="citation" data-cites="Brown1999">Brown et al. (<a href="References.html#ref-Brown1999" role="doc-biblioref">1999</a>)</span> and <span class="citation" data-cites="OReilly2006">O’Reilly and Frank (<a href="References.html#ref-OReilly2006" role="doc-biblioref">2006</a>)</span>. This entry of the cue in the executive loop will provide a timing signal which, combined with the reward association of the corresponding CN representation, is able to gradually provoke a DA phasic burst at the appearance of a cue which is reliably associated to reward. From a conceptual point of view, our current implementation of the DA firing considers that DA firing only enables the learning of the link between a context (here the content of WM), an action (the response made by the system) and the consequences of this action (here the delivery of reward), as suggested by <span class="citation" data-cites="redgrave2006">Redgrave and Gurney (<a href="References.html#ref-redgrave2006" role="doc-biblioref">2006</a>)</span>.</p>
+<p>The DA phasic burst generated by the executive loop could allow to signal the behavioral relevance of a stimulus instead of its association to reward. In the trace conditioning that we performed, even rarely rewarded stimuli get represented in CN, although they do not acquire a strong association to reward. By signaling that these stimuli may be rewarded but do not have a great importance for behavior, this cue-related DA firing may allow to reduce or even suppress their representation in CN so that the corresponding cells can focus on more important events. This DA-mediated behavioral relevance may act on the learning of corticostriatal connections (as we implemented it) or through the modulation of the membrane potential of striatal cells through the activation of D1 or D2 receptors <span class="citation" data-cites="Calabresi2007">(<a href="References.html#ref-Calabresi2007" role="doc-biblioref">Calabresi et al., 2007</a>)</span>. Linking striatal representations to behavioral relevance instead of just reward-association may allow a more efficient and selective encoding of external events that can occur in natural scenes.</p>
+<p>A few computational models have addressed the issue of memory retrieval in the context of delayed visual WM tasks <span class="citation" data-cites="Morita2002 Mongillo2003 gisiger2006">(<a href="References.html#ref-gisiger2006" role="doc-biblioref">Gisiger and Kerszberg, 2006</a>; <a href="References.html#ref-Mongillo2003" role="doc-biblioref">Mongillo et al., 2003</a>; <a href="References.html#ref-Morita2002" role="doc-biblioref">Morita and Suemitsu, 2002</a>)</span>. These models are mainly attractor networks which focus on the interplay between inferotemporal and prefrontal cortices, but do not consider the influence of BG on learning through reinforcement. The model by <span class="citation" data-cites="gisiger2006">Gisiger and Kerszberg (<a href="References.html#ref-gisiger2006" role="doc-biblioref">2006</a>)</span> learns concurrently DMS and DPA with a paradigm similar to the one we used. It is composed of three interconnected cortical structures performing respectively visual representation, working memory and planning, and is able to reproduce electrophysiological data on IT and PFC functioning. However, it only learns to associate visual representations together, without learning to schedule the tasks. For example, the execution in time of DPA compared to DMS is controlled by manually computed gating signals, whereas, in our model, the only external gating signals concern the entry of visual representations into WM, independently of the particular task. Even if our model does not either solve the temporal credit assignment problem, we consider that the BG loops are an important site where the temporal execution of a task is learned, and that this functioning in time has important consequences on the content of cortical processing itself, such as anticipatory activities.</p>
+<p>A comparison with other BG models is more difficult as we apply our model to a different paradigm. Some models deal with the influence of BG on reinforcement learning, particularly in classical or operant conditioning. The model of <span class="citation" data-cites="Suri1999">Suri and Schultz (<a href="References.html#ref-Suri1999" role="doc-biblioref">1999</a>)</span> principally focuses on the computational aspects of DA firing which is considered similar to the error signal of the TD algorithm and which biases a direct mapping between stimuli and actions, within an actor-critic architecture. The model of <span class="citation" data-cites="Brown1999">Brown et al. (<a href="References.html#ref-Brown1999" role="doc-biblioref">1999</a>)</span> is more biologically detailed and proposes a distinction between the different sources of information reaching SNc. The rest of the architecture of the BG is nonetheless kept simple and learning occurs only at the corticostriatal level. Other models focus more on the executive loop, especially with regard to WM gating and maintenance. Similarly to our approach, the model of <span class="citation" data-cites="OReilly2006">O’Reilly and Frank (<a href="References.html#ref-OReilly2006" role="doc-biblioref">2006</a>)</span> uses the BG as a gating device for specific thalamocortical loops. It is successfully applied to complex WM tasks such as 1-2-AX, where it learns to generate a binary motor response depending on the content of WM. It is also applied to the store ignore recall (SIR) task, where it is presented with successions of visual objects, together with task symbols like “store” (where it should copy the object into WM) or ignore (where it should not copy). When the “recall” signal is presented alone, the system should respond towards the object that is currently stored in WM, whereas ordinarily it should just respond towards what is visually available. This task is similar to how we simulated DMS (PRh represents the visual input except when thalamic stimulation tells the opposite), but their model has the great additional ability to ignore intervening distractors by selectively updating the content of WM depending on task requirements. The main differences with our model is that the output of their model is segregated from the input and that cues and task symbols have to be presented simultaneously. Adding an efficient executive loop to our model may allow us to better compare with this model. The model of <span class="citation" data-cites="ashby2005">Ashby et al. (<a href="References.html#ref-ashby2005" role="doc-biblioref">2005</a>)</span> also focuses on working memory maintenance (although in the spatial modality) through selective disinhibition of thalamocortical loops by the direct pathway only and considers elegantly the role of the feedback connections between PFC and posterior cortices. A very functionally different model was proposed by <span class="citation" data-cites="Gurney2001a">Gurney et al. (<a href="References.html#ref-Gurney2001a" role="doc-biblioref">2001</a>)</span>, who place the subthalamic nucleus (STN) at a very central place in the functioning of the BG. They claim that STN mediates the interplay between the selection pathway (similar to the direct pathway in other models) and the control pathway which biases processing in the selection pathway instead of acting in the opposite direction as suggested in the classical direct/indirect (or Go/NoGo) dichotomy. Although DA has there only a tonic effect, the concepts introduced in this model allow to reconsider the functional connectivity between BG structures.</p>
+<p>Our proposed model is coherent with most cortical functional models of visual WM, such as <span class="citation" data-cites="ranganath2006">Ranganath (<a href="References.html#ref-ranganath2006" role="doc-biblioref">2006</a>)</span>. It considers that relevant visual objects are actively maintained in dlPFC and fed back in high-level visual areas. These visual areas themselves modulate visual processing in the ventral pathway through feedback connections, in order to create object-based attention that helps selecting the correct target in space <span class="citation" data-cites="hamkermodel2005">(<a href="References.html#ref-hamkermodel2005" role="doc-biblioref">Hamker, 2005a</a>)</span>. However, we propose that in the first phase of learning, BG learns to associate prefrontal representations with visual representations through reinforced trial-and-error learning in order to acquire the correct behavior. In parallel, but more slowly, the top-down connections from PFC to IT or PRh learns the same task in a supervised manner, BG acting as the teacher. After this second stage of learning, this prefrontal feedback on high-level visual areas can become the unique source of memory retrieval, as suggested by the results of <span class="citation" data-cites="tomita1999">Tomita et al. (<a href="References.html#ref-tomita1999" role="doc-biblioref">1999</a>)</span>.</p>
+<section id="acknowledgments" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="acknowledgments">Acknowledgments</h4>
+<p>This work has been supported by the German Research Foundation (Deutsche Forschungsgemeinschaft) grant “A neurocomputational systems approach to modeling the cognitive guidance of attention and object/category recognition” (DFG HA2630/4-1) and by the European Union grant “Eyeshots: Heterogeneous 3-D Perception across Visual Fragments”.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Albin1989" class="csl-entry" role="listitem">
+Albin, R. L., Young, A. B., and Penney, J. B. (1989). <a href="https://www.ncbi.nlm.nih.gov/pubmed/2479133">The functional anatomy of basal ganglia disorders.</a> <em>Trends Neurosci</em> 12, 366–375.
+</div>
+<div id="ref-Alexander1986" class="csl-entry" role="listitem">
+Alexander, G. E., DeLong, M. R., and Strick, P. L. (1986). Parallel organization of functionally segregated circuits linking the basal ganglia and cortex. <em>Ann Rev Neurosci</em> 9, 357–381.
+</div>
+<div id="ref-ashby2005" class="csl-entry" role="listitem">
+Ashby, F. G., Ell, S. W., Valentin, V. V., and Casale, M. B. (2005). FROST: A distributed neurocomputational model of working memory maintenance. <em>J Cogn Neurosci</em> 17, 1728–1743.
+</div>
+<div id="ref-Bar-Gad2003" class="csl-entry" role="listitem">
+Bar-Gad, I., Morris, G., and Bergman, H. (2003). Information processing, dimensionality reduction and reinforcement learning in the basal ganglia. <em>Prog Neurobiol</em> 71, 439–473. doi:<a href="https://doi.org/10.1016/j.pneurobio.2003.12.001">10.1016/j.pneurobio.2003.12.001</a>.
+</div>
+<div id="ref-Bienenstock1982" class="csl-entry" role="listitem">
+Bienenstock, E. L., Cooper, L. N., and Munro, P. W. (1982). <a href="https://www.ncbi.nlm.nih.gov/pubmed/7054394">Theory for the development of neuron selectivity: Orientation specificity and binocular interaction in visual cortex.</a> <em>J Neurosci</em> 2, 32–48.
+</div>
+<div id="ref-Brown1999" class="csl-entry" role="listitem">
+Brown, J., Bullock, D., and Grossberg, S. (1999). <span class="nocase">How the basal ganglia use parallel excitatory and inhibitory learning pathways to selectively respond to unexpected rewarding cues.</span> <em>J. Neurosci.</em> 19, 10502–11. Available at: <a href="http://www.ncbi.nlm.nih.gov/pubmed/10575046">http://www.ncbi.nlm.nih.gov/pubmed/10575046</a>.
+</div>
+<div id="ref-Calabresi2007" class="csl-entry" role="listitem">
+Calabresi, P., Picconi, B., Tozzi, A., and Di Filippo, M. (2007). <span class="nocase">Dopamine-mediated regulation of corticostriatal synaptic plasticity.</span> <em>Trends Neurosci.</em> 30, 211–9. doi:<a href="https://doi.org/10.1016/j.tins.2007.03.001">10.1016/j.tins.2007.03.001</a>.
+</div>
+<div id="ref-Chang2007" class="csl-entry" role="listitem">
+Chang, C., Crottaz-Herbette, S., and Menon, V. (2007). Temporal dynamics of basal ganglia response and connectivity during verbal working memory. <em>Neuroimage</em> 34, 1253–1269. doi:<a href="https://doi.org/10.1016/j.neuroimage.2006.08.056">10.1016/j.neuroimage.2006.08.056</a>.
+</div>
+<div id="ref-Chang2002" class="csl-entry" role="listitem">
+Chang, J.-Y., Chen, L., Luo, F., Shi, L.-H., and Woodward, D. J. (2002). Neuronal responses in the frontal cortico-basal ganglia system during delayed matching-to-sample task: Ensemble recording in freely moving rats. <em>Exp Brain Res</em> 142, 67–80. doi:<a href="https://doi.org/10.1007/s00221-001-0918-3">10.1007/s00221-001-0918-3</a>.
+</div>
+<div id="ref-Chevalier1990" class="csl-entry" role="listitem">
+Chevalier, G., and Deniau, J. M. (1990). <a href="https://www.ncbi.nlm.nih.gov/pubmed/1695403">Disinhibition as a basic process in the expression of striatal functions.</a> <em>Trends Neurosci</em> 13, 277–280.
+</div>
+<div id="ref-DEsposito2006" class="csl-entry" role="listitem">
+D’Esposito, M., Cooney, J. W., Gazzaley, A., Gibbs, S. E. B., and Postle, B. R. (2006). Is the prefrontal cortex necessary for delay task performance? <span>E</span>vidence from lesion and <span>FMRI</span> data. <em>J Int Neuropsychol Soc</em> 12, 248–260. doi:<a href="https://doi.org/10.1017/S1355617706060322">10.1017/S1355617706060322</a>.
+</div>
+<div id="ref-DeLong1990" class="csl-entry" role="listitem">
+DeLong, M. R. (1990). <a href="https://www.ncbi.nlm.nih.gov/pubmed/1695404">Primate models of movement disorders of basal ganglia origin.</a> <em>Trends Neurosci</em> 13, 281–285.
+</div>
+<div id="ref-desimone1995" class="csl-entry" role="listitem">
+Desimone, R., and Duncan, J. (1995). Neural mechanisms of selective visual attention. <em>Ann Rev Neurosci</em> 18, 193–222.
+</div>
+<div id="ref-DiFilippo2009" class="csl-entry" role="listitem">
+Di Filippo, M., Picconi, B., Tantucci, M., Ghiglieri, V., Bagetta, V., Sgobio, C., et al. (2009). Short-term and long-term plasticity at corticostriatal synapses: Implications for learning and memory. <em>Behav Brain Res</em> 199, 108–18.
+</div>
+<div id="ref-Elliott1999" class="csl-entry" role="listitem">
+Elliott, R., and Dolan, R. J. (1999). <a href="https://www.ncbi.nlm.nih.gov/pubmed/10366639">Differential neural responses during performance of matching and nonmatching to sample tasks at two delay intervals.</a> <em>J Neurosci</em> 19, 5066–5073.
+</div>
+<div id="ref-Flaherty1994" class="csl-entry" role="listitem">
+Flaherty, A. W., and Graybiel, A. M. (1994). <a href="https://www.ncbi.nlm.nih.gov/pubmed/7507981">Input-output organization of the sensorimotor striatum in the squirrel monkey.</a> <em>J Neurosci</em> 14, 599–610.
+</div>
+<div id="ref-frank2001" class="csl-entry" role="listitem">
+Frank, M. J., Loughry, B., and O’Reilly, R. C. (2001). Interactions between frontal cortex and basal ganglia in working memory: A computational model. <em>Cogn Affect Behav Neurosci</em> 1, 137–160.
+</div>
+<div id="ref-funahashi1989" class="csl-entry" role="listitem">
+Funahashi, S., Bruce, C. J., and Goldman-Rakic, P. S. (1989). Mnemonic coding of visual space in the monkey’s dorsolateral prefrontal cortex. <em>J Neurophysiol</em> 61, 331–349.
+</div>
+<div id="ref-fuster1971" class="csl-entry" role="listitem">
+Fuster, J. M., and Alexander, G. E. (1971). Neuron activity related to short-term memory. <em>Science</em> 173, 652–654.
+</div>
+<div id="ref-Fuster1981" class="csl-entry" role="listitem">
+Fuster, J. M., Bauer, R. H., and Jervey, J. P. (1981). <a href="https://www.ncbi.nlm.nih.gov/pubmed/7449907">Effects of cooling inferotemporal cortex on performance of visual memory tasks.</a> <em>Exp Neurol</em> 71, 398–409.
+</div>
+<div id="ref-Fuster1985" class="csl-entry" role="listitem">
+Fuster, J. M., Bauer, R. H., and Jervey, J. P. (1985). <a href="https://www.ncbi.nlm.nih.gov/pubmed/3986545">Functional interactions between inferotemporal and prefrontal cortex in a cognitive task.</a> <em>Brain Res</em> 330, 299–307.
+</div>
+<div id="ref-gisiger2006" class="csl-entry" role="listitem">
+Gisiger, T., and Kerszberg, M. (2006). A model for integrating elementary neural functions into delayed-response behavior. <em>PLoS Comput Biol</em> 2, e25.
+</div>
+<div id="ref-gruber2006" class="csl-entry" role="listitem">
+Gruber, A. J., Dayan, P., Gutkin, B. S., and Solla, S. A. (2006). Dopamine modulation in the basal ganglia locks the gate to working memory. <em>J Comput Neurosci</em> 20, 153–166.
+</div>
+<div id="ref-Gulley2002" class="csl-entry" role="listitem">
+Gulley, J. M., Kosobud, A. E. K., and Rebec, G. V. (2002). <a href="https://www.ncbi.nlm.nih.gov/pubmed/11983319">Behavior-related modulation of substantia nigra pars reticulata neurons in rats performing a conditioned reinforcement task.</a> <em>Neuroscience</em> 111, 337–349.
+</div>
+<div id="ref-Gurney2001a" class="csl-entry" role="listitem">
+Gurney, K., Prescott, T. J., and Redgrave, P. (2001). <a href="https://www.ncbi.nlm.nih.gov/pubmed/11417053">A computational model of action selection in the basal ganglia. <span>II. Analysis</span> and simulation of behaviour.</a> <em>Biol Cybern</em> 84, 411–423.
+</div>
+<div id="ref-Gutnikov1997" class="csl-entry" role="listitem">
+Gutnikov, S. A., Ma, Y. Y., and Gaffan, D. (1997). <a href="https://www.ncbi.nlm.nih.gov/pubmed/9240410">Temporo-frontal disconnection impairs visual-visual paired association learning but not configural learning in macaca monkeys.</a> <em>Eur J Neurosci</em> 9, 1524–1529.
+</div>
+<div id="ref-Haber2003" class="csl-entry" role="listitem">
+Haber, S. N. (2003). <a href="https://www.ncbi.nlm.nih.gov/pubmed/14729134">The primate basal ganglia: Parallel and integrative networks.</a> <em>J Chem Neuroanat</em> 26, 317–330.
+</div>
+<div id="ref-Hamker2004a" class="csl-entry" role="listitem">
+Hamker, F. H. (2004). <a href="https://www.ncbi.nlm.nih.gov/pubmed/14680776">A dynamic model of how feature cues guide spatial attention.</a> <em>Vision Res</em> 44, 501–521.
+</div>
+<div id="ref-hamkermodel2005" class="csl-entry" role="listitem">
+Hamker, F. H. (2005a). The emergence of attention by population-based inference and its role in distributed processing and cognitive control of vision. <em>J Comput Vis Image Underst</em> 100, 64–106.
+</div>
+<div id="ref-Hamker2005" class="csl-entry" role="listitem">
+Hamker, F. H. (2005b). The reentry hypothesis: The putative interaction of the frontal eye field, ventrolateral prefrontal cortex, and areas <span>V4</span>, <span>IT</span> for attention and eye movement. <em>Cereb Cortex</em> 15, 431–447.
+</div>
+<div id="ref-hikosaka1989" class="csl-entry" role="listitem">
+Hikosaka, O., Sakamoto, M., and Usui, S. (1989). Functional properties of monkey caudate neurons. <span>III.</span> <span>A</span>ctivities related to expectation of target and reward. <em>J Neurophysiol</em> 61, 814–832.
+</div>
+<div id="ref-Ibanez-Sandoval2006" class="csl-entry" role="listitem">
+Ibañez-Sandoval, O., Hernández, A., Florán, B., Galarraga, E., Tapia, D., Valdiosera, R., et al. (2006). Control of the subthalamic innervation of substantia nigra pars reticulata by <span class="nocase">D1 and D2</span> dopamine receptors. <em>J Neurophysiol</em> 95, 1800–1811. doi:<a href="https://doi.org/10.1152/jn.01074.2005">10.1152/jn.01074.2005</a>.
+</div>
+<div id="ref-Ishikawa2009" class="csl-entry" role="listitem">
+Ishikawa, M., Mu, P., Moyer, J. T., Wolf, J. A., Quock, R. M., Davies, N. M., et al. (2009). Homeostatic synapse-driven membrane plasticity in nucleus accumbens neurons. <em>J Neurosci</em> 29, 5820–5831. doi:<a href="https://doi.org/10.1523/JNEUROSCI.5703-08.2009">10.1523/JNEUROSCI.5703-08.2009</a>.
+</div>
+<div id="ref-Lawrence1998" class="csl-entry" role="listitem">
+Lawrence, A. D., Sahakian, B. J., and Robbins, T. W. (1998). Cognitive functions and corticostriatal circuits: Insights from <span class="nocase">Huntington’s</span> disease. <em>Trends in Cognitive Sciences</em> 2, 379–388.
+</div>
+<div id="ref-lehky2007" class="csl-entry" role="listitem">
+Lehky, S. R., and Tanaka, K. (2007). Enhancement of object representations in primate perirhinal cortex during a visual working-memory task. <em>J Neurophysiol</em> 97, 1298–1310.
+</div>
+<div id="ref-Levy1997" class="csl-entry" role="listitem">
+Levy, R., Friedman, H. R., Davachi, L., and Goldman-Rakic, P. S. (1997). <a href="https://www.ncbi.nlm.nih.gov/pubmed/9133405">Differential activation of the caudate nucleus in primates performing spatial and nonspatial working memory tasks.</a> <em>J Neurosci</em> 17, 3870–3882.
+</div>
+<div id="ref-lewis2004" class="csl-entry" role="listitem">
+Lewis, S. J. G., Dove, A., Robbins, T. W., Barker, R. A., and Owen, A. M. (2004). Striatal contributions to working memory: A functional magnetic resonance imaging study in humans. <em>Eur J Neurosci</em> 19, 755–760.
+</div>
+<div id="ref-luck1997a" class="csl-entry" role="listitem">
+Luck, S. J., and Vogel, E. K. (1997). The capacity of visual working memory for features and conjunctions. <em>Nature</em> 390, 279–281.
+</div>
+<div id="ref-Mailly2003" class="csl-entry" role="listitem">
+Mailly, P., Charpier, S., Menetrey, A., and Deniau, J.-M. (2003). <a href="https://www.ncbi.nlm.nih.gov/pubmed/12832549">Three-dimensional organization of the recurrent axon collateral network of the substantia nigra pars reticulata neurons in the rat.</a> <em>J Neurosci</em> 23, 5247–5257.
+</div>
+<div id="ref-Middleton1996" class="csl-entry" role="listitem">
+Middleton, F. A., and Strick, P. L. (1996). <a href="https://www.ncbi.nlm.nih.gov/pubmed/8710931">The temporal lobe is a target of output from the basal ganglia.</a> <em>Proc Natl Acad Sci U S A</em> 93, 8683–8687.
+</div>
+<div id="ref-Miller2001" class="csl-entry" role="listitem">
+Miller, E. K., and Cohen, J. D. (2001). An integrative theory of prefrontal cortex function. <em>Annu Rev Neurosci</em> 24, 167–202.
+</div>
+<div id="ref-miller1996" class="csl-entry" role="listitem">
+Miller, E. K., Erickson, C., and Desimone, R. (1996). Neural mechanisms of visual working memory in prefrontal cortex of the macaque. <em>J Neurosci</em> 16, 5154–5167.
+</div>
+<div id="ref-miller1993" class="csl-entry" role="listitem">
+Miller, E. K., Gochin, P. M., and Gross, C. G. (1993). Suppression of visual responses of neurons in inferior temporal cortex of the awake macaque monkey by addition of a second stimulus. <em>Brain Res</em> 616, 25–29.
+</div>
+<div id="ref-Mirenowicz1994" class="csl-entry" role="listitem">
+Mirenowicz, J., and Schultz, W. (1994). <a href="https://www.ncbi.nlm.nih.gov/pubmed/7983508">Importance of unpredictability for reward responses in primate dopamine neurons.</a> <em>J Neurophysiol</em> 72, 1024–1027.
+</div>
+<div id="ref-mogami2006" class="csl-entry" role="listitem">
+Mogami, T., and Tanaka, K. (2006). Reward association affects neuronal responses to visual stimuli in macaque te and perirhinal cortices. <em>J Neurosci</em> 26, 6761–6770.
+</div>
+<div id="ref-Mongillo2003" class="csl-entry" role="listitem">
+Mongillo, G., Amit, D. J., and Brunel, N. (2003). <a href="https://www.ncbi.nlm.nih.gov/pubmed/14622234">Retrospective and prospective persistent activity induced by hebbian learning in a recurrent cortical network.</a> <em>Eur J Neurosci</em> 18, 2011–2024.
+</div>
+<div id="ref-Morita2002" class="csl-entry" role="listitem">
+Morita, M., and Suemitsu, A. (2002). <a href="https://www.ncbi.nlm.nih.gov/pubmed/11958959">Computational modeling of pair-association memory in inferior temporal cortex.</a> <em>Brain Res Cogn Brain Res</em> 13, 169–178.
+</div>
+<div id="ref-Murray1999" class="csl-entry" role="listitem">
+Murray, and Bussey (1999). <a href="https://www.ncbi.nlm.nih.gov/pubmed/10322468">Perceptual-mnemonic functions of the perirhinal cortex.</a> <em>Trends Cogn Sci</em> 3, 142–151.
+</div>
+<div id="ref-Mushiake1995" class="csl-entry" role="listitem">
+Mushiake, H., and Strick, P. L. (1995). <a href="https://www.ncbi.nlm.nih.gov/pubmed/8747231">Pallidal neuron activity during sequential arm movements.</a> <em>J Neurophysiol</em> 74, 2754–2758.
+</div>
+<div id="ref-Nakamura1995" class="csl-entry" role="listitem">
+Nakamura, K., and Kubota, K. (1995). Mnemonic firing of neurons in the monkey temporal pole during a visual recognition memory task. <em>J Neurophysiol</em> 74, 162–178.
+</div>
+<div id="ref-Nakamura1994" class="csl-entry" role="listitem">
+Nakamura, K., Matsumoto, K., Mikami, A., and Kubota, K. (1994). <a href="https://www.ncbi.nlm.nih.gov/pubmed/8201413">Visual response properties of single neurons in the temporal pole of behaving monkeys.</a> <em>J Neurophysiol</em> 71, 1206–1221.
+</div>
+<div id="ref-Nambu2002" class="csl-entry" role="listitem">
+Nambu, A., Kaneda, K., Tokuno, H., and Takada, M. (2002). <a href="https://www.ncbi.nlm.nih.gov/pubmed/12364509">Organization of corticostriatal motor inputs in monkey putamen.</a> <em>J Neurophysiol</em> 88, 1830–1842.
+</div>
+<div id="ref-naya2003" class="csl-entry" role="listitem">
+Naya, Y., Yoshida, M., Takeda, M., Fujimichi, R., and Miyashita, Y. (2003). Delay-period activities in two subdivisions of monkey inferotemporal cortex during pair association memory task. <em>Eur J Neurosci</em> 18, 2915–2918.
+</div>
+<div id="ref-Nicola2000" class="csl-entry" role="listitem">
+Nicola, S. M., Surmeier, J., and Malenka, R. C. (2000). Dopaminergic modulation of neuronal excitability in the striatum and nucleus accumbens. <em>Annu Rev Neurosci</em> 23, 185–215.
+</div>
+<div id="ref-OReilly2006" class="csl-entry" role="listitem">
+O’Reilly, R. C., and Frank, M. J. (2006). <span class="nocase">Making working memory work: a computational model of learning in the prefrontal cortex and basal ganglia.</span> <em>Neural Comput.</em> 18, 283–328. doi:<a href="https://doi.org/10.1162/089976606775093909">10.1162/089976606775093909</a>.
+</div>
+<div id="ref-OReilly2007" class="csl-entry" role="listitem">
+O’Reilly, R. C., Frank, M. J., Hazy, T. E., and Watz, B. (2007). <span>PVLV:</span> The primary value and learned value pavlovian learning algorithm. <em>Behav Neurosci</em> 121, 31–49.
+</div>
+<div id="ref-Oja1982" class="csl-entry" role="listitem">
+Oja, E. (1982). <span class="nocase">A simplified neuron model as a principal component analyzer.</span> <em>J. Math. Biol.</em> 15, 267–73. Available at: <a href="http://www.ncbi.nlm.nih.gov/pubmed/7153672">http://www.ncbi.nlm.nih.gov/pubmed/7153672</a>.
+</div>
+<div id="ref-Pan2005" class="csl-entry" role="listitem">
+Pan, W.-X., Schmidt, R., Wickens, J. R., and Hyland, B. I. (2005). Dopamine cells respond to predicted events during classical conditioning: Evidence for eligibility traces in the reward-learning network. <em>J Neurosci</em> 25, 6235–6242. doi:<a href="https://doi.org/10.1523/JNEUROSCI.1478-05.2005">10.1523/JNEUROSCI.1478-05.2005</a>.
+</div>
+<div id="ref-Parent1995a" class="csl-entry" role="listitem">
+Parent, A., and Hazrati, L. N. (1995). Functional anatomy of the basal ganglia. <span>II. The</span> place of subthalamic nucleus and external pallidum in basal ganglia circuitry. <em>Brain Res Brain Res Rev</em> 20, 128–54.
+</div>
+<div id="ref-Parker1997" class="csl-entry" role="listitem">
+Parker, A., Eacott, M. J., and Gaffan, D. (1997). <a href="https://www.ncbi.nlm.nih.gov/pubmed/9464936">The recognition memory deficit caused by mediodorsal thalamic lesion in non-human primates: A comparison with rhinal cortex lesion.</a> <em>Eur J Neurosci</em> 9, 2423–2431.
+</div>
+<div id="ref-Partiot1996" class="csl-entry" role="listitem">
+Partiot, A., Vérin, M., Pillon, B., Teixeira-Ferreira, C., Agid, Y., and Dubois, B. (1996). <a href="https://www.ncbi.nlm.nih.gov/pubmed/8783222">Delayed response tasks in basal ganglia lesions in man: Further evidence for a striato-frontal cooperation in behavioural adaptation.</a> <em>Neuropsychologia</em> 34, 709–721.
+</div>
+<div id="ref-Petrides2000" class="csl-entry" role="listitem">
+Petrides, M. (2000). <a href="https://www.ncbi.nlm.nih.gov/pubmed/11007909">Dissociable roles of mid-dorsolateral prefrontal and anterior inferotemporal cortex in visual working memory.</a> <em>J Neurosci</em> 20, 7496–7503.
+</div>
+<div id="ref-Plenz1996" class="csl-entry" role="listitem">
+Plenz, D., and Aertsen, A. (1996). <a href="https://www.ncbi.nlm.nih.gov/pubmed/8848172">Neural dynamics in cortex-striatum co-cultures–i. Anatomy and electrophysiology of neuronal cell types.</a> <em>Neuroscience</em> 70, 861–891.
+</div>
+<div id="ref-ranganath2006" class="csl-entry" role="listitem">
+Ranganath, C. (2006). Working memory for visual objects: Complementary roles of inferior temporal, medial temporal, and prefrontal cortex. <em>Neurosci</em> 139, 277–289.
+</div>
+<div id="ref-ranganath2005" class="csl-entry" role="listitem">
+Ranganath, C., and D’Esposito, M. (2005). Directing the mind’s eye: Prefrontal, inferior and medial temporal mechanisms for visual working memory. <em>Curr Opin Neurobiol</em> 15, 175–182.
+</div>
+<div id="ref-redgrave2006" class="csl-entry" role="listitem">
+Redgrave, P., and Gurney, K. (2006). The short-latency dopamine signal: A role in discovering novel actions? <em>Nat Rev Neurosci</em> 7, 967–975.
+</div>
+<div id="ref-Reynolds2000" class="csl-entry" role="listitem">
+Reynolds, J. N., and Wickens, J. R. (2000). <a href="https://www.ncbi.nlm.nih.gov/pubmed/10938425">Substantia nigra dopamine regulates synaptic plasticity and membrane potential fluctuations in the rat neostriatum, in vivo.</a> <em>Neuroscience</em> 99, 199–203.
+</div>
+<div id="ref-rolls2000" class="csl-entry" role="listitem">
+Rolls, E. T. (2000). Hippocampo-cortical and cortico-cortical backprojections. <em>Hippocampus</em> 10, 380–388.
+</div>
+<div id="ref-Romanski2007" class="csl-entry" role="listitem">
+Romanski, L. M. (2007). Representation and integration of auditory and visual stimuli in the primate ventral lateral prefrontal cortex. <em>Cereb Cortex</em> 17 Suppl 1, i61–i69. doi:<a href="https://doi.org/10.1093/cercor/bhm099">10.1093/cercor/bhm099</a>.
+</div>
+<div id="ref-Rougier2009" class="csl-entry" role="listitem">
+Rougier, N. P. (2009). Implicit and explicit representations. <em>Neural Netw</em> 22, 155–160. doi:<a href="https://doi.org/10.1016/j.neunet.2009.01.008">10.1016/j.neunet.2009.01.008</a>.
+</div>
+<div id="ref-Rougier2005" class="csl-entry" role="listitem">
+Rougier, N. P., Noelle, D. C., Braver, T. S., Cohen, J. D., and O’Reilly, R. C. (2005). Prefrontal cortex and flexible cognitive control: Rules without symbols. <em>Proc Natl Acad Sci U S A</em> 102, 7338–7343. doi:<a href="https://doi.org/10.1073/pnas.0502455102">10.1073/pnas.0502455102</a>.
+</div>
+<div id="ref-rougier2006" class="csl-entry" role="listitem">
+Rougier, N. P., and Vitay, J. (2006). Emergence of attention within a neural population. <em>Neur Netw</em> 19, 573–581.
+</div>
+<div id="ref-Sakai1991" class="csl-entry" role="listitem">
+Sakai, K., and Miyashita, Y. (1991). Neural organization for the long-term memory of paired associates. <em>Nature</em> 354, 152–155. doi:<a href="https://doi.org/10.1038/354152a0">10.1038/354152a0</a>.
+</div>
+<div id="ref-Schultz1997" class="csl-entry" role="listitem">
+Schultz, W., Dayan, P., and Montague, P. R. (1997). <span class="nocase">A neural substrate of prediction and reward.</span> <em>Science</em> 275, 1593–9. Available at: <a href="http://www.ncbi.nlm.nih.gov/pubmed/9054347">http://www.ncbi.nlm.nih.gov/pubmed/9054347</a>.
+</div>
+<div id="ref-Seger2008" class="csl-entry" role="listitem">
+Seger, C. A. (2008). How do the basal ganglia contribute to categorization? <span>Their </span>roles in generalization, response selection, and learning via feedback. <em>Neurosci Biobehav Rev</em> 32, 265–278. doi:<a href="https://doi.org/10.1016/j.neubiorev.2007.07.010">10.1016/j.neubiorev.2007.07.010</a>.
+</div>
+<div id="ref-Selemon1985" class="csl-entry" role="listitem">
+Selemon, L. D., and Goldman-Rakic, P. S. (1985). <a href="https://www.ncbi.nlm.nih.gov/pubmed/2983048">Longitudinal topography and interdigitation of corticostriatal projections in the rhesus monkey.</a> <em>J Neurosci</em> 5, 776–794.
+</div>
+<div id="ref-Suri1999" class="csl-entry" role="listitem">
+Suri, R. E., and Schultz, W. (1999). A neural network model with dopamine-like reinforcement signal that learns a spatial delayed response task. <em>Neuroscience</em> 91, 871–90.
+</div>
+<div id="ref-suzuki1997" class="csl-entry" role="listitem">
+Suzuki, W. A., Miller, E. K., and Desimone, R. (1997). Object and place memory in the macaque entorhinal cortex. <em>J Neurophysiol</em> 78, 1062–1081.
+</div>
+<div id="ref-Takeda2005" class="csl-entry" role="listitem">
+Takeda, M., Naya, Y., Fujimichi, R., Takeuchi, D., and Miyashita, Y. (2005). Active maintenance of associative mnemonic signal in monkey inferior temporal cortex. <em>Neuron</em> 48, 839–848. doi:<a href="https://doi.org/10.1016/j.neuron.2005.09.028">10.1016/j.neuron.2005.09.028</a>.
+</div>
+<div id="ref-Tepper2008" class="csl-entry" role="listitem">
+Tepper, J. M., Wilson, C. J., and Koós, T. (2008). Feedforward and feedback inhibition in neostriatal <span>GABAergic</span> spiny neurons. <em>Brain Res Rev</em> 58, 272–281. doi:<a href="https://doi.org/10.1016/j.brainresrev.2007.10.008">10.1016/j.brainresrev.2007.10.008</a>.
+</div>
+<div id="ref-tomita1999" class="csl-entry" role="listitem">
+Tomita, H., Ohbayashi, M., Nakahara, K., Hasegawa, I., and Miyashita, Y. (1999). Top-down signal from prefrontal cortex in executive control of memory retrieval. <em>Nature</em> 401, 699–703.
+</div>
+<div id="ref-turrigiano2004" class="csl-entry" role="listitem">
+Turrigiano, G. G., and Nelson, S. B. (2004). Homeostatic plasticity in the developing nervous system. <em>Nat Rev Neurosci</em> 5, 97–107.
+</div>
+<div id="ref-ungerleider1982" class="csl-entry" role="listitem">
+Ungerleider, L. G., and Mishkin, M. (1982). <span>“Two cortical visual systems,”</span> in <em>Analysis of visual behavior</em>, eds. D. J. Ingle, M. A. Goodale, and R. J. W. Mansfield (Cambridge, MA: The MIT Press), 549–586.
+</div>
+<div id="ref-Vitay2008" class="csl-entry" role="listitem">
+Vitay, J., and Hamker, F. H. (2008). <span class="nocase">Sustained activities and retrieval in a computational model of the perirhinal cortex.</span> <em>J. Cogn. Neurosci.</em> 20, 1993–2005. doi:<a href="https://doi.org/10.1162/jocn.2008.20147">10.1162/jocn.2008.20147</a>.
+</div>
+<div id="ref-Watanabe2004a" class="csl-entry" role="listitem">
+Watanabe, Y., and Funahashi, S. (2004). Neuronal activity throughout the primate mediodorsal nucleus of the thalamus during oculomotor delayed-responses. <span>II. Activity</span> encoding visual versus motor signal. <em>J Neurophysiol</em> 92, 1756–1769. doi:<a href="https://doi.org/10.1152/jn.00995.2003">10.1152/jn.00995.2003</a>.
+</div>
+<div id="ref-Webster1994" class="csl-entry" role="listitem">
+Webster, M. J., Bachevalier, J., and Ungerleider, L. G. (1994). <a href="https://www.ncbi.nlm.nih.gov/pubmed/7530521">Connections of inferior temporal areas <span class="nocase">TEO and TE</span> with parietal and frontal cortex in macaque monkeys.</a> <em>Cereb Cortex</em> 4, 470–483.
+</div>
+<div id="ref-Wickens2000" class="csl-entry" role="listitem">
+Wickens, J. R., and Oorshcot, D. E. (2000). <span>“Neuronal dynamics and surround inhibition in the neostriatum: A possible connection,”</span> in <em>Brain dynamics and the striatal complex</em>, eds. R. Miller and J. R. Wickens (Australia: Harwood Academic Publishers), 141--150.
+</div>
+<div id="ref-Woodman2007b" class="csl-entry" role="listitem">
+Woodman, G. F., and Luck, S. J. (2007). Do the contents of visual working memory automatically influence attentional selection during visual search? <em>J Exp Psychol Hum Percept Perform</em> 33, 363–377. doi:<a href="https://doi.org/10.1037/0096-1523.33.2.363">10.1037/0096-1523.33.2.363</a>.
+</div>
+<div id="ref-Zheng2002" class="csl-entry" role="listitem">
+Zheng, T., and Wilson, C. J. (2002). <a href="https://www.ncbi.nlm.nih.gov/pubmed/11826064">Corticostriatal combinatorics: The implications of corticostriatal axonal arborizations.</a> <em>J Neurophysiol</em> 87, 1007–1017.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./2-JOCN.html" class="pagination-link" aria-label="Sustained activities and retrieval in a computational model of perirhinal cortex">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sustained activities and retrieval in a computational model of perirhinal cortex</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./4-NN.html" class="pagination-link" aria-label="Working memory and response selection: A computational account of interactions among cortico-basal ganglio-thalamic loops">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working memory and response selection: A computational account of interactions among cortico-basal ganglio-thalamic loops</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

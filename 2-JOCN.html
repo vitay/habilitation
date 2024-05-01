@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>On the role of dopamine in motivated behavior : a neuro-computational approach - 2&nbsp; Sustained activities and retrieval in a computational model of perirhinal cortex</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./3-FICN.html" rel="next">
+<link href="./1-Introduction.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./2-JOCN.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sustained activities and retrieval in a computational model of perirhinal cortex</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./img/tuc.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">On the role of dopamine in motivated behavior : a neuro-computational approach</a> 
+        <div class="sidebar-tools-main">
+    <a href="./thesis.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Abstract</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-JOCN.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sustained activities and retrieval in a computational model of perirhinal cortex</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-FICN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A computational model of basal ganglia and its role in memory retrieval in rewarded visual memory tasks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-NN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working memory and response selection: A computational account of interactions among cortico-basal ganglio-thalamic loops</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5-FINR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Timing and expectation of reward: a neuro-computational model of the afferents to the ventral tegmental area</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6-FINI.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">ANNarchy: a code generation approach to neural simulations on parallel hardware</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">2.1</span> Introduction</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods"><span class="header-section-number">2.2</span> Methods</a>
+  <ul class="collapse">
+  <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context"><span class="header-section-number">2.2.1</span> Context</a></li>
+  <li><a href="#architecture-of-the-model" id="toc-architecture-of-the-model" class="nav-link" data-scroll-target="#architecture-of-the-model"><span class="header-section-number">2.2.2</span> Architecture of the model</a></li>
+  <li><a href="#dopamine-modulation" id="toc-dopamine-modulation" class="nav-link" data-scroll-target="#dopamine-modulation"><span class="header-section-number">2.2.3</span> Dopamine modulation</a></li>
+  <li><a href="#equations-for-updating-the-activity" id="toc-equations-for-updating-the-activity" class="nav-link" data-scroll-target="#equations-for-updating-the-activity"><span class="header-section-number">2.2.4</span> Equations for updating the activity</a></li>
+  <li><a href="#learning-rule" id="toc-learning-rule" class="nav-link" data-scroll-target="#learning-rule"><span class="header-section-number">2.2.5</span> Learning rule</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">2.3</span> Results</a>
+  <ul class="collapse">
+  <li><a href="#learning-and-propagation-of-activity-within-a-cluster" id="toc-learning-and-propagation-of-activity-within-a-cluster" class="nav-link" data-scroll-target="#learning-and-propagation-of-activity-within-a-cluster"><span class="header-section-number">2.3.1</span> Learning and propagation of activity within a cluster</a></li>
+  <li><a href="#sustained-activities-and-intermediate-values-of-dopamine" id="toc-sustained-activities-and-intermediate-values-of-dopamine" class="nav-link" data-scroll-target="#sustained-activities-and-intermediate-values-of-dopamine"><span class="header-section-number">2.3.2</span> Sustained activities and intermediate values of dopamine</a></li>
+  <li><a href="#propagation-of-activity-between-clusters" id="toc-propagation-of-activity-between-clusters" class="nav-link" data-scroll-target="#propagation-of-activity-between-clusters"><span class="header-section-number">2.3.3</span> Propagation of activity between clusters</a></li>
+  <li><a href="#thalamic-stimulation" id="toc-thalamic-stimulation" class="nav-link" data-scroll-target="#thalamic-stimulation"><span class="header-section-number">2.3.4</span> Thalamic stimulation</a></li>
+  </ul></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion"><span class="header-section-number">2.4</span> Discussion</a></li>
+  <li><a href="#appendix-details-of-the-model" id="toc-appendix-details-of-the-model" class="nav-link" data-scroll-target="#appendix-details-of-the-model">Appendix: details of the model</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-chapter:PRh" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sustained activities and retrieval in a computational model of perirhinal cortex</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="abstract" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="abstract">Abstract</h4>
+<p>Perirhinal cortex is involved in object recognition and novelty detection, but also in multimodal integration, reward association and visual working memory. We propose a computational model that focuses on the role of perirhinal cortex in working memory, particularly with respect to sustained activities and memory retrieval. This model describes how different partial informations are integrated into assemblies of neurons that represent the identity of an object. Through dopaminergic modulation, the resulting clusters can retrieve the global information with recurrent interactions between neurons. Dopamine leads to sustained activities after stimulus disappearance that form the basis of the involvement of perirhinal cortex in visual working memory processes. The information carried by a cluster can also be retrieved by a partial thalamic or prefrontal stimulation. Thus, we suggest that areas involved in planning and memory coordination encode a pointer to access the detailed information encoded in associative cortex such as perirhinal cortex.</p>
+</section>
+<section id="introduction" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">2.1</span> Introduction</h2>
+<p>Perirhinal cortex (PRh), composed of cortical areas 35 and 36, is located in the ventromedial part of the temporal lobe. It receives its major inputs from areas TE and TEO of inferotemporal cortex, as well as from entorhinal cortex (ERh), parahippocampal cortex, insular cortex and orbitofrontal cortex <span class="citation" data-cites="suzuki1994">(<a href="References.html#ref-suzuki1994" role="doc-biblioref">Suzuki and Amaral, 1994</a>)</span>. As part of the medial temporal lobe system (with hippocampus and ERh), its primary role is considered to be object-recognition memory, as shown by impairements in delayed matching-to-sample (DMS) or delayed nonmatching-to-sample (DNMS) tasks following PRh cooling or removal <span class="citation" data-cites="horel1987 zolamorgan1989 meunier1993 buffalo1998">(<a href="References.html#ref-buffalo1998" role="doc-biblioref">Buffalo et al., 1998</a>; <a href="References.html#ref-horel1987" role="doc-biblioref">Horel et al., 1987</a>; <a href="References.html#ref-meunier1993" role="doc-biblioref">Meunier et al., 1993</a>; <a href="References.html#ref-zolamorgan1989" role="doc-biblioref">Zola-Morgan et al., 1989</a>)</span>. It is thought to be particularly involved in the representation and learning of novel objects <span class="citation" data-cites="brown1998 wan1999 pihlajamaeki2003">(<a href="References.html#ref-brown1998" role="doc-biblioref">Brown and Xiang, 1998</a>; <a href="References.html#ref-pihlajamaeki2003" role="doc-biblioref">Pihlajamäki et al., 2003</a>; <a href="References.html#ref-wan1999" role="doc-biblioref">Wan et al., 1999</a>)</span>, with a greater activation for these objects than for familiar ones. suggest that novel objects do not have a strong preexisting representation in inferotemporal cortex, and traces of long-term memory in PRh could be used to manipulate these objects.</p>
+<p>Despite the huge amount of evidence for a mnemonic role of PRh, some recent findings suggest that it is also involved in high-level perception (for a controversy, see and ), such as object categorization and multimodal integration, by integrating different sources of information about the identity of an object <span class="citation" data-cites="taylor2006">Taylor et al. (<a href="References.html#ref-taylor2006" role="doc-biblioref">2006</a>)</span>. PRh indeed receives connections from insular cortex (somatosensory information) and the dorsal bank of the <em>superior temporal sulcus</em> (vision/audition coordination), therefore being at a central place for integrating different modalities of an object. Interestingly, monkeys with lesions of PRh are unable to select a visible object first sampled by touch <span class="citation" data-cites="goulet2001">Goulet and Murray (<a href="References.html#ref-goulet2001" role="doc-biblioref">2001</a>)</span> or by a partial view of that object <span class="citation" data-cites="murray1993">Murray et al. (<a href="References.html#ref-murray1993" role="doc-biblioref">1993</a>)</span>.</p>
+<p>Accordingly, PRh is neither a purely mnemonic nor a perceptual area: it is a multimodal area which is presumably involved in the goal-directed guidance of perception. This link to the goals of the task at hand is reflected by the modulation of PRh activity by reward association <span class="citation" data-cites="mogami2006">(<a href="References.html#ref-mogami2006" role="doc-biblioref">Mogami and Tanaka, 2006</a>)</span>, which strongly depends on D2 dopamine receptors <span class="citation" data-cites="liu2004">(<a href="References.html#ref-liu2004" role="doc-biblioref">Liu et al., 2004</a>)</span>. Also, PRh is involved in visual working memory, which is known to use integrated representations of objects rather than individual features <span class="citation" data-cites="luck1997a lee2001">(<a href="References.html#ref-lee2001" role="doc-biblioref">Lee and Chun, 2001</a>; <a href="References.html#ref-luck1997a" role="doc-biblioref">Luck and Vogel, 1997</a>)</span>. showed that PRh cells are more active during a DMS task when their preferred stimulus is the sample (the object to be remembered) than when it is the match (the target) and that this property is actively reset between trials, supporting the evidence of a higher cognitive involvement. Some PRh cells also exhibit sustained activity between sample and match: their proportion has been estimated to 35% compared to 22% in IT or 71% in ERh <span class="citation" data-cites="Nakamura1995 naya2003">(<a href="References.html#ref-Nakamura1995" role="doc-biblioref">Nakamura and Kubota, 1995</a>; <a href="References.html#ref-naya2003" role="doc-biblioref">Naya et al., 2003</a>)</span>. However, contrary to ERh, these sustained activities are not robust to the presentation of distractors between sample and match <span class="citation" data-cites="miller1993a suzuki1997">(<a href="References.html#ref-miller1993a" role="doc-biblioref">Miller et al., 1993b</a>; <a href="References.html#ref-suzuki1997" role="doc-biblioref">Suzuki et al., 1997</a>)</span>. The exact mechanism and purpose of these sustained activities is still unknown. Are they only provoked by feedback connections from prefrontal cortex where sustained activities are robust to distractors <span class="citation" data-cites="miller1996">(<a href="References.html#ref-miller1996" role="doc-biblioref">Miller et al., 1996</a>)</span>, or does prefrontal cortex just control the maintenance or suppression of these sustained representations that are created with intrinsic mechanisms in PRh?</p>
+<p>This article presents a computational model of PRh focused on the involvement of this cortical area in visual working memory processes, by emphasizing the effect of dopamine modulation on perirhinal cell activation. Our aim is neither to model every aspect of PRh functioning nor to explore the biophysical properties of sustained activation. We rather propose a new interpretation at the functional level of these sustained activities in the framework of multimodal object identification or categorization. The model demonstrates how different aspects of an object or a category are linked into a neural assembly according to their cooccurence through time and how this assembly can be reactivated for memory retrieval.</p>
+</section>
+<section id="methods" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="methods"><span class="header-section-number">2.2</span> Methods</h2>
+<section id="context" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="context"><span class="header-section-number">2.2.1</span> Context</h3>
+<p>There are only few computational models of PRh. One of the most famous is the <em>perceptual-mnemonic feature conjunction</em> (PMFC) model by Bussey, Saksida and colleagues <span class="citation" data-cites="bussey2002a cowell2006">(<a href="References.html#ref-bussey2002a" role="doc-biblioref">Bussey and Saksida, 2002</a>; <a href="References.html#ref-cowell2006" role="doc-biblioref">Cowell et al., 2006</a>)</span>. As its name indicates, it is primarily concerned with the interplay of perceptual and mnemonic processes in PRh. PRh is represented by a feature-conjunction layer that integrates individual features and learns to represent effectively objects in concurrent discrimination or configural learning tasks. Learning occurs either through a Rescorla-Wagner rule <span class="citation" data-cites="bussey2002a">(<a href="References.html#ref-bussey2002a" role="doc-biblioref">Bussey and Saksida, 2002</a>)</span> or through self-association in Kohonen maps <span class="citation" data-cites="cowell2006">(<a href="References.html#ref-cowell2006" role="doc-biblioref">Cowell et al., 2006</a>)</span>. Despite its good predictions about the effects of PRh lesions on discrimination and configural learning tasks, it is a purely static model that can not deal with sustained activities. The model by is much more detailed and dynamic (spiking neurons) but only deals with familiarity discrimination: its Hopfield-like structure makes it able to tell rapidly if an object has already been seen but it does not allow to recollect its details. It is a purely mnemonic view of PRh. The model we propose is original with regards to the functions it describes (autoassociative memory, sustained activation, memory retrieval) and its dynamical structure.</p>
+</section>
+<section id="architecture-of-the-model" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="architecture-of-the-model"><span class="header-section-number">2.2.2</span> Architecture of the model</h3>
+<p>To keep the model as simple as possible, we do not consider the precise timing of spikes but use mean-rate artificial neurons whose activity is ruled by a dynamical differential equation. This positive scalar activity represents the instantaneous firing rate, which is directly derived through a transfer function from the membrane potential, without using a spike-generation mechanism. As a consequence, the neurons used in this model exchange only this time-varying scalar activity through their connections, similar to dynamical neural fields <span class="citation" data-cites="Amari1977 taylor1999">(<a href="References.html#ref-Amari1977" role="doc-biblioref">Amari, 1977</a>; <a href="References.html#ref-taylor1999" role="doc-biblioref">Taylor, 1999</a>)</span>.</p>
+<p>The neural network (<a href="#fig-jocn:model" class="quarto-xref">Figure&nbsp;<span>2.1</span></a> - a) is composed of a population of excitatory pyramidal cells interconnected with a population of inhibitory interneurons. In order to reflect approximately the relative number of GABAergic interneurons in the cerebral cortex, the excitatory population is four times bigger that the inhibitory one <span class="citation" data-cites="beaulieu1993">Beaulieu (<a href="References.html#ref-beaulieu1993" role="doc-biblioref">1993</a>)</span>. Each inhibitory cell receives excitatory inputs from a subset of excitatory cells, with a gaussian connectivity kernel centered on the corresponding neural location. Reciprocally, each excitatory cell receives connections from a subset of inhibitory cells with a broader gaussian connectivity kernel. Additionnally, inhibitory cells are reciprocally connected with each other in a all-to-all manner, with the connection strength decreasing with the distance between cells. Excitatory cells are also reciprocally connected in an all-to-all manner, but the strength of these connections is modifiable with experience.</p>
+<div id="fig-jocn:model" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-jocn:model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/jocn/modelprocedure.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-jocn:model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: a) Architecture of the model. It is composed of <span class="math inline">N \times N</span> excitatory cells (E) and <span class="math inline">\frac{N}{2} \times \frac{N}{2}</span> inhibitory cells (I). Excitatory and inhibitory cells are reciprocally connected through gaussian connectivity kernels. Inhibitory cells are also reciprocally connected with each other with a strength decreasing with the distance. Excitatory cells are reciprocally connected with each other, but the strength of the connections is learned. Each excitatory cell receives a cortical input C from other areas. Additionnally, some excitatory cells receive a thalamic input T. All connections except the cortical ones are modulated by dopamine (hatched squares). b) Feed-forward connectivity for excitatory cells. Two different objects have to be learned by the model: object A (light grey) and B (dark grey, hatched) are each represented by five parts (numbered from 1 to 5), corresponding to different views or modalities. Each part is represented by a cortical input to four cells, what makes each object being represented by a cluster of 20 cells.
+</figcaption>
+</figure>
+</div>
+<p>Each excitatory cell receives a cortical input that could originate in a visual area like TE or in the multimodal parahippocampal cortex. showed that neighbouring cells in PRh tend to represent the same objects after visual experience. This finding could be explained by a self-organization of receptive fields, i.e.&nbsp;the modification of feedforward connections. Our model does not include this feed-forward learning but is rather designed to show how the gathering of these different informations can occur in PRh. The cortical input to a cell will therefore be a time-varying scalar value, reflecting the weighted sum of the activity of its afferent cells, without any information about its origin. The basic idea of the model is that the perirhinal neurons representing a given object or category have receptive fields selective for a particular aspect of that object or category, either in visual space (different views of an object or different exemplars of a category sharing some visual features) or in multimodal space (some neurons are preferentially activated by the sound associated to this object, or its touch). In the following, we will not distinguish between the learning of different views or modalities of an object, or the learning of a category represented by different exemplars: the mechanism remains the same and we will use the term “object” for either a real object or a category. The increase in the strength of the lateral reciprocal connections between excitatory cells will provoke a clustering effect: the representation of an object will be distributed over several cells (forming what is called a <em>cluster</em> or an autoassociative pattern) which are individually selective for a particular aspect.</p>
+<p>In our simulations, an object is represented by five parts corresponding each to a particular aspect. Each part provides a cortical input to four excitatory cells in PRh (randomly chosen in the population), meaning that the representation of all aspects of an object forms a cluster of twenty neurons (<a href="#fig-jocn:model" class="quarto-xref">Figure&nbsp;<span>2.1</span></a> - b). During learning, each object will be successively presented during a certain amount of time (250 ms here), but each of its parts will be randomly active with a probability of 0.6. The random activation of parts means that each presentation of an object will be incomplete in most cases. The goal of the learning in the lateral connections will be to correlate the different parts, even if they do not constantly appear together. Unless stated otherwise, all the simulations have been done with two different objects.</p>
+</section>
+<section id="dopamine-modulation" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="dopamine-modulation"><span class="header-section-number">2.2.3</span> Dopamine modulation</h3>
+<p>Dopamine (DA) modulation is a very important feature of the model, responsible for most of its interesting properties. Unfortunately, little is known about its effects in PRh. We will therefore assume that dopamine modulation in PRh is similar to what occurs in prefrontal cortex, given the fact that PRh has a similar ratio of D1/D2 receptors, even if their density is higher <span class="citation" data-cites="hurd2001">(<a href="References.html#ref-hurd2001" role="doc-biblioref">Hurd et al., 2001</a>)</span>. An exhaustive review about dopamine effects on prefrontal cells can be found in . The picture that emerges from experimental observations is very heterogeneous. However, there is some accumulating evidence for the following properties:</p>
+<ul>
+<li>the effect of DA is strictly modulatory: it does not induce excitatory post-synaptic currents by itself <span class="citation" data-cites="yang1996">(<a href="References.html#ref-yang1996" role="doc-biblioref">Yang and Seamans, 1996</a>)</span>;</li>
+<li>DA modulates both pyramidal and fast-spiking inhibitory interneurons <span class="citation" data-cites="gorelova2002">(<a href="References.html#ref-gorelova2002" role="doc-biblioref">Gorelova et al., 2002</a>)</span>;</li>
+<li>DA modifies the cell’s excitability by modulating intrinsic ionic currents like <span class="math inline">\text{Na}^{+}</span> and <span class="math inline">\text{K}^{+}</span> <span class="citation" data-cites="yang1996">(<a href="References.html#ref-yang1996" role="doc-biblioref">Yang and Seamans, 1996</a>)</span>;</li>
+<li>the effect of DA is dose-dependent: D1 receptor activation can have opposing functional effects depending on the level of stimulation, following an inverted U-shape <span class="citation" data-cites="goldmanrakic2000">(<a href="References.html#ref-goldmanrakic2000" role="doc-biblioref">Goldman-Rakic et al., 2000</a>)</span>;</li>
+<li>the effect of DA is neurotransmitter receptor-dependent: NMDA- (excitatory activity-dependent) and GABA- (inhibitory) mediated currents are enhanced by DA, but AMPA- (excitatory) mediated ones are decreased <span class="citation" data-cites="cepeda1992 momiyama1996">(<a href="References.html#ref-cepeda1992" role="doc-biblioref">Cepeda et al., 1992</a>; <a href="References.html#ref-momiyama1996" role="doc-biblioref">Momiyama et al., 1996</a>)</span>;</li>
+<li>the effect of DA is dendrite-dependent: DA reduces more strongly the EPSPs generated in apical dendrites (long-distance cortical inputs) than in the basal ones (neighbouring pyramidal cells), through a reduction of dendritic <span class="math inline">\text{Ca}^{2+}</span> currents <span class="citation" data-cites="yang1996 zahrt1997">(<a href="References.html#ref-yang1996" role="doc-biblioref">Yang and Seamans, 1996</a>; <a href="References.html#ref-zahrt1997" role="doc-biblioref">Zahrt et al., 1997</a>)</span>;</li>
+<li>the effect of DA is activity-dependent: the more the cell is active, the more DA modulates its inputs <span class="citation" data-cites="calabresi1987">(<a href="References.html#ref-calabresi1987" role="doc-biblioref">Calabresi et al., 1987</a>)</span>;</li>
+<li>DA levels are long-lasting in the target area <span class="citation" data-cites="huang1995">Huang and Kandel (<a href="References.html#ref-huang1995" role="doc-biblioref">1995</a>)</span>. The phasic DA bursts in the dopaminergic cells are therefore not relevant: we will only consider the tonic component of DA activity, not its phasic component.</li>
+</ul>
+<p>Existing models of dopaminergic modulation of sustained activies in prefrontal cortex do not all make the same hypothesis about the exact influence of DA. A detailed model by supposes that DA enhances the persistent <span class="math inline">\text{Na}^{+}</span> ionic currents, reduces the slowly inactivating <span class="math inline">\text{K}^{+}</span> ionic currents, reduces the efficiency of apical inputs, reduces the amplitude of glutamate-induced EPSPs (including NMDA, even if they admit this is controversial) and increases the spontaneous activity of GABAergic cells as well as the amplitude of IPSPs in pyramidal cells. In their respective models, as well as suppose that DA only enhances NMDA-mediated currents in the basal dendrites in coordination with a simultaneous increase of the amplitude of IPSPs. On the contrary, consider that DA momentarily restricts excitatory inputs on apical dendrites. More recently, considered that DA only modifies the gain of cells by increasing their firing threshold, without being more specific about synaptic currents.</p>
+<p>The major link between most of these models is that they distinguish the effects of DA on apical dendrites and on basal dendrites of pyramidal cells: the influence of long-distance cortical inputs is reduced by DA whereas the influence of neighbouring pyramidal cells is increased. This last assumtion is coherent with the fact that basal dendrites are primarily NMDA-mediated <span class="citation" data-cites="schiller2000">(<a href="References.html#ref-schiller2000" role="doc-biblioref">Schiller et al., 2000</a>)</span>. The reduction of apical currents allows the network to be momentarily insensitive to external inputs, increasing the robustness of sustained activities when they appear. In the case of PRh, as we know that sustained activities are not robust to the appearance of distractors <span class="citation" data-cites="miller1993">(<a href="References.html#ref-miller1993" role="doc-biblioref">Miller et al., 1993a</a>)</span>, we neglected this effect. Accordingly, the major influences of DA we consider in our model are therefore the increase of the efficiency of lateral connections between excitatory cells (on an activity-dependent manner, as they are mainly mediated by NMDA receptors), the increase of the amplitude of IPSPs (by increasing the efficiency of the connections from inhibitory to excitatory cells) and the increase of the activity of the inhibitory cells through an increase in the efficiency of the connections from excitatory to inhibitory cells. These assumptions are summarized in <a href="#fig-jocn:model" class="quarto-xref">Figure&nbsp;<span>2.1</span></a> - a. The modification of the excitability of cells through modulation of ionic currents has not been taken into account since the effects of this mechanism are thought to be similar to the selective modulation of synaptic currents. The differential effects of D1-like and D2-like receptors have not been considered since there exists no sufficient experimental evidence to draw a precise line between them.</p>
+</section>
+<section id="equations-for-updating-the-activity" class="level3" data-number="2.2.4">
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="equations-for-updating-the-activity"><span class="header-section-number">2.2.4</span> Equations for updating the activity</h3>
+<p>The model consists of a single map of <span class="math inline">N \times N</span> excitatory units and <span class="math inline">\frac{N}{2} \times \frac{N}{2}</span> inhibitory units. We use <span class="math inline">N = 20</span> for the results in this paper, but the properties of the model do not depend on this particular size: it has been tested from <span class="math inline">N=10</span> to <span class="math inline">N=40</span>, showing that distributed computations and flexible learning can induce scalability. We used a mean-field approach, where the activity of each unit follows an ordinary differential equation, discretized with a timestep of <span class="math inline">1</span> ms. In the mean-field approach, a unit represents a population average of a certain number of single cells. Since the true underlying circuitry is not well known, we do not explicitely derive the mean-field solution but describe the dynamics at the macroscopic population level. Nevertheless, for the sake of simplicty, we use the term “cell” for a unit. The mean activity <span class="math inline">I_i (t)</span> of an inhibitory cell at time <span class="math inline">t</span> is ruled by <a href="#eq-jocn:inhib" class="quarto-xref">Equation&nbsp;<span>2.1</span></a>:</p>
+<p><span id="eq-jocn:inhib"><span class="math display">
+    \tau_I \cdot \frac{d I_i (t)}{d t} + I_i (t) = \sum_{j \neq i} W^{II}_{i j} \cdot I_j (t) + ( 1 + K^{EI} \cdot DA ) \times \sum_{k} W^{EI}_{i k} \cdot E_k (t) +\eta^I_i (t)
+\tag{2.1}</span></span></p>
+<p>where <span class="math inline">\tau_I</span> = 10 ms is the net time constant of the unit. <span class="math inline">W^{II}</span> is the set of connections between inhibitory cells, decreasing with the distance between the cells and <span class="math inline">W^{EI}</span> is the set of connections from the excitatory cells (activity denoted <span class="math inline">E_k (t)</span>) to the inhibitory cell (formulas given in the appendix). The dopamine level in the network (represented by the scalar value <span class="math inline">DA</span> between 0 and 1) increases the gain of inputs from excitatory cells. <span class="math inline">K^{EI}</span> is a fixed scaling parameter. Finally, <span class="math inline">\eta^I (t)</span> is a noise added to the cell that randomly fluctuates in the range <span class="math inline">[- 0.1, 0.1]</span>. The resulting activity is restricted to positive values.</p>
+<p>The mean activity <span class="math inline">E_i (t)</span> of an excitatory cell at time <span class="math inline">t</span> is ruled by <a href="#eq-jocn:excit" class="quarto-xref">Equation&nbsp;<span>2.2</span></a>:</p>
+<p><span id="eq-jocn:excit"><span class="math display">
+\begin{aligned}
+    \tau_E \cdot \frac{d E_i (t)}{d t}  + E_i (t) =   f (     &amp; ( 1 + K^{EE} \cdot \sigma^{lat}(DA) \cdot \sigma^{EE} (E_i (t)) ) \cdot \sum_{j \neq i} W^{EE}_{i j} \cdot E_j (t) \\
+                                        +    &amp;( 1 + K^{IE} \cdot \sigma^{GABA} (DA) \cdot E_i^2 (t)) \cdot  \sum_k W^{IE}_{i k} \cdot I_k (t) \\
+                                        +    &amp; W^{C}_i \cdot C_i (t) \\
+                                        +    &amp; (1 + K^{T} \cdot \sigma^{T} (DA) ) \cdot T_i (t)  \\
+                                        +    &amp;       \eta^E_i (t) )
+\end{aligned}
+\tag{2.2}</span></span></p>
+<p>where <span class="math inline">\tau_E =</span> 20 ms is the net time constant of the unit. This value is chosen twice as large as in the inhibitory units to reflect the ratio of membrane time constants between pyramidal cells and inhibitory interneurons in the cortex <span class="citation" data-cites="mccormick1985">(<a href="References.html#ref-mccormick1985" role="doc-biblioref">McCormick et al., 1985</a>)</span>. <span class="math inline">f (x)</span> is a transfer function, ensuring that the activity of the cell does not reach too high values. It is linear in the range <span class="math inline">[0, 1]</span> and then saturates slowly to a maximum value of <span class="math inline">1.5</span> (formula given in the appendix). There are five terms inside this transfer function. The first term denotes the influence of the lateral connections between excitatory cells <span class="math inline">W^{EE}</span>. Its gain depends on dopamine through a sigmoidal term <span class="math inline">\sigma^{lat}</span> and a fixed scaling parameter <span class="math inline">K^{EE}</span> but also on the activity of the cell itself through another sigmoidal function <span class="math inline">\sigma^{EE}</span>. For these predominantly NMDA-mediated lateral connections, the influence of DA is therefore activity-dependent. These two sigmoids are independent to ensure that DA only modulates active cells and that effective transmission of activity through NMDA-mediated connections between excitatory cells only occurs in the presence of DA. The second term represents the influence of the connections from the inhibitory cells with a negative strength <span class="math inline">W^{IE}</span>. Their efficiency also increases with dopamine (sigmoidal function <span class="math inline">\sigma^{GABA}</span> and fixed scaling parameter <span class="math inline">K^{IE}</span>) and the activity of the cell. The feedforward inhibition produced by the increase of the efficiency of IPSPs by high levels of DA on pyramidal cells, as proposed by , is realized through a square of the activity of the cell itself. The third term is the contribution of the cortical input <span class="math inline">C_i (t)</span> through a random weight <span class="math inline">W^{C}_i</span>, without any dopaminergic modulation since they are considered to reach apical dendrites (see the <em>Dopamine modulation</em> section). When the cell is stimulated, we set <span class="math inline">C_i(t) = 1.0</span>. The fourth term is the contribution of a possible thalamic input <span class="math inline">T_i (t)</span>, increased by dopamine through <span class="math inline">\sigma^{T}</span> and the scaling parameter <span class="math inline">K^{T}</span>. This term is clearly distinct from the cortical inputs: although PRh is dysgranular - with a very thin layer IV <span class="citation" data-cites="rempel-clower2000">(<a href="References.html#ref-rempel-clower2000" role="doc-biblioref">Rempel-Clower and Barbas, 2000</a>)</span> - thalamocortical afferents from the dorsal and medial geniculate nuclei target layers I, III/IV and VI <span class="citation" data-cites="linke2000 furtak2007">(<a href="References.html#ref-furtak2007" role="doc-biblioref">Furtak et al., 2007</a>; <a href="References.html#ref-linke2000" role="doc-biblioref">Linke and Schwegler, 2000</a>)</span>, therefore on both apical and basal dendrites of pyramidal cells, as well as on various interneurons. We therefore assume that the thalamic input has a driving force through apical dendrites, similar to the cortical input, and a dependence on dopamine through the basal dendrites. The last term <span class="math inline">\eta^E (t)</span> is a noise randomly fluctuating in <span class="math inline">[- 0.5, 0.5]</span>. The resulting activity is restricted to positive values. Details about the sigmoidal functions and other parameters are given in the appendix.</p>
+<p>While the general properties of DA modulation are largely supported by the discussed observations, the exact parameters and sigmoid functions have been determined through trial-and-error processes to enable sustained activities. Although the results we present here quantitatively depend on these choices, the global properties we intend to highlight admit some variations in the values of the parameters.</p>
+</section>
+<section id="learning-rule" class="level3" data-number="2.2.5">
+<h3 data-number="2.2.5" class="anchored" data-anchor-id="learning-rule"><span class="header-section-number">2.2.5</span> Learning rule</h3>
+<p>The lateral reciprocal connections between excitatory cells <span class="math inline">W^{EE}</span> are subject to learning. We considered a covariance rule combining input- and output-dependent LTP (long-term potentiation) and output-dependent only LTD (long-term depression):</p>
+<p><span id="eq-jocn:weight"><span class="math display">\begin{aligned}
+    \tau_W \cdot \frac{d W^{EE}_{i j} (t)}{d t} = (E_i (t) - \hat{E_i} (t))^+ \cdot ( (E_j (t) - \hat{E_j} (t) )^+  - \alpha_i (t) \cdot W^{EE}_{i j} (t) \cdot (E_i (t) - \hat{E_i} (t))^+ )
+    \end{aligned}
+\tag{2.3}</span></span></p>
+<p>where <span class="math inline">E_i (t)</span> is the pre-synaptic activity of cell <span class="math inline">i</span>, <span class="math inline">E_j (t)</span> the post-synaptic activity of cell <span class="math inline">j</span>. <span class="math inline">()^+</span> is the positive part function. <span class="math inline">\hat{E_k} (t)</span> is a temporal sliding-mean of the activity <span class="math inline">E_k (t)</span> over a window of <span class="math inline">T</span> ms defined by:</p>
+<p><span id="eq-jocn:slidingmean"><span class="math display">\begin{aligned}
+    \hat{E_k} (t) = \frac{(T-1) \cdot \hat{E_k} (t - 1) + E_k (t)}{T}
+    \end{aligned}
+\tag{2.4}</span></span></p>
+<p>with <span class="math inline">T = 5000</span> ms in this model. This term ensures that learning occurs only when pre-synaptic or post-synaptic activities are significantly higher than their baseline value, ruling out learning of noise. However, the final weights determined by this rule alone are strongly dependent on the value of the parameter <span class="math inline">\alpha_i</span>, which is constant in classical covariance rules. If <span class="math inline">\alpha_i</span> is set too high, weights will never increase enough to produce post-synaptic activity, but if <span class="math inline">\alpha_i</span> is too low, the post-synaptic cell will have maximal activity for a too large set of stimuli. As we want our model to deal with different cluster sizes, we had to use a more flexible approach for the learning rule. We therefore focused on homeostatic learning, where the learning rule uses as a constraint that the activity of a cell should not exceed a certain value, in order to save energy <span class="citation" data-cites="vanrossum2001 turrigiano2004">(<a href="References.html#ref-vanrossum2001" role="doc-biblioref">Rossum and Turrigiano, 2001</a>; <a href="References.html#ref-turrigiano2004" role="doc-biblioref">Turrigiano and Nelson, 2004</a>)</span>. Homeostatic learning is possible when the parameter <span class="math inline">\alpha_i</span> can vary with the experience of the cell, in our case when the cell’s activity exceeds a certain threshold. The following rule is used:</p>
+<p><span id="eq-jocn:alpha"><span class="math display">\begin{aligned}
+    \tau_{\alpha}  \cdot \frac{d \alpha_{i} (t)}{d t} + \alpha_i (t) = K_\alpha \cdot H_i (t)
+    \end{aligned}
+\tag{2.5}</span></span></p>
+<p><span id="eq-jocn:H"><span class="math display">\begin{aligned}
+    \tau_H \cdot \frac{d H_{i} (t)}{d t} + H_i (t) = K_H \cdot ( (E_i (t) - E_{max})^+ )^2
+    \end{aligned}
+\tag{2.6}</span></span></p>
+<p>with <span class="math inline">H_i (t)</span> and <span class="math inline">\alpha_i (t)</span> restricted to positive values and <span class="math inline">\alpha_i (0)</span> equal to <span class="math inline">10</span>.</p>
+<p>When <span class="math inline">E_i (t)</span> exceeds <span class="math inline">E_{max}</span> (<span class="math inline">1.0</span> in our model), <span class="math inline">H_i (t)</span> becomes rapidly highly positive, leading to a slow increase of <span class="math inline">\alpha_i (t)</span>. The inhibitory part of <a href="#eq-jocn:weight" class="quarto-xref">Equation&nbsp;<span>2.3</span></a> becomes preponderant and all the weights decrease. The reason why <span class="math inline">H_i (t)</span> is introduced is that <span class="math inline">\alpha_i (t)</span> must have a slow time constant so that learning is stable. This learning rule is similar to the classical BCM rule <span class="citation" data-cites="Bienenstock1982">(<a href="References.html#ref-Bienenstock1982" role="doc-biblioref">Bienenstock et al., 1982</a>)</span> but is more stable, since the inhibitory term in <a href="#eq-jocn:weight" class="quarto-xref">Equation&nbsp;<span>2.3</span></a> represents a constraint both on a short time scale - by its dependance on <span class="math inline">E_i (t)</span> and <span class="math inline">W^{EE}_{i j} (t)</span>- and on a long time scale with <span class="math inline">\alpha_i (t)</span>. The effect of this learning rule is that weights will rapidly increase at the beginning of learning (the Hebbian part of <a href="#eq-jocn:weight" class="quarto-xref">Equation&nbsp;<span>2.3</span></a> is preponderant) but when the cells begin to overshoot, <span class="math inline">\alpha_i (t)</span> increases and forces the cell to find a compromise between increasing its afferent weights and activity overshooting. When learning is efficient, <span class="math inline">\alpha_i (t)</span> stabilizes to an optimal value that depends on the mean activity of the cell.</p>
+</section>
+</section>
+<section id="results" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="results"><span class="header-section-number">2.3</span> Results</h2>
+<p>We will first show the consequence of learning the lateral connections between excitatory cells on the formation of clusters and the propagation of activity within the cluster. We then demonstrate the effect of DA modulation on sustained activities in the network and show that the model follows the classical inverted-U shaped curve. After introducing these basic properties, we then demonstrate the specific properties for memory recall such as the dependence of the propagation of activity between two clusters on the strength of their reciprocal connections, as well as the effect of thalamic stimulation on memory retrieval</p>
+<section id="learning-and-propagation-of-activity-within-a-cluster" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="learning-and-propagation-of-activity-within-a-cluster"><span class="header-section-number">2.3.1</span> Learning and propagation of activity within a cluster</h3>
+<p>During learning, a sequence of stimuli is shown to the network. The first object is presented for 250 ms, activating a random number of parts of the corresponding cluster. No stimulation is given to the network for the next 250 ms, followed by the second object for 250 ms and further on. This sequence is repeated for 100 times. Please note that this is one particular learning protocol, but that other protocols ensuring that each objet is sufficiently often presented also work. The dopamine level is set to a low value of <span class="math inline">0.1</span> during learning, for reasons explained in the <em>Discussion</em> section.</p>
+<p>After learning, each cell has built connections with the cells representing other parts of an object. <a href="#fig-jocn:progressive" class="quarto-xref">Figure&nbsp;<span>2.2</span></a> - a shows the 25 highest connection values for a randomly selected cell in the first cluster. One can observe that this cell has formed positive connections with the 19 other cells of the cluster. The weights within a cluster are not all equal, reflecting the probability of cooccurrence of the different parts during learning. Oppositely, the connections with cells of another cluster have been reduced to neglictable values.</p>
+<p>After learning, how do we functionaly retrieve the information about the correlation between different parts? Our hypothesis is that the activation of a sufficient number of parts should provoke activity in the remaining parts, at least under certain dopamine levels. <a href="#fig-jocn:progressive" class="quarto-xref">Figure&nbsp;<span>2.2</span></a> - b shows the mean activity of the remaining parts dependent on the numbers of parts that receive cortical activation. When dopamine has too low (0.2) or high (0.8) levels, the remaining parts show only little activation, even if four out of five parts are stimulated. When dopamine has an intermediate level (0.4 or 0.6) and three or more parts are activated, the remaining parts show strong activity, as if they actually received cortical input. This shows that under intermediate dopamine levels, the network is able to retrieve all the parts of a cluster if a majority of them is stimulated. We also simulated clusters of bigger size (up to 20 parts of four cells, i.e.&nbsp;80 cells) and observed that this minimum proportion of stimulated parts is slightly decreasing with the cluster size, but it is always superior to one third.</p>
+<div id="fig-jocn:progressive" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-jocn:progressive-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/jocn/weightsprogressive.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-jocn:progressive-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2: a) Weight values for a given cell in the first cluster. Only the 25 highest values are represented in descending order. We observe that this cell has positive connections with the 19 cells that form the cluster and none with other cells. b) Mean activity of unstimulated parts relative to the number of stimulated parts. We observe that for low (0.2) or high (0.8) dopamine levels, the remaining parts are only poorly activated. For intermediate levels (0.4 or 0.6), three stimulated parts are sufficient to provoke a high activity in the remaining two unstimulated parts.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sustained-activities-and-intermediate-values-of-dopamine" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="sustained-activities-and-intermediate-values-of-dopamine"><span class="header-section-number">2.3.2</span> Sustained activities and intermediate values of dopamine</h3>
+<p>In the following experiments, we stimulate only three parts of a cluster (12 cells out of 20) and record two different neurons, one belonging to these three parts and called the “stimulated” cell, the other to one of the two remaining parts and called the “unstimulated” cell.</p>
+<div id="fig-jocn:inputtest" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-jocn:inputtest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/jocn/sustained.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-jocn:inputtest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.3: a) Time course of the activity of two different cells in the same cluster. The first one (“stimulated cell”) belongs to one of the three parts that receive cortical input, the other one (“unstimulated cell”) receiving no cortical input. When the dopamine level is low (<span class="math inline">DA = 0.1</span>), the stimulated cell responds strongly to the presentation of the object but not the unstimulated one. When the stimulation ends, the activity of these two cells return to baseline. When the dopamine level is intermediate (<span class="math inline">DA = 0.4</span>), the two cells respond equally strong to the presentation of the object. After disappearance, they show sustained activity until a new object is presented. b) Effect of dopamine on two cells in the same cluster. The two upper curves represent the activity of the stimulated and unstimulated cells during stimulation, 200 ms after the corresponding object onset. With intermediate levels of DA, the activity of the unstimulated cell is high and only slightly inferior to the stimulated one (difference of 0.2). With large dopamine levels (<span class="math inline">&gt; 0.6</span>), the activity of the two cells is drastically reduced because of the enhancement of inhibition by dopamine. The two lower curves (which seem identical) represent the activity of these two cells 100 ms after the end of the stimulation. We observe an inverted-U shape meaning that the level of dopamine necessary to observe sustained activities is between 0.3 and 0.7.
+</figcaption>
+</figure>
+</div>
+<p>To determine the adequate range of dopamine levels, it is interesting to look at the sustained activities observable in the network. <a href="#fig-jocn:inputtest" class="quarto-xref">Figure&nbsp;<span>2.3</span></a> - a shows the timecourse of the activity of two cells during the successive presentation of the two objects. With a low dopamine level (0.1), only the stimulated cell shows significant activity (around 1.0) during the presentation of the object. With an intermediate dopamine level (0.4), both cells become highly active (around 1.2 and 1.0, respectively) during the stimulation, with a little timelag due to the propagation of activity within the cluster. When the stimulation ends, their activity does not fall back to baseline but stays at a high level (1.0). This sustained activity is only due to the reciprocal interactions between excitatory cells and their modulation by dopamine.</p>
+<p>When the second object is presented, its representation competes with the sustained activation. If the two representations are equally distributed on the map, which is the case here, some of their excitatory cells will be connected to the same inhibitory cells, leading to enhanced inhibition and disruption of the sustained activities. If the two representations are spatially segregated on the map (corresponding for example to two objects from very different categories, like a face and a tree), the two representations can exist in parallel. Data from about the robustness of sustained activities in PRh does not deal with the distribution of competing stimuli on the surface of the cortex, allowing this property to be a prediction of the model. However, if the distracting stimulus has a low intensity (<span class="math inline">C_i(t) &lt; 0.4</span>) or is not represented by more than two parts, the sustained representation can resist its appearance, thanks to the increased activity of inhibitory cells.</p>
+<p><a href="#fig-jocn:inputtest" class="quarto-xref">Figure&nbsp;<span>2.3</span></a> - b shows the influence of the dopamine level on the activities of the two considered cells during and after stimulation. When the cluster is partly stimulated, dopamine globally enhances the activity of the stimulated cell when DA is inferior to 0.4 but then begins to depress it. For the unstimulated cell, one can observe a strong enhancing effect when dopamine is around 0.25 due to the propagation of activity within the cluster. When dopamine exceeds 0.8, the activity of this cell falls abruptly to zero, showing that propagation of activity is not possible under high levels of dopamine, because of the enhancement of the reciprocal connections between inhibitory and excitatory cells. The two lower curves of <a href="#fig-jocn:inputtest" class="quarto-xref">Figure&nbsp;<span>2.3</span></a> - b show the sustained activity of the two cells 100 ms after the end of the stimulation. They have an inverted-U shape which is typical for dopaminergic modulation of working memory in prefrontal cortex <span class="citation" data-cites="goldmanrakic2000">(<a href="References.html#ref-goldmanrakic2000" role="doc-biblioref">Goldman-Rakic et al., 2000</a>)</span>. The graph shows that the values of dopamine in our model that allow to observe sustained activities range between 0.3 and 0.7. The amplitude of the sustained activities is relatively high (up to 80% of the activity during stimulation depending on the dopamine level) but is coherent with cellular recordings <span class="citation" data-cites="naya2003 ohbayashi2003 curtis2003">(<a href="References.html#ref-curtis2003" role="doc-biblioref">Curtis and D’Esposito, 2003</a>; <a href="References.html#ref-naya2003" role="doc-biblioref">Naya et al., 2003</a>; <a href="References.html#ref-ohbayashi2003" role="doc-biblioref">Ohbayashi et al., 2003</a>)</span>. Due to the balanced background inhibition, we can also change the parameters of the model to obtain lower sustained activities.</p>
+</section>
+<section id="propagation-of-activity-between-clusters" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="propagation-of-activity-between-clusters"><span class="header-section-number">2.3.3</span> Propagation of activity between clusters</h3>
+<p>The propagation of activity within a cluster is an interesting property in the framework of multimodal object categorisation and identification. However, contrary to the preceding experiments where the two learned objects do not share any parts, learning in the real world does not ensure that parts of two different objects are not activated at the same time in PRh, for example because these objects share these parts. Consequently, the weights between two clusters are not necessarily equal to zero. What happens to the propagation of activity if two clusters are reciprocally connected with small weight values?</p>
+<div id="fig-jocn:propagate" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-jocn:propagate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/jocn/propagate.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-jocn:propagate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.4: a) Influence of the connections between different clusters on the propagation of activity. For simplicity, only four excitatory cells by cluster and just a few connections are shown on the figure. Two clusters C1 and C2 are learned. Each excitatory cell <span class="math inline">i</span> of the cluster C2 receives connections <span class="math inline">\left(W^{EE}_{i j}\right)_{j \in \text{C1}}</span> from excitatory cells of the cluster C1, but they are very low after learning. In this experiment, the weights of these inter-cluster connections are artificially set proportional to the mean value of the intra-cluster connections to the corresponding cell in the second cluster <span class="math inline">W^{mean}_i = \frac{1}{N} \times \sum_{j \in \text{C2}} W^{EE}_{i j}</span>. b) Results. Three parts of the first cluster are then stimulated and we plot the mean activity of the second cluster after 200 ms. When dopamine is low (0.2) or high (0.8), the second cluster becomes only poorly activated by the first cluster, even when the connections have equal strengths. When dopamine is intermediate, the inter-cluster weights must be below 40% of the intra-cluster weights to avoid the propagation of activity.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-jocn:propagate" class="quarto-xref">Figure&nbsp;<span>2.4</span></a> shows the influence of these inter-cluster connections. After the two clusters have been learned, we artificially increase the strength of connection between the two groups of cells. As each cell does not receive the same amount of cortical input because of the random weights <span class="math inline">W^C_i</span>, their lateral connections <span class="math inline">W^{EE}_{i j}</span> are not equal. We therefore computed the mean value of these lateral connections for each cell of the second cluster (called the intra-cluster connection value) and set the connections from the first cluster to the corresponding cell in the second cluster proportional to this value (inter-cluster connection value).</p>
+<p>We then stimulate three parts of the first cluster and record the mean activity of the second cluster. Under low or high dopamine levels, inter-cluster connections can be equal to the intra-cluster connections (meaning that they form one bigger cluster) without observing any propagation of activity to the second cluster. Under intermediate dopamine levels, the ratio between these connections must be below 40% to avoid that the activation of one cluster propagates without control to other weakly connected clusters. This result ensures a reasonable trade-off between stability of object representation and propagation of activity.</p>
+</section>
+<section id="thalamic-stimulation" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="thalamic-stimulation"><span class="header-section-number">2.3.4</span> Thalamic stimulation</h3>
+<p>The preceding results show that our model is able to learn to correlate different parts of an object through lateral connections and to propagate activity between these parts under intermediate dopamine levels. It also exhibits sustained activity after an object is presented, but which is easily disrupted by similar distractors. What can be the interest of such unrobust sustained activities in the more general framework of visual working memory? Our conviction is that this high-level representation of an object does not need to be actively maintained through time but only regenerated when needed. A cluster describes quite exhaustively the different aspects of an object: what needs to be remembered is more the location of the cluster in PRh than the details of its representation. Propagation of activity within a cluster seems a useful mechanism in the sense that external activation of parts of a cluster can be sufficient under intermediate dopamine levels to retrieve the whole information carried by the cluster. This external activation can take its origins either from prefrontal cortex or from the basal ganglia - through the dorsal nucleus of the thalamus- where sustained activities are robust.</p>
+<div id="fig-jocn:thal" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-jocn:thal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/jocn/thal.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-jocn:thal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.5: a) Thalamic stimulation of clusters of different sizes under intermediate dopamine level (DA = 0.5). A certain percentage of the cells of each cluster is fed with a thalamic input. b) Results. With an intermediate dopamine level, propagation of activity within the cluster of 12 cells happens when at least 35% of the cells receive thalamic input. Clusters of bigger size need an even smaller proportion of stimulated cells.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-jocn:thal" class="quarto-xref">Figure&nbsp;<span>2.5</span></a> shows the influence of partial thalamic stimulation of the cells of a cluster. For this experiment, the network learned simultaneously four clusters of different sizes: 12 cells (3 parts), 20 cells (5 parts), 28 cells (7 parts) and 36 cells (9 parts). A learning cycle (the successive presentation of the four partially stimulated objects) is therefore two times longer (2 seconds) and learning is stopped after 200 cycles. For each cluster, we feed a certain percentage of cells with thalamic input (<span class="math inline">T_i = 1.0</span>) and we record the mean activity of the remaining cells. Using an intermediate dopamine level (0.5), one can observe that, for the cluster of 12 cells, a thalamic stimulation of at least 35% of its cells is sufficient to propagate activity in the cluster. This proportion is even smaller with clusters of bigger sizes. This property allows the <em>retrieval</em> of the encoded information in the cluster without knowing all its details. The consequence is that a robust working memory of an object does not require to contact all the cells of a cluster but only a small portion of them, making manipulation easier and more flexible.</p>
+</section>
+</section>
+<section id="discussion" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="discussion"><span class="header-section-number">2.4</span> Discussion</h2>
+<p>The proposed computational model of PRh focuses on multimodal object representation. It learns to integrate different parts of an object, even if they do not all appear together during learning. The resulting clusters of reciprocally interconnected neurons are modulated by dopamine, so that, under an intermediate level, activation of a majority of parts propagates to the rest of the cluster and sustained activities appear after stimulus disappearance. Despite the fact that these sustained activities are not robust to distractors - as experimentally found in -, a cluster can be reactivated through thalamic stimulation of less than 35% of its cells (depending on the size of the cluster) and allows the retrieval of the global information.</p>
+<p>The major implication of this model is that the maintenance in working memory of the visual attributes of an object is located in PRh - more precisely in the lateral connections of its cells - but that the manipulation of the content of working memory (robustness to distractors, retrieval) has to come from external regions like the thalamus or prefrontal cortex. A testable prediction is that unrobust sustained activities can be observed in PRh <em>without</em> any feedback from prefrontal cortex, as proposed also by or . Similarly to what is observed in prefrontal cortex <span class="citation" data-cites="goldmanrakic2000">(<a href="References.html#ref-goldmanrakic2000" role="doc-biblioref">Goldman-Rakic et al., 2000</a>)</span>, we also suggest that sustained activities in PRh have an inverted-U shape dependence with dopamine levels: no sustained activity for low or high levels of dopamine, sustained activities in the intermediate range. Cellular recordings could also reveal our “propagation of activity” property: cells that are selective for a part of an object that is not presented should respond to the object under intermediate level of DA but not under low levels. Moreover, we predict that these activations will be slightly delayed.</p>
+<p>This model principally relies on the modulation by dopamine of various synaptic currents. Although a lot of -sometimes contradictory - data exists regarding the action of DA on prefrontal cells <span class="citation" data-cites="Seamans2004">(<a href="References.html#ref-Seamans2004" role="doc-biblioref">Seamans and Yang, 2004</a>)</span>, little is known about its action on PRh cells. We hypothesized that PRh cells are similarily modulated by DA, but put emphasis on different aspects. In particular, some models of sustained activation in prefrontal cortex <span class="citation" data-cites="durstewitz1999 dreher2002">(<a href="References.html#ref-dreher2002" role="doc-biblioref">Dreher et al., 2002</a>; <a href="References.html#ref-durstewitz1999" role="doc-biblioref">Durstewitz et al., 1999</a>)</span> consider that DA primarily restricts the efficiency of cortical inputs on apical dendrites, allowing the network to be isolated from outside distractors. As sustained activities are not robust in PRh, we considered that this apical reduction was not as important as in prefrontal cortex and chose not to use it in the model. On the contrary, we considered that the main influences of DA are to enhance the NMDA-mediated currents provoked by the lateral connections from neighbouring cells and the GABA-mediated currents coming from inhibitory cells like in <span class="citation" data-cites="brunel2001 deco2003">(<a href="References.html#ref-brunel2001" role="doc-biblioref">Brunel and Wang, 2001</a>; <a href="References.html#ref-deco2003" role="doc-biblioref">Deco and Rolls, 2003</a>)</span>. This assumption is at the core of our model and is susceptible to be experimentally confirmed.</p>
+<p>We focused on the tonic component of DA release by considering DA levels in PRh constant over sufficiently long periods. We are not aware of any study that investigated the effect of DA over time in PRh, but our assumption is motivated by observations in hippocampus where the effects of DA can last up to three hours <span class="citation" data-cites="huang1995">(<a href="References.html#ref-huang1995" role="doc-biblioref">Huang and Kandel, 1995</a>)</span> and in prefrontal cortex <span class="citation" data-cites="grace1991">(<a href="References.html#ref-grace1991" role="doc-biblioref">Grace, 1991</a>)</span> where similar observations have been made. Such long-lasting DA effects can be critical in the learning phase. Here, we set DA to a low value (<span class="math inline">0.1</span>) since intermediate values partially impair learning: the global efficiency of excitatory lateral connections has to compensate almost exactly the global efficiency of inhibitory connections (which increases faster than the dopaminergic modulation term of excitatory connections). If the DA level is too high during learning, the afferent weights can not increase enough since the homeostatic rule impairs learning when the activity of the cell exceeds a threshold. Thus, the lateral connections will not compensate the disappearance of the cortical input: there will be no sustained activity. However, they remain strong enough to propagate activity within the cluster. Therefore, this model can not handle high constant levels of DA during the whole learning process (what would be however unrealistic), but only some increases to high levels for a finite period of time. These transient increases (which are not however phasic bursts) could momentarily signal the behavioural importance of certain objects and favorize their learning, but on the long-term DA should show habituation to these objects.</p>
+<p>The sustained activation in this model relies on the reciprocal interactions between excitatory cells. This concept has already been used in the previously cited computational models of working memory in prefrontal cortex <span class="citation" data-cites="durstewitz1999 brunel2001 dreher2002 deco2003 chadderdon2006">(<a href="References.html#ref-brunel2001" role="doc-biblioref">Brunel and Wang, 2001</a>; <a href="References.html#ref-chadderdon2006" role="doc-biblioref">Chadderdon and Sporns, 2006</a>; <a href="References.html#ref-deco2003" role="doc-biblioref">Deco and Rolls, 2003</a>; <a href="References.html#ref-dreher2002" role="doc-biblioref">Dreher et al., 2002</a>; <a href="References.html#ref-durstewitz1999" role="doc-biblioref">Durstewitz et al., 1999</a>)</span>. The major differences with most of these models is that in our model these lateral connections are primarily relevant for memory recall and that they adapt to the experience of the system so that the attractors of the network can evolve through time. Another remarkable property is that the cells of a cluster do not need to receive input at the same time: a partial activation is enough to propagate activity and to create sustained activities in the whole cluster. It could be possible that the sustained activities in PRh have no direct purpose but they occur as a side effect of the propagation of activity for memory retrieval.</p>
+<p>What do the clusters of cells in PRh exactly represent? We used the term “object” in a very broad sense, as a collection of parts that frequently appear together during learning. This could relate to spatial arrangements of parts of an object (the back, the seat and the feet of a chair, for example) that do not all appear at the same time depending on the point of view to the object, but partly view-invariant cells are already present in IT <span class="citation" data-cites="booth1998">(<a href="References.html#ref-booth1998" role="doc-biblioref">Booth and Rolls, 1998</a>)</span>. However, When PRh is functional, learning to discriminate a set of visual objects under a certain viewpoint can be easily transfered to the same objects under another viewpoint, whereas this capacity is severely impaired without PRh <span class="citation" data-cites="buckley1998">(<a href="References.html#ref-buckley1998" role="doc-biblioref">Buckley and Gaffan, 1998</a>)</span>. Another level of abtsraction for PRh is multimodal integration, i.e.&nbsp;linking the visual representation of an object with its tactile information, its sound or the associated action (grasping, pushing, sitting, etc).</p>
+<p>A cluster could also represent a subordinate-level category in the sense of: different objects sharing a sufficient number of sensory features (parts) would be represented by the same cluster. For example, a cluster could be generic for different espresso cups but not mugs, lacking the genericity of the “cup” basic-level category but providing a minimal sensory abstraction. This is coherent with the study by that indicates that PRh is only involved in fine-grained categorization. Such narrow categories could be used as “templates” to guide attention to the corresponding target through feedback connections to the ventral pathway <span class="citation" data-cites="Hamker2005">(<a href="References.html#ref-Hamker2005" role="doc-biblioref">Hamker, 2005</a>)</span>, as broader categories have been shown to be useless in visual search <span class="citation" data-cites="smith2005a">(<a href="References.html#ref-smith2005a" role="doc-biblioref">Smith et al., 2005</a>)</span>.</p>
+<p>Our primary aim has been to extend the concept of visual working memory to association areas where the detailed visual properties of an object are stored. Most computational models of working memory make no such distinction and primarily deal with sustained activities in prefrontal cortex. We propose that memory retrieval is achieved through a loop between PRh, basal ganglia and thalamus. PRh receives thalamocortical connections from dorsal and medial geniculate nuclei of the thalamus and in turn projects heavily to the caudate putamen, a part of the main input structure of the basal ganglia, the striatum <span class="citation" data-cites="furtak2007">(<a href="References.html#ref-furtak2007" role="doc-biblioref">Furtak et al., 2007</a>)</span>. When a given object has to be retrieved, the basal ganglia can selectively disinhibit the thalamus and therefore favorize the thalamic stimulation of the cluster to be retrieved.</p>
+<p>This pathway through the basal ganglia significantly compresses the information encoded in the cerebral cortex and can not represent its rich and detailed representations: as pinpoints, the number of neurons projecting to the striatum is two orders of magnitude greater than the number of striatal neurons <span class="citation" data-cites="kincaid1998">(<a href="References.html#ref-kincaid1998" role="doc-biblioref">Kincaid et al., 1998</a>)</span>. We propose that the basal ganglia acts as a pointer that allows to retrieve the detailed representation when necessary through the disinhibition of thalamus. Similarly, prefrontal cortex is probably not encoding the content of memory, but rather a rule to retrieve this content. In a realistic DMS task, basal ganglia and prefrontal cortex have to learn which object has to be retrieved and which should be forgotten. This work is facilitated by the fact that the exact content of a cluster in PRh does not need to be known by this external loop: stimulating 35% of its cells (or even less for bigger clusters) is sufficient to retrieve its details.</p>
+<section id="acknowledgements" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="acknowledgements">Acknowledgements</h4>
+<p>This work has been supported by the HA2630/4-1 grant of the German research foundation (Deutsche Forschungsgemeinschaft, DFG).</p>
+</section>
+</section>
+<section id="appendix-details-of-the-model" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="appendix-details-of-the-model">Appendix: details of the model</h2>
+<p>All equations described in the <em>Materials and methods</em> section are numerized according to the finite difference method, with a timestep of 1 ms. Their evaluation occurs asynchronously: cells are randomly evaluated and their new activity is immediately used in the rest of the computations, in order to emphasize the competition between neuronal representations <span class="citation" data-cites="rougier2006">(<a href="References.html#ref-rougier2006" role="doc-biblioref">Rougier and Vitay, 2006</a>)</span>.</p>
+<p>The model is composed of <span class="math inline">20 \times 20</span> excitatory cells and <span class="math inline">10 \times 10</span> inhibitory cells. Excitatory and inhibitory cells are reciprocally connected through gaussian connectivity kernels. We thus defined a distance between cells: let the excitatory cell <span class="math inline">E_i</span> have coordinates <span class="math inline">(x_i, y_i) \in [0..20]^2</span> on the map and the inhibitory cell <span class="math inline">I_j</span> have coordinates <span class="math inline">(x_j, y_j) \in [0..10]^2</span>. The distance <span class="math inline">d_{EI}(i, j)</span> between the two cells is therefore given by:</p>
+<p><span class="math display">
+    d_{EI}(i, j) = \sqrt{(x_i - 2\times x_j)^2 + (y_i - 2\times y_j)^2}
+</span></p>
+<p>Similarly, the distance <span class="math inline">d_{II}(i, j)</span> between two inhibitory cells <span class="math inline">I_i</span> with coordinates <span class="math inline">(x_i, y_i) \in [0..10]^2</span> and <span class="math inline">I_j</span> with coordinates <span class="math inline">(x_j, y_j) \in [0..10]^2</span> is given by:</p>
+<p><span class="math display">
+    d_{II}(i, j) = \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}
+</span></p>
+<p>We then define the gaussian connectivity kernels by:</p>
+<p><span class="math display">
+    W^{IE}(i, j) = -0.12 \times \exp{ \left(- (\frac{d_{EI}(i, j)}{2.5})^2 \right)}
+</span></p>
+<p><span class="math display">
+    W^{EI}(i, j) = 0.3 \times \exp{ \left( - (\frac{d_{EI}(i, j)}{2})^2 \right)}
+</span></p>
+<p>The connections between two inhibitory cells are given by:</p>
+<p><span class="math display">W^{II}(i, j) =
+     \begin{cases}
+     0.02 \times \exp{ \left(- (\frac{d_{II}(i, j)}{5})^2 \right)} &amp; \text{if } i \neq j \\
+     0 &amp; else.
+     \end{cases}
+</span></p>
+<p>The parameters of <a href="#eq-jocn:inhib" class="quarto-xref">Equation&nbsp;<span>2.1</span></a> are the same for each inhibitory cell: <span class="math inline">\tau_I = 10</span> ms, <span class="math inline">K^{EI} = 1.2</span> and <span class="math inline">\eta^I_i (t)</span> is a random value uniformly distributed between -0.1 and 0.1. The parameters of <a href="#eq-jocn:excit" class="quarto-xref">Equation&nbsp;<span>2.2</span></a> are: <span class="math inline">\tau_E = 20</span> ms, <span class="math inline">K^{EE} = 3.0</span>, <span class="math inline">K^{IE} = 3.0</span>, <span class="math inline">K^{T} = 1.0</span> and <span class="math inline">\eta^E_i (t)</span> a random value uniformly distributed between -0.5 and 0.5. Cortical weights <span class="math inline">W^C</span> are randomly chosen in the range [0.8, 1.2]. The sigmoidal functions <span class="math inline">\sigma^{lat}(x)</span>, <span class="math inline">\sigma^{EE}(x)</span>, <span class="math inline">\sigma^{GABA}(x)</span>, <span class="math inline">\sigma^{T}(x)</span> all have the same shape:</p>
+<p><span class="math display">
+    \sigma(x) = \frac{1}{1+\exp{(-l \cdot (x-c))}} - \frac{1}{1+\exp{(l \cdot c)}}
+</span></p>
+<p>with <span class="math inline">l</span> and <span class="math inline">c</span> being: for <span class="math inline">\sigma^{lat}(x)</span> <span class="math inline">c = 0.3</span>, <span class="math inline">l = 20</span>; for <span class="math inline">\sigma^{EE}(x)</span> <span class="math inline">c = 0.3</span>, <span class="math inline">l = 20</span>; for <span class="math inline">\sigma^{GABA}(x)</span> <span class="math inline">c = 0.5</span>, <span class="math inline">l = 10</span>; for <span class="math inline">\sigma^{T}(x)</span> <span class="math inline">c = 0.5</span>, <span class="math inline">l = 10</span>. The transfer function <span class="math inline">f(x)</span> is defined as follows:</p>
+<p><span class="math display">f(x)=
+     \begin{cases}
+        0 &amp; \text{if $x &lt; 0$}  \\
+        x  &amp; \text{if $0 \leq x \leq 1$} \\
+    \frac{0.5}{1+\exp{(- 10.0 \cdot (x-1) )}} +0.75 &amp; \text{if $x &gt; 1$}
+     \end{cases}
+</span></p>
+<p>The parameters of <a href="#eq-jocn:weight" class="quarto-xref">Equation&nbsp;<span>2.3</span></a>, <a href="#eq-jocn:alpha" class="quarto-xref">Equation&nbsp;<span>2.5</span></a> and <a href="#eq-jocn:H" class="quarto-xref">Equation&nbsp;<span>2.6</span></a> are: <span class="math inline">\tau_W = 50000</span> ms, <span class="math inline">\tau_\alpha = 50000</span> ms, <span class="math inline">K_\alpha = 100</span>, <span class="math inline">\tau_H = 100</span> ms, <span class="math inline">K_H = 200</span>, <span class="math inline">E_{max} = 1.0</span>.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Amari1977" class="csl-entry" role="listitem">
+Amari, S. (1977). <span class="nocase">Dynamics of pattern formation in lateral-inhibition type neural fields.</span> <em>Biol. Cybern.</em> 27, 77–87. Available at: <a href="http://www.ncbi.nlm.nih.gov/pubmed/911931">http://www.ncbi.nlm.nih.gov/pubmed/911931</a>.
+</div>
+<div id="ref-beaulieu1993" class="csl-entry" role="listitem">
+Beaulieu, C. (1993). Numerical data on neocortical neurons in adult rat, with special reference to the <span>GABA</span> population. <em>Brain Res</em> 609, 284–292.
+</div>
+<div id="ref-Bienenstock1982" class="csl-entry" role="listitem">
+Bienenstock, E. L., Cooper, L. N., and Munro, P. W. (1982). <a href="https://www.ncbi.nlm.nih.gov/pubmed/7054394">Theory for the development of neuron selectivity: Orientation specificity and binocular interaction in visual cortex.</a> <em>J Neurosci</em> 2, 32–48.
+</div>
+<div id="ref-booth1998" class="csl-entry" role="listitem">
+Booth, M. C., and Rolls, E. T. (1998). View-invariant representations of familiar objects by neurons in the inferior temporal visual cortex. <em>Cereb Cortex</em> 8, 510–523.
+</div>
+<div id="ref-brown1998" class="csl-entry" role="listitem">
+Brown, M. W., and Xiang, J. Z. (1998). Recognition memory: Neuronal substrates of the judgement of prior occurrence. <em>Prog Neurobiol</em> 55, 149–189.
+</div>
+<div id="ref-brunel2001" class="csl-entry" role="listitem">
+Brunel, N., and Wang, X. J. (2001). Effects of neuromodulation in a cortical network model of object working memory dominated by recurrent inhibition. <em>J Comput Neurosci</em> 11, 63–85.
+</div>
+<div id="ref-buckley1998" class="csl-entry" role="listitem">
+Buckley, M. J., and Gaffan, D. (1998). Perirhinal cortex ablation impairs visual object identification. <em>J Neurosci</em> 18, 2268–2275.
+</div>
+<div id="ref-buffalo1998" class="csl-entry" role="listitem">
+Buffalo, E. A., Reber, P. J., and Squire, L. R. (1998). The human perirhinal cortex and recognition memory. <em>Hippocampus</em> 8, 330–339.
+</div>
+<div id="ref-bussey2002a" class="csl-entry" role="listitem">
+Bussey, T. J., and Saksida, L. M. (2002). The organization of visual object representations: A connectionist model of effects of lesions in perirhinal cortex. <em>Eur J Neurosci</em> 15, 355–364.
+</div>
+<div id="ref-calabresi1987" class="csl-entry" role="listitem">
+Calabresi, P., Mercuri, N., Stanzione, P., Stefani, A., and Bernardi, G. (1987). Intracellular studies on the dopamine-induced firing inhibition of neostriatal neurons in vitro: Evidence for D1 receptor involvement. <em>Neuroscience</em> 20, 757–771.
+</div>
+<div id="ref-cepeda1992" class="csl-entry" role="listitem">
+Cepeda, C., Radisavljevic, Z., Peacock, W., Levine, M. S., and Buchwald, N. A. (1992). Differential modulation by dopamine of responses evoked by excitatory amino acids in human cortex. <em>Synapse</em> 11, 330–341.
+</div>
+<div id="ref-chadderdon2006" class="csl-entry" role="listitem">
+Chadderdon, G. L., and Sporns, O. (2006). A large-scale neurocomputational model of task-oriented behavior selection and working memory in prefrontal cortex. <em>J Cogn Neurosci</em> 18, 242–257.
+</div>
+<div id="ref-cowell2006" class="csl-entry" role="listitem">
+Cowell, R. A., Bussey, T. J., and Saksida, L. M. (2006). Why does brain damage impair memory? <span>A</span> connectionist model of object recognition memory in perirhinal cortex. <em>J Neurosci</em> 26, 12186–12197.
+</div>
+<div id="ref-curtis2003" class="csl-entry" role="listitem">
+Curtis, C., and D’Esposito, M. (2003). Persistent activity in the prefrontal cortex during working memory. <em>Trends Cogn Sci</em> 7, 415–423.
+</div>
+<div id="ref-deco2003" class="csl-entry" role="listitem">
+Deco, G., and Rolls, E. T. (2003). Attention and working memory: A dynamical model of neuronal activity in the prefrontal cortex. <em>Eur J Neurosci</em> 18, 2374–2390.
+</div>
+<div id="ref-dreher2002" class="csl-entry" role="listitem">
+Dreher, J.-C., Guigon, E., and Burnod, Y. (2002). A model of prefrontal cortex dopaminergic modulation during the delayed alternation task. <em>J Cogn Neurosci</em> 14, 853–865.
+</div>
+<div id="ref-durstewitz1999" class="csl-entry" role="listitem">
+Durstewitz, D., Kelc, M., and Güntürkün, O. (1999). A neurocomputational theory of the dopaminergic modulation of working memory functions. <em>J Neurosci</em> 19, 2807–2822.
+</div>
+<div id="ref-furtak2007" class="csl-entry" role="listitem">
+Furtak, S. C., Wei, S.-M., Agster, K. L., and Burwell, R. D. (2007). Functional neuroanatomy of the parahippocampal region in the rat: The perirhinal and postrhinal cortices. <em>Hippocampus</em>.
+</div>
+<div id="ref-goldmanrakic2000" class="csl-entry" role="listitem">
+Goldman-Rakic, P. S., Muly, E. C., and Williams, G. V. (2000). D1 receptors in prefrontal cells and circuits. <em>Brain Res Rev</em> 31, 295–301.
+</div>
+<div id="ref-gorelova2002" class="csl-entry" role="listitem">
+Gorelova, N., Seamans, J. K., and Yang, C. R. (2002). Mechanisms of dopamine activation of fast-spiking interneurons that exert inhibition in rat prefrontal cortex. <em>J Neurophysiol</em> 88, 3150–3166.
+</div>
+<div id="ref-goulet2001" class="csl-entry" role="listitem">
+Goulet, S., and Murray, E. A. (2001). Neural substrates of crossmodal association memory in monkeys: The amygdala versus the anterior rhinal cortex. <em>Behav Neurosci</em> 115, 271–284.
+</div>
+<div id="ref-grace1991" class="csl-entry" role="listitem">
+Grace, A. A. (1991). Phasic versus tonic dopamine release and the modulation of dopamine system responsivity: A hypothesis for the etiology of schizophrenia. <em>Neuroscience</em> 41, 1–24.
+</div>
+<div id="ref-Hamker2005" class="csl-entry" role="listitem">
+Hamker, F. H. (2005). The reentry hypothesis: The putative interaction of the frontal eye field, ventrolateral prefrontal cortex, and areas <span>V4</span>, <span>IT</span> for attention and eye movement. <em>Cereb Cortex</em> 15, 431–447.
+</div>
+<div id="ref-horel1987" class="csl-entry" role="listitem">
+Horel, J. A., Pytko-Joiner, D. E., Voytko, M. L., and Salsbury, K. (1987). The performance of visual tasks while segments of the inferotemporal cortex are suppressed by cold. <em>Behav Brain Res</em> 23, 29–42.
+</div>
+<div id="ref-huang1995" class="csl-entry" role="listitem">
+Huang, Y. Y., and Kandel, E. R. (1995). <span>D1/D5</span> receptor agonists induce a protein synthesis-dependent late potentiation in the CA1 region of the hippocampus. <em>Proc Natl Acad Sci U S A</em> 92, 2446–2450.
+</div>
+<div id="ref-hurd2001" class="csl-entry" role="listitem">
+Hurd, Y. L., Suzuki, M., and Sedvall, G. C. (2001). D1 and <span>D2</span> dopamine receptor <span class="nocase">mRNA</span> expression in whole hemisphere sections of the human brain. <em>J Chem Neuroanat</em> 22, 127–137.
+</div>
+<div id="ref-kincaid1998" class="csl-entry" role="listitem">
+Kincaid, A. E., Zheng, T., and Wilson, C. J. (1998). Connectivity and convergence of single corticostriatal axons. <em>J Neurosci</em> 18, 4722–4731.
+</div>
+<div id="ref-lee2001" class="csl-entry" role="listitem">
+Lee, D., and Chun, M. M. (2001). What are the units of visual short-term memory, objects or spatial locations? <em>Percept Psychophys</em> 63, 253–257.
+</div>
+<div id="ref-linke2000" class="csl-entry" role="listitem">
+Linke, R., and Schwegler, H. (2000). Convergent and complementary projections of the caudal paralaminar thalamic nuclei to rat temporal and insular cortex. <em>Cereb Cortex</em> 10, 753–771.
+</div>
+<div id="ref-liu2004" class="csl-entry" role="listitem">
+Liu, Z., Richmond, B. J., Murray, E. A., Saunders, R. C., Steenrod, S., Stubblefield, B. K., et al. (2004). <span>DNA</span> targeting of rhinal cortex <span>D2</span> receptor protein reversibly blocks learning of cues that predict reward. <em>Proc Natl Acad Sci U S A</em> 101, 12336–12341.
+</div>
+<div id="ref-luck1997a" class="csl-entry" role="listitem">
+Luck, S. J., and Vogel, E. K. (1997). The capacity of visual working memory for features and conjunctions. <em>Nature</em> 390, 279–281.
+</div>
+<div id="ref-mccormick1985" class="csl-entry" role="listitem">
+McCormick, D. A., Connors, B. W., Lighthall, J. W., and Prince, D. A. (1985). Comparative electrophysiology of pyramidal and sparsely spiny stellate neurons of the neocortex. <em>J Neurophysiol</em> 54, 782–806.
+</div>
+<div id="ref-meunier1993" class="csl-entry" role="listitem">
+Meunier, M., Bachevalier, J., Mishkin, M., and Murray, E. A. (1993). Effects on visual recognition of combined and separate ablations of the entorhinal and perirhinal cortex in rhesus monkeys. <em>J Neurosci</em> 13, 5418–5432.
+</div>
+<div id="ref-miller1996" class="csl-entry" role="listitem">
+Miller, E. K., Erickson, C., and Desimone, R. (1996). Neural mechanisms of visual working memory in prefrontal cortex of the macaque. <em>J Neurosci</em> 16, 5154–5167.
+</div>
+<div id="ref-miller1993" class="csl-entry" role="listitem">
+Miller, E. K., Gochin, P. M., and Gross, C. G. (1993a). Suppression of visual responses of neurons in inferior temporal cortex of the awake macaque monkey by addition of a second stimulus. <em>Brain Res</em> 616, 25–29.
+</div>
+<div id="ref-miller1993a" class="csl-entry" role="listitem">
+Miller, E. K., Li, L., and Desimone, R. (1993b). Activity of neurons in anterior inferior temporal cortex during a short-term memory task. <em>J Neurosci</em> 13, 1460–1478.
+</div>
+<div id="ref-mogami2006" class="csl-entry" role="listitem">
+Mogami, T., and Tanaka, K. (2006). Reward association affects neuronal responses to visual stimuli in macaque te and perirhinal cortices. <em>J Neurosci</em> 26, 6761–6770.
+</div>
+<div id="ref-momiyama1996" class="csl-entry" role="listitem">
+Momiyama, T., Sim, J. A., and Brown, D. A. (1996). Dopamine <span>D1</span>-like receptor-mediated presynaptic inhibition of excitatory transmission onto rat magnocellular basal forebrain neurones. <em>J Physiol</em> 495 ( Pt 1), 97–106.
+</div>
+<div id="ref-murray1993" class="csl-entry" role="listitem">
+Murray, E. A., Gaffan, D., and Mishkin, M. (1993). Neural substrates of visual stimulus-stimulus association in rhesus monkeys. <em>J Neurosci</em> 13, 4549–4561.
+</div>
+<div id="ref-Nakamura1995" class="csl-entry" role="listitem">
+Nakamura, K., and Kubota, K. (1995). Mnemonic firing of neurons in the monkey temporal pole during a visual recognition memory task. <em>J Neurophysiol</em> 74, 162–178.
+</div>
+<div id="ref-naya2003" class="csl-entry" role="listitem">
+Naya, Y., Yoshida, M., Takeda, M., Fujimichi, R., and Miyashita, Y. (2003). Delay-period activities in two subdivisions of monkey inferotemporal cortex during pair association memory task. <em>Eur J Neurosci</em> 18, 2915–2918.
+</div>
+<div id="ref-ohbayashi2003" class="csl-entry" role="listitem">
+Ohbayashi, M., Ohki, K., and Miyashita, Y. (2003). Conversion of working memory to motor sequence in the monkey premotor cortex. <em>Science</em> 301, 233–236.
+</div>
+<div id="ref-pihlajamaeki2003" class="csl-entry" role="listitem">
+Pihlajamäki, M., Tanila, H., Hänninen, T., Könönen, M., Mikkonen, M., Jalkanen, V., et al. (2003). Encoding of novel picture pairs activates the perirhinal cortex: An <span class="nocase">fMRI</span> study. <em>Hippocampus</em> 13, 67–80.
+</div>
+<div id="ref-rempel-clower2000" class="csl-entry" role="listitem">
+Rempel-Clower, N. L., and Barbas, H. (2000). The laminar pattern of connections between prefrontal and anterior temporal cortices in the rhesus monkey is related to cortical structure and function. <em>Cereb Cortex</em> 10, 851–865.
+</div>
+<div id="ref-vanrossum2001" class="csl-entry" role="listitem">
+Rossum, M. C. W. van, and Turrigiano, G. G. (2001). Correlation based learning from spike timing dependent plasticity. <em>Neurocomputing</em> 38-40, 409–415.
+</div>
+<div id="ref-rougier2006" class="csl-entry" role="listitem">
+Rougier, N. P., and Vitay, J. (2006). Emergence of attention within a neural population. <em>Neur Netw</em> 19, 573–581.
+</div>
+<div id="ref-schiller2000" class="csl-entry" role="listitem">
+Schiller, J., Major, G., Koester, H. J., and Schiller, Y. (2000). <span>NMDA</span> spikes in basal dendrites of cortical pyramidal neurons. <em>Nature</em> 404, 285–289.
+</div>
+<div id="ref-Seamans2004" class="csl-entry" role="listitem">
+Seamans, J. K., and Yang, C. R. (2004). <span class="nocase">The principal features and mechanisms of dopamine modulation in the prefrontal cortex.</span> <em>Prog. Neurobiol.</em> 74, 1–58. doi:<a href="https://doi.org/10.1016/j.pneurobio.2004.05.006">10.1016/j.pneurobio.2004.05.006</a>.
+</div>
+<div id="ref-smith2005a" class="csl-entry" role="listitem">
+Smith, J. D., Redford, J. S., Gent, L. C., and Washburn, D. A. (2005). Visual search and the collapse of categorization. <em>J Exp Psychol Gen</em> 134, 443–460.
+</div>
+<div id="ref-suzuki1994" class="csl-entry" role="listitem">
+Suzuki, W. A., and Amaral, D. G. (1994). Perirhinal and parahippocampal cortices of the macaque monkey: Cortical afferents. <em>J Comp Neurol</em> 350, 497–533.
+</div>
+<div id="ref-suzuki1997" class="csl-entry" role="listitem">
+Suzuki, W. A., Miller, E. K., and Desimone, R. (1997). Object and place memory in the macaque entorhinal cortex. <em>J Neurophysiol</em> 78, 1062–1081.
+</div>
+<div id="ref-taylor1999" class="csl-entry" role="listitem">
+Taylor, J. G. (1999). Neural bubble dynamics in two dimensions: foundations. <em>Biol Cyb</em> 80, 393–409.
+</div>
+<div id="ref-taylor2006" class="csl-entry" role="listitem">
+Taylor, K. I., Moss, H. E., Stamatakis, E. A., and Tyler, L. K. (2006). Binding crossmodal object features in perirhinal cortex. <em>Proc Natl Acad Sci U S A</em> 103, 8239–8244.
+</div>
+<div id="ref-turrigiano2004" class="csl-entry" role="listitem">
+Turrigiano, G. G., and Nelson, S. B. (2004). Homeostatic plasticity in the developing nervous system. <em>Nat Rev Neurosci</em> 5, 97–107.
+</div>
+<div id="ref-wan1999" class="csl-entry" role="listitem">
+Wan, H., Aggleton, J. P., and Brown, M. W. (1999). Different contributions of the hippocampus and perirhinal cortex to recognition memory. <em>J Neurosci</em> 19, 1142–1148.
+</div>
+<div id="ref-yang1996" class="csl-entry" role="listitem">
+Yang, C. R., and Seamans, J. K. (1996). Dopamine <span>D1</span> receptor actions in layers <span>V-VI</span> rat prefrontal cortex neurons in vitro: Modulation of dendritic-somatic signal integration. <em>J Neurosci</em> 16, 1922–1935.
+</div>
+<div id="ref-zahrt1997" class="csl-entry" role="listitem">
+Zahrt, J., Taylor, J. R., Mathew, R. G., and Arnsten, A. F. (1997). Supranormal stimulation of D1 dopamine receptors in the rodent prefrontal cortex impairs spatial working memory performance. <em>J Neurosci</em> 17, 8528–8535.
+</div>
+<div id="ref-zolamorgan1989" class="csl-entry" role="listitem">
+Zola-Morgan, S., Squire, L. R., Amaral, D. G., and Suzuki, W. A. (1989). Lesions of perirhinal and parahippocampal cortex that spare the amygdala and hippocampal formation produce severe memory impairment. <em>J Neurosci</em> 9, 4355–4370.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="./1-Introduction.html" class="pagination-link" aria-label="Introduction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./3-FICN.html" class="pagination-link" aria-label="A computational model of basal ganglia and its role in memory retrieval in rewarded visual memory tasks">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A computational model of basal ganglia and its role in memory retrieval in rewarded visual memory tasks</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
