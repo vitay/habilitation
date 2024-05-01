@@ -1,0 +1,24 @@
+
+## Abstract {-}
+
+Neuro-computational models allow to study the brain mechanisms involved in intelligent behavior and extract essential computational principles which can be implemented in cognitive systems. They are a promising solution to achieve a brain-like artificial intelligence that can compete with natural intelligence on realistic behaviors. 
+A crucial property of intelligent behavior is motivation, defined as the incentive to interact with the world in order to achieve specific goals, either extrinsic (obtaining rewards such as food or money, or avoiding pain) or intrinsic (satisfying one's curiosity, fun). 
+In the human brain, motivated or goal-directed behavior depends on a network of different structures, including the prefrontal cortex, the basal ganglia and the limbic system. 
+Dopamine, a neuro-transmitter associated with reward processing, plays a central role in coordinating the activity of this network. 
+It structures processing in high-level cognitive areas along a limbic-associative-motor gradient and impacts the learning capabilities of the whole system.
+In this habilitation thesis, I present biologically-constrained neuro-computational models which investigate the role of dopamine in visual object categorization and memory retrieval [@Vitay2008], reinforcement learning and action selection [@Vitay2010], the updating, learning and maintenance of working memory [@Schroll2012] and timing processes [@Vitay2014]. 
+These models outline the many mechanisms by which the dopaminergic system regulates cognitive and emotional behavior: bistable processing modes in the cerebral cortex, modulation of synaptic transmission and plasticity, allocation of cognitive resources and signaling of relevant events.
+Finally, I present a neural simulator able to simulate a variety of neuro-computational models efficiently on parallel architectures [@Vitay2015].
+
+---
+
+\newpage
+
+Neuronale Modelle nach dem Vorbild des Gehirns bieten die Möglichkeit intelligente, kognitive Prozesse nicht nur besser zu verstehen, sondern sie stellen auch eine vielversprechende Lösung dar, um eine Gehirn-ähnliche künstliche Intelligenz für Wahrnehmung und Verhaltensweisen zu erreichen, die mit natürlicher Intelligenz konkurrieren kann.
+Eine entscheidende Eigenschaft von intelligentem Verhalten ist Motivation, definiert als der Anreiz mit der Welt zu interagieren, um bestimmte Ziele zu erreichen, sei es extrinsisch (Belohnungen wie Nahrung oder Geld zu erhalten oder die Vermeidung von Schmerzen) oder intrinsisch (die Neugier zu befriedigen, Spaß zu haben).
+Im menschlichen Gehirn basiert motiviertes oder zielgerichtetes Verhalten auf einem Netzwerk von verschiedenen Strukturen, einschließlich des präfrontalen Cortex, der Basalganglien und des limbischen Systems.
+Dopamin, ein Neurotransmitter, welcher der Belohnungsverarbeitung zugeordnet wird, spielt eine zentrale Rolle bei der Koordination der Aktivität in diesem Netzwerk.
+Es strukturiert die Verarbeitung in High-Level-kognitiven Bereichen entlang eines limbischen-assoziativ-motor Gradienten und beinflusst die Lernfähigkeit des gesamten Systems.
+In dieser Habilitation, präsentiere ich biologisch motivierte neuronale Modelle, die die Rolle von Dopamin in der visuellen Objektkategorisierung und Gedächtnisabruf [@Vitay2008], Reinforcement Lernen und Aktionsauswahl [@Vitay2010], Aktualisierung, Lernen und Aufrechterhaltung von Arbeitsgedächtnis [@Schroll2012] und Timing Prozessen [@Vitay2014] untersuchen.
+Diese Modelle beschreiben Mechanismen, durch die das dopaminerge System kognitives und emotionales Verhalten reguliert: bistabile Verarbeitungsmodi in der Hirnrinde, Plastizität und Modulation der synaptischen Übertragung, Zuweisung von kognitiven Ressourcen und Signalisierung von relevanten Ereignissen.
+Schließlich beschreibe ich einen neuronalen Simulator, der in in der Lage ist, eine Vielzahl von neuronalen Modellen effizient auf parallelen Architekturen zu simulieren [@Vitay2015].
